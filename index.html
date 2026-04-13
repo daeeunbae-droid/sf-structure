@@ -43,12 +43,14 @@ input[type=text]:focus{border-color:#1B3A5C}
 .q-mode{font-size:12px;color:#888;font-weight:600}
 .q-score{font-size:13px;font-weight:800;color:#E8A010}
 .zone-lbl{font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
-.answer-zone{min-height:56px;border:2px dashed #1B3A5C;border-radius:12px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;margin-bottom:14px;background:#f8fafc;transition:border-color .2s;position:relative}
+.answer-zone{min-height:60px;border:2px dashed #1B3A5C;border-radius:12px;padding:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-bottom:14px;background:#f8fafc;transition:border-color .2s;position:relative}
 .answer-zone.empty{border-color:#cbd5e1}
 .zone-ph{font-size:12px;color:#cbd5e1;font-style:italic;padding:8px;width:100%;text-align:center}
-.bank-zone{min-height:56px;background:#f1f5f9;border-radius:12px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-start;margin-bottom:14px}
-.ck{padding:9px 14px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;border:2px solid;position:relative;transition:all .15s;user-select:none;-webkit-user-select:none;line-height:1.3}
-.ck:active{transform:scale(.93)}
+.bank-zone{min-height:60px;background:#f1f5f9;border-radius:12px;padding:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start;margin-bottom:14px}
+.ck{padding:10px 15px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:2px solid;position:relative;transition:all .18s cubic-bezier(.34,1.56,.64,1);user-select:none;-webkit-user-select:none;line-height:1.3}
+.ck:active{transform:scale(.91)}
+@keyframes snapIn{0%{transform:scale(1.12);box-shadow:0 4px 16px rgba(27,58,92,.25)}60%{transform:scale(.97)}100%{transform:scale(1);box-shadow:none}}
+.ck-snap{animation:snapIn .22s cubic-bezier(.34,1.56,.64,1) forwards}
 .ck-bank{background:#fff;border-color:#cbd5e1;color:#1e293b}
 .ck-bank:hover{border-color:#1B3A5C;background:#f0f4ff}
 .ck-ans{background:#1B3A5C;border-color:#1B3A5C;color:#fff}
@@ -91,6 +93,29 @@ input[type=text]:focus{border-color:#1B3A5C}
 .res-ok{background:#f0fdf4;color:#16a34a}
 .res-no{background:#fff5f5;color:#dc2626}
 .res-disp{background:#fffbeb;color:#92400e}
+/* ── 구조 훈련 모드 — Skeleton OS ── */
+/* 뼈대 가이드 바 */
+.skeleton-bar{display:flex;align-items:center;gap:5px;flex-wrap:wrap;padding:9px 12px;background:#f8f9ff;border-radius:10px;border:1.5px solid #e0e7ff;margin-bottom:12px}
+.sk-slot{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:7px;font-size:11px;font-weight:800;letter-spacing:.3px;opacity:.55;transition:opacity .2s,transform .2s}
+.sk-slot.sk-done{opacity:.35;text-decoration:line-through}
+.sk-slot.sk-active{opacity:1;transform:scale(1.07);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.sk-s{background:#dbeafe;color:#1d4ed8}
+.sk-v{background:#fee2e2;color:#b91c1c}
+.sk-oc{background:#dcfce7;color:#15803d}
+.sk-mod{background:#fff9ed;color:#b45309}
+.sk-arrow{font-size:11px;color:#94a3b8;font-weight:700}
+/* 드릴 상단 안내 배너 */
+.drill-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 14px;background:linear-gradient(135deg,#1B3A5C08,#7c3aed08);border-left:3px solid #7c3aed;border-radius:0 10px 10px 0;margin-bottom:10px}
+.drill-banner-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.drill-banner-text{font-size:12px;color:#4c1d95;line-height:1.65;font-weight:600}
+/* 청크 역할별 색상 (뱅크에서만) */
+.ck-bank.role-s{border-color:#93c5fd;background:#eff6ff}
+.ck-bank.role-v{border-color:#fca5a5;background:#fff5f5}
+.ck-bank.role-oc{border-color:#86efac;background:#f0fdf4}
+.ck-bank.role-mod{border-color:#fcd34d;background:#fffdf5}
+/* 구역 레이블 */
+.zone-lbl-drill{font-size:10px;font-weight:800;color:#7c3aed;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;display:flex;align-items:center;gap:5px}
+
 /* 관리자 */
 .admin-row{border:1px solid #e2e8f0;border-radius:10px;padding:14px;margin-bottom:10px;background:#fafafa}
 .admin-meta{font-size:11px;color:#888;margin-bottom:6px}
@@ -105,6 +130,7 @@ input[type=text]:focus{border-color:#1B3A5C}
 .ck.dragging{opacity:.35;transform:scale(.95)}
 .drop-indicator{width:3px;min-height:36px;border-radius:3px;background:#1B3A5C;flex-shrink:0;animation:blink .6s ease-in-out infinite alternate}
 @keyframes blink{from{opacity:.4}to{opacity:1}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 .answer-zone.drag-over{border-color:#1B3A5C;background:#eff6ff}
 .bank-zone.drag-over{background:#f0f4ff}
 #drag-ghost{position:fixed;pointer-events:none;z-index:9999;background:#1B3A5C;color:#fff;border-radius:9px;padding:9px 14px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:.88;white-space:nowrap;transform:translate(-50%,-50%);font-family:-apple-system,'Apple SD Gothic Neo',sans-serif}
@@ -117,9 +143,14 @@ input[type=text]:focus{border-color:#1B3A5C}
 /* 출제 비율 버튼 (SF Voca 동일) */
 .pgBtn{padding:6px 14px;border-radius:8px;font-size:13px;font-weight:600;border:2px solid #ddd;background:#fff;cursor:pointer;color:#333;transition:all .15s}
 .pgBtn.on{border-color:#1B3A5C;background:#1B3A5C;color:#fff}
+/* ── drill 모드 청크 상태 스타일 ── */
+.ck-dimmed{opacity:.45;border-style:dashed!important}
+.ck-locked{background:#e2e8f0!important;color:#94a3b8!important;cursor:default!important}
+.ck-grouped{border:2px solid #3b82f6!important}
+.ck-selected{border:2px solid #16a34a!important;background:#f0fdf4!important}
 </style>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js" onerror="console.warn('Firebase app script failed to load')"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js" onerror="console.warn('Firebase db script failed to load')"></script>
 </head>
 <body>
 <div class="ctn" id="app"></div>
@@ -129,7 +160,18 @@ input[type=text]:focus{border-color:#1B3A5C}
 /* ── FIREBASE ── */
 const FC={apiKey:"AIzaSyA8vsxLDWXbLMEqmGSMyMnsWwttH_z_mrA",authDomain:"sf-english-voca.firebaseapp.com",databaseURL:"https://sf-english-voca-default-rtdb.asia-southeast1.firebasedatabase.app",projectId:"sf-english-voca",storageBucket:"sf-english-voca.firebasestorage.app",messagingSenderId:"152710937707",appId:"1:152710937707:web:f72cf0212cd6bd6a58c52e"};
 let DB=null;
-try{firebase.initializeApp(FC);DB=firebase.database();}catch(e){}
+try{
+  if(typeof firebase!=='undefined'){
+    firebase.initializeApp(FC);
+    DB=firebase.database();
+  } else {
+    console.warn('Firebase SDK not loaded — running without DB');
+  }
+}catch(e){console.warn('Firebase init failed:',e);}
+
+/* 전역 에러가 앱을 튕기지 않도록 */
+window.addEventListener('error',function(e){console.warn('Global error caught:',e.message);e.preventDefault();});
+window.addEventListener('unhandledrejection',function(e){console.warn('Unhandled promise:',e.reason);e.preventDefault();});
 function sKey(s){return s.replace(/[.#$\/\[\]]/g,'_');}
 
 /* 출제 비율 실시간 로드 (SF Voca와 동일 방식) */
@@ -155,12 +197,81 @@ function getVisibleSets(){
 /* ════════════════════════════════════════════════════════════
    문제 세트 데이터
    ════════════════════════════════════════════════════════════ */
+/* ── drill 코드 → 한국어 레이블 ── */
+const DRILL_LABELS={
+  DRILL_SV_CORE:           '주어·동사 찾기 훈련',
+  DRILL_SV_AFTER_MOD:      '수식어 제거 후 주어·동사 찾기 훈련',
+  DRILL_MOD_PP_REMOVE:     '수식어구 제거 후 뼈대 찾기 훈련',
+  DRILL_MOD_INF_SCOPE:     'to부정사 수식 범위 잡기 훈련',
+  DRILL_MOD_SKIP_ADV:      '부사절 건너뛰고 주절 찾기 훈련',
+  DRILL_CLAUSE_NOUN:       '명사절 역할 인식 훈련',
+  DRILL_CLAUSE_ADV_SCOPE:  '부사절 범위 잡기 훈련',
+  DRILL_CLAUSE_REL_SCOPE:  '관계절 수식 범위 훈련',
+  DRILL_CLAUSE_BOUNDARY:   '절 경계 인식 훈련',
+  DRILL_MOVE_IT:           '가주어·강조구문 인식 훈련',
+  DRILL_MOVE_INV:          '도치 구조 복원 훈련',
+  DRILL_OC_5TYPE:          '5형식 목적어·보어 구별 훈련',
+  DRILL_OC_OBJECT_SCOPE:   '목적어 범위 잡기 훈련',
+  DRILL_VERB_GERUND_SUBJ:  '동명사 주어 인식 훈련',
+  DRILL_VERB_FORM_DISTINCTION: '분사·구동사 형태 구별 훈련',
+};
+
+/* ── primaryFocus 한국어 레이블 ── */
+const FOCUS_LABELS={
+  SV:'주어·동사 찾기', MOD:'수식어 구조', CLAUSE:'절 인식',
+  MOVE:'구조 복원', OC:'목적어·보어', VERB_FORM:'동사 형태',
+};
+function focusLabel(f){ return FOCUS_LABELS[f]||f; }
+function drillLabel(code){ return DRILL_LABELS[code]||code; }
+/* ── 시험 유형 연결 매핑 ── */
+const DRILL_TO_TEST={
+  DRILL_SV_CORE:              {exam:'수일치',       trap:'수식어구를 주어로 착각'},
+  DRILL_SV_AFTER_MOD:         {exam:'수일치',       trap:'긴 수식어 뒤 주어 놓침'},
+  DRILL_MOD_PP_REMOVE:        {exam:'수일치 함정',  trap:'전치사구를 주어로 착각'},
+  DRILL_MOD_INF_SCOPE:        {exam:'순서·삽입',    trap:'to부정사 역할 혼동'},
+  DRILL_MOD_SKIP_ADV:         {exam:'순서·삽입',    trap:'부사절을 주절로 착각'},
+  DRILL_CLAUSE_NOUN:          {exam:'빈칸·구조',    trap:'명사절을 문장으로 읽음'},
+  DRILL_CLAUSE_ADV_SCOPE:     {exam:'순서·삽입',    trap:'부사절 경계 혼동'},
+  DRILL_CLAUSE_REL_SCOPE:     {exam:'수일치·빈칸',  trap:'관계절을 주어로 착각'},
+  DRILL_CLAUSE_BOUNDARY:      {exam:'순서·삽입',    trap:'절 경계 혼동'},
+  DRILL_MOVE_IT:              {exam:'강조·변형',    trap:'가주어 it을 진주어로 착각'},
+  DRILL_MOVE_INV:             {exam:'어법·변형',    trap:'도치 구조에서 주어 못 찾음'},
+  DRILL_OC_5TYPE:             {exam:'5형식·어법',   trap:'목적어와 보어 혼동'},
+  DRILL_OC_OBJECT_SCOPE:      {exam:'빈칸·어법',    trap:'목적어 범위를 잘못 잡음'},
+  DRILL_VERB_GERUND_SUBJ:     {exam:'어법·수일치',  trap:'동명사를 동사로 읽음'},
+  DRILL_VERB_FORM_DISTINCTION:{exam:'어법',         trap:'분사를 본동사로 착각'},
+};
+/* ── 오답 이유 메시지 ── */
+const DRILL_TO_ERROR_MSG={
+  DRILL_SV_CORE:              '수식어구 안에서 주어를 찾으려 했을 가능성이 큽니다.',
+  DRILL_SV_AFTER_MOD:         '긴 수식어 때문에 실제 주어를 놓쳤을 가능성이 큽니다.',
+  DRILL_MOD_PP_REMOVE:        '전치사구를 주어로 착각했을 가능성이 큽니다.',
+  DRILL_MOD_INF_SCOPE:        'to부정사의 수식 범위를 잘못 잡았을 가능성이 있습니다.',
+  DRILL_MOD_SKIP_ADV:         '부사절을 주절로 착각했을 가능성이 있습니다.',
+  DRILL_CLAUSE_NOUN:          '명사절을 독립된 문장으로 읽었을 가능성이 있습니다.',
+  DRILL_CLAUSE_ADV_SCOPE:     '부사절의 경계를 잘못 잡았을 가능성이 있습니다.',
+  DRILL_CLAUSE_REL_SCOPE:     '관계절을 주어로 착각했을 가능성이 있습니다.',
+  DRILL_CLAUSE_BOUNDARY:      '절의 경계를 잘못 인식했을 가능성이 있습니다.',
+  DRILL_MOVE_IT:              '가주어 it을 진짜 주어로 착각했을 가능성이 있습니다.',
+  DRILL_MOVE_INV:             '도치 구조에서 주어 위치를 잘못 판단했을 가능성이 있습니다.',
+  DRILL_OC_5TYPE:             '목적어와 보어를 구분하지 못했을 가능성이 있습니다.',
+  DRILL_OC_OBJECT_SCOPE:      '목적어의 범위를 잘못 잡았을 가능성이 있습니다.',
+  DRILL_VERB_GERUND_SUBJ:     '동명사를 동사로 착각했을 가능성이 있습니다.',
+  DRILL_VERB_FORM_DISTINCTION:'분사를 본동사로 착각했을 가능성이 있습니다.',
+};
+
+
+
+/* ── 태그 데이터 맵 (SF_tags_v4_2 기반) ── */
+const DRILL_TAG_MAP={"mock_2021_03_20": {"q1": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q2": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q3": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q5": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q6": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q7": {"primaryFocus": "VERB_FORM", "stage": "basic", "drill": "DRILL_VERB_FORM_DISTINCTION", "minorTag": "MOD_PP"}, "q8": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q9": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}}, "mock_2021_03_21": {"q1": {"primaryFocus": "OC", "stage": "basic", "drill": "DRILL_OC_OBJECT_SCOPE", "minorTag": "OC_OBJECT"}, "q2": {"primaryFocus": "CLAUSE", "stage": "basic", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q3": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q4": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q5": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_AFTER_MOD", "minorTag": "SV_MAIN_VERB"}, "q6": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}}, "mock_2021_03_22": {"q1": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q2": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q3": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q5": {"primaryFocus": "MOVE", "stage": "integrated", "drill": "DRILL_MOVE_IT", "minorTag": "MOVE_IT_THAT"}, "q6": {"primaryFocus": "MOVE", "stage": "integrated", "drill": "DRILL_MOVE_IT", "minorTag": "MOVE_IT_THAT"}, "q7": {"primaryFocus": "OC", "stage": "mixed", "drill": "DRILL_OC_5TYPE", "minorTag": "OC_5TYPE"}, "q8": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}}, "mock_2021_03_23": {"q1": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q2": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q3": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q5": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q6": {"primaryFocus": "CLAUSE", "stage": "basic", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}}, "mock_2021_03_30": {"q1": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q2": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q3": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q5": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q6": {"primaryFocus": "MOVE", "stage": "integrated", "drill": "DRILL_MOVE_INV", "minorTag": "MOVE_INV"}, "q7": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}}, "mock_2021_03_31": {"q1": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q2": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q3": {"primaryFocus": "CLAUSE", "stage": "integrated", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q4": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q5": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q6": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q7": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q8": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}}, "mock_2021_03_32": {"q1": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q2": {"primaryFocus": "SV", "stage": "integrated", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q3": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "VERB_FORM", "stage": "basic", "drill": "DRILL_VERB_GERUND_SUBJ", "minorTag": "VERB_GERUND"}, "q5": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q6": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}}, "mock_2021_03_33": {"q1": {"primaryFocus": "CLAUSE", "stage": "basic", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q2": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q3": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q4": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q5": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q6": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q7": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}}, "mock_2021_03_34": {"q1": {"primaryFocus": "MOVE", "stage": "mixed", "drill": "DRILL_MOVE_IT", "minorTag": "MOVE_IT"}, "q2": {"primaryFocus": "MOD", "stage": "integrated", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q3": {"primaryFocus": "CLAUSE", "stage": "integrated", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "VERB_FORM", "stage": "basic", "drill": "DRILL_VERB_GERUND_SUBJ", "minorTag": "VERB_GERUND"}, "q5": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}}, "mock_2021_03_35": {"q1": {"primaryFocus": "OC", "stage": "basic", "drill": "DRILL_OC_5TYPE", "minorTag": "OC_5TYPE"}, "q2": {"primaryFocus": "MOVE", "stage": "integrated", "drill": "DRILL_MOVE_INV", "minorTag": "MOVE_INV"}, "q3": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q4": {"primaryFocus": "VERB_FORM", "stage": "basic", "drill": "DRILL_VERB_FORM_DISTINCTION", "minorTag": "VERB_GERUND"}, "q5": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}}, "mock_2021_03_36": {"q1": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q2": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q3": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q5": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}}, "mock_2021_03_37": {"q1": {"primaryFocus": "MOVE", "stage": "mixed", "drill": "DRILL_MOVE_IT", "minorTag": "MOVE_IT"}, "q2": {"primaryFocus": "MOVE", "stage": "mixed", "drill": "DRILL_MOVE_IT", "minorTag": "MOVE_IT"}, "q3": {"primaryFocus": "SV", "stage": "integrated", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q4": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}}, "mock_2021_03_38": {"q1": {"primaryFocus": "MOVE", "stage": "mixed", "drill": "DRILL_MOVE_IT", "minorTag": "MOVE_IT"}, "q2": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q3": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q4": {"primaryFocus": "VERB_FORM", "stage": "basic", "drill": "DRILL_VERB_GERUND_SUBJ", "minorTag": "VERB_GERUND"}, "q5": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q6": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q7": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q8": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}}, "mock_2021_03_39": {"q1": {"primaryFocus": "MOD", "stage": "basic", "drill": "DRILL_MOD_INF_SCOPE", "minorTag": "MOD_INF"}, "q2": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_SKIP_ADV", "minorTag": "CLAUSE_ADV"}, "q3": {"primaryFocus": "CLAUSE", "stage": "integrated", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q4": {"primaryFocus": "MOVE", "stage": "mixed", "drill": "DRILL_MOVE_IT", "minorTag": "MOVE_IT"}, "q5": {"primaryFocus": "CLAUSE", "stage": "basic", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q6": {"primaryFocus": "CLAUSE", "stage": "integrated", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q7": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}}, "mock_2021_03_40": {"q1": {"primaryFocus": "OC", "stage": "basic", "drill": "DRILL_OC_5TYPE", "minorTag": "OC_5TYPE"}, "q2": {"primaryFocus": "SV", "stage": "basic", "drill": "DRILL_SV_CORE", "minorTag": "SV_MAIN_VERB"}, "q3": {"primaryFocus": "CLAUSE", "stage": "integrated", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q4": {"primaryFocus": "CLAUSE", "stage": "mixed", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q5": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q6": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}}, "mock_2021_03_4142": {"q1": {"primaryFocus": "MOD", "stage": "integrated", "drill": "DRILL_CLAUSE_ADV_SCOPE", "minorTag": "CLAUSE_ADV"}, "q2": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q3": {"primaryFocus": "OC", "stage": "mixed", "drill": "DRILL_OC_OBJECT_SCOPE", "minorTag": "OC_OBJECT"}, "q4": {"primaryFocus": "CLAUSE", "stage": "basic", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}, "q5": {"primaryFocus": "CLAUSE", "stage": "integrated", "drill": "DRILL_CLAUSE_REL_SCOPE", "minorTag": "CLAUSE_REL"}, "q6": {"primaryFocus": "MOD", "stage": "mixed", "drill": "DRILL_MOD_PP_REMOVE", "minorTag": "MOD_PP"}, "q7": {"primaryFocus": "CLAUSE", "stage": "integrated", "drill": "DRILL_CLAUSE_NOUN", "minorTag": "CLAUSE_NOUN"}}};
+
+
 const SETS=[
   {id:"mock_2021_03_20",title:"21년 3월 모의 20번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"At a publishing house and at a newspaper, you learn the following.",chunks:["At a publishing house and at a newspaper,","you","learn","the following"],labels:["Mod","S","V","O"],pattern:"SVO",concept:"SVO + 전치사구 수식어",explanation:"핵심 뼈대: you(S) learn(V) the following(O). 'At a publishing house and at a newspaper'는 장소 전치사구 두 개가 and로 연결된 수식어. 문두 전치사구는 쉼표로 본 절과 분리."},
     {id:"q2",sentence:"It's not a mistake if it doesn't end up in print.",chunks:["It","is","not a mistake","if it doesn't end up in print"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"2형식 SVC + 조건 부사절",explanation:"핵심 뼈대: It(S) is(V) not a mistake(C). SVC 2형식. 'if it doesn't end up in print'는 조건 부사절로 C의 성립 조건을 제시. 부사절이 문장 뒤에 오면 쉼표 불필요."},
     {id:"q3",sentence:"Nothing bad can happen if you haven't hit the Send key.",chunks:["Nothing bad","can happen","if you haven't hit the Send key"],labels:["S","V","Adv.Cl"],pattern:"SV",concept:"SV + 조건 부사절",explanation:"핵심 뼈대: Nothing bad(S) can happen(V). happen은 완전자동사 — SV 2요소로 완결. 'if you haven't hit the Send key'는 조건 부사절. 부정 표현 'Nothing'이 주어."},
-    {id:"q4",sentence:"What you've written can have misspellings, errors of fact, rude comments, and obvious lies.",chunks:["What you've written","can have","misspellings, errors of fact, rude comments, and obvious lies"],labels:["S","V","O"],pattern:"SVO",concept:"명사절(What절) 주어",explanation:"'What you've written'은 관계사 what이 이끄는 명사절로 문장 전체의 주어 자리. can have(V) — 목적어 자리에 4가지 명사가 나열됨(O). 명사절 주어는 항상 단수 취급."},
+    {id:"q4",sentence:"What you've written can have misspellings, errors of fact, rude comments, and obvious lies.",chunks:["What you've written","can have","misspellings, errors of fact, rude comments, and obvious lies"],labels:["S","V","O"],pattern:"SVO",concept:"명사절(What절) 주어",explanation:"'What you've written'은 관계사 what이 이끄는 명사절로 문장 전체의 주어 자리. can have(V) — 목적어 자리에 4가지 명사가 나열됨(O). 명사절 주어는 항상 단수 취급.",linkedGrammar:{tp:"TP10","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "[___] you've written can have misspellings, errors of fact, rude comments, and obvious lies.", "options": ["What", "That"], "answer": "What", "explanation": {"structure": "빈칸 뒤 you've written의 목적어가 빠져 있고, 이 절 전체가 문장의 주어입니다.", "rule": "선행사 없이 명사절을 이끌고 절 안에서 목적어 역할을 할 때는 what을 씁니다. what은 '~하는 것'의 의미로 선행사를 포함합니다.", "connection": "you've written의 목적어가 빠진 자리를 채우면서 명사절 주어를 만들므로 What이 맞습니다. That은 절 안에서 문장 성분 역할을 하지 않습니다."}}},
     {id:"q5",sentence:"If you haven't sent it, you still have time to fix it.",chunks:["If you haven't sent it,","you","still have","time","to fix it"],labels:["Adv.Cl","S","V","O","Inf"],pattern:"SVO",concept:"부사절 + SVO + to부정사",explanation:"핵심 뼈대: you(S) still have(V) time(O). 'to fix it'은 명사 time을 뒤에서 수식하는 to부정사구. 'If you haven't sent it'은 조건 부사절 — 문두에 오면 쉼표로 분리."},
     {id:"q6",sentence:"You can correct any mistake and nobody will ever know the difference.",chunks:["You","can correct","any mistake","and nobody will ever know the difference"],labels:["S","V","O","Mod"],pattern:"SVO",concept:"등위절 연결(and)",explanation:"핵심 뼈대: You(S) can correct(V) any mistake(O). 'and nobody will ever know the difference'는 등위접속사 and로 연결된 두 번째 SVO절(nobody-will know-the difference). 두 절이 대등하게 병렬."},
     {id:"q7",sentence:"This is easier said than done, of course.",chunks:["This","is","easier said than done","of course"],labels:["S","V","C","Mod"],pattern:"SVC",concept:"2형식 SVC + 삽입 부사어",explanation:"핵심 뼈대: This(S) is(V) easier said than done(C). 'easier said than done'은 관용 표현(말하기 쉽고 행하기 어렵다). 'of course'는 삽입어(parenthetical) — 문장 구조에서 독립적."},
@@ -168,8 +279,8 @@ const SETS=[
     {id:"q9",sentence:"But before you hit the Send key, make sure that you read your document carefully one last time.",chunks:["But before you hit the Send key,","make sure","that you read your document carefully one last time"],labels:["Adv.Cl","V","O"],pattern:"명령문",concept:"명령문 + 부사절 + 명사절 목적어",explanation:"명령문 — 주어 You 생략, 동사 make로 시작. make sure(V) + that절(O): that절은 명사절로 목적어 역할. 'before you hit the Send key'는 시간 부사절. 문두 But은 앞 문맥(쓰기 쉬움)과 대비."}
   ]},
   {id:"mock_2021_03_21",title:"21년 3월 모의 21번",level:"고1",levelClass:"lv-adv",questions:[
-    {id:"q1",sentence:"Get past the 'I wish I hadn't done that!' reaction.",chunks:["Get past","the 'I wish I hadn't done that!' reaction"],labels:["V","O"],pattern:"명령문",concept:"명령문 + 인용 내포 명사구",explanation:"명령문: 주어 You 생략, Get past(V)로 시작. 'the reaction'이 O. reaction을 수식하는 인용구 'I wish I hadn't done that!'는 명사구에 동격처럼 내포. 핵심 뼈대: (You) get past(V) the reaction(O)."},
-    {id:"q2",sentence:"Accept that it's happened now.",chunks:["Accept","that it's happened now"],labels:["V","O"],pattern:"명령문",concept:"명령문 + that절 목적어",explanation:"명령문: Accept(V)로 시작. 'that it's happened now'는 명사절로 목적어(O) 역할. that절 목적어를 취하는 동사 패턴: accept / admit / realize + that절."},
+    {id:"q1",sentence:"Get past the 'I wish I hadn't done that!' reaction.",chunks:["Get past","the 'I wish I hadn't done that!' reaction"],labels:["V","O"],pattern:"명령문",concept:"명령문 + 인용 내포 명사구",explanation:"명령문: 주어 You 생략, Get past(V)로 시작. 'the reaction'이 O. reaction을 수식하는 인용구 'I wish I hadn't done that!'는 명사구에 동격처럼 내포. 핵심 뼈대: (You) get past(V) the reaction(O).",linkedGrammar:{tp:"TP01","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "[___] past the 'I wish I hadn't done that!' reaction.", "options": ["Get", "Getting"], "answer": "Get", "explanation": {"structure": "이 문장은 명령문입니다.", "rule": "명령문은 주어(You)가 생략되고 동사원형으로 시작합니다.", "connection": "문장 첫 자리는 동사 자리이므로 동사원형 Get이 맞습니다. Getting은 동명사 형태로 명령문 동사 자리에 올 수 없습니다."}}},
+    {id:"q2",sentence:"Accept that it's happened now.",chunks:["Accept","that it's happened now"],labels:["V","O"],pattern:"명령문",concept:"명령문 + that절 목적어",explanation:"명령문: Accept(V)로 시작. 'that it's happened now'는 명사절로 목적어(O) 역할. that절 목적어를 취하는 동사 패턴: accept / admit / realize + that절.",linkedGrammar:{tp:"TP01","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "[___] that it's happened now.", "options": ["Accept", "Accepting"], "answer": "Accept", "explanation": {"structure": "이 문장은 명령문입니다.", "rule": "명령문은 주어(You)가 생략되고 동사원형으로 시작합니다.", "connection": "문장 첫 자리는 동사 자리이므로 동사원형 Accept가 맞습니다. Accepting은 동명사나 현재분사로 명령문 동사 자리에 올 수 없습니다."}}},
     {id:"q3",sentence:"The only value of 'I wish I hadn't done that!' is that you'll know better what to do next time.",chunks:["The only value of 'I wish I hadn't done that!'","is","that you'll know better what to do next time"],labels:["S","V","C"],pattern:"SVC",concept:"2형식 — that절 명사절 보어",explanation:"핵심 뼈대: The only value(S) is(V) that …(C). that절이 주격 보어 자리에 위치 — SVC 2형식. that절 내부에 간접의문문 'what to do next time'이 know의 목적어로 내포됨."},
     {id:"q4",sentence:"The learning pay-off is useful and significant.",chunks:["The learning pay-off","is","useful and significant"],labels:["S","V","C"],pattern:"SVC",concept:"2형식 기본 SVC",explanation:"가장 기본적인 2형식 뼈대. The learning pay-off(S) is(V) useful and significant(C). 형용사 두 개가 and로 병렬 연결되어 보어(C) 자리를 채움."},
     {id:"q5",sentence:"This 'if only I ...' agenda is virtual.",chunks:["This 'if only I ...' agenda","is","virtual"],labels:["S","V","C"],pattern:"SVC",concept:"2형식 기본 SVC",explanation:"핵심 뼈대: This agenda(S) is(V) virtual(C). 'if only I ...'는 agenda를 수식하는 삽입 인용구. virtual(형용사)이 주격 보어 자리. SVC 2형식."},
@@ -184,10 +295,10 @@ const SETS=[
     {id:"q6",sentence:"Don't forget that the other person may be reading your body language as well.",chunks:["Don't forget","that the other person may be reading your body language as well"],labels:["V","O"],pattern:"명령문",concept:"부정 명령문 + that절 목적어",explanation:"부정 명령문: Don't + 동사원형(forget). 'that the other person may be reading …'는 명사절로 목적어(O) 자리. may be reading은 현재진행형의 추측(may + be + V-ing). 'as well'은 '~도'의 부사."}
   ]},
   {id:"mock_2021_03_31",title:"21년 3월 모의 31번",level:"고1",levelClass:"lv-adv",questions:[
-    {id:"q1",sentence:"One of the most important aspects of providing good care is making sure that an animal's needs are being met consistently and predictably.",chunks:["One of the most important aspects of providing good care","is","making sure","that an animal's needs are being met consistently and predictably"],labels:["S","V","C","O(that절)"],pattern:"SVC",concept:"동명사 보어 + that절 목적어",explanation:"핵심 뼈대: One(S) is(V) making sure(C). 'of the most important aspects …'는 One을 수식하는 전치사구. 'making sure'는 동명사구로 보어. 'that절'은 make sure의 목적절. 'are being met'은 수동태 진행형(be being p.p.)."},
+    {id:"q1",sentence:"One of the most important aspects of providing good care is making sure that an animal's needs are being met consistently and predictably.",chunks:["One of the most important aspects of providing good care","is","making sure","that an animal's needs are being met consistently and predictably"],labels:["S","V","C","O(that절)"],pattern:"SVC",concept:"동명사 보어 + that절 목적어",explanation:"핵심 뼈대: One(S) is(V) making sure(C). 'of the most important aspects …'는 One을 수식하는 전치사구. 'making sure'는 동명사구로 보어. 'that절'은 make sure의 목적절. 'are being met'은 수동태 진행형(be being p.p.).",linkedGrammar:{tp:"TP22","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "One of the most important aspects of providing good care [___] making sure that an animal's needs are being met consistently and predictably.", "options": ["is", "are"], "answer": "is", "explanation": {"structure": "이 문장의 진짜 주어는 One입니다.", "rule": "'One of the + 복수명사' 구조에서 동사는 One에 맞춥니다. of 뒤의 명사(aspects)는 수식어이므로 동사 결정에 영향을 주지 않습니다.", "connection": "주어 One은 단수이므로 is가 맞습니다. aspects에 맞춰 are를 쓰면 틀립니다."}}},
     {id:"q2",sentence:"Like humans, animals need a sense of control.",chunks:["Like humans,","animals","need","a sense of control"],labels:["Mod","S","V","O"],pattern:"SVO",concept:"SVO + 비교 전치사구 수식어",explanation:"핵심 뼈대: animals(S) need(V) a sense of control(O). 'Like humans'는 비교를 나타내는 전치사구 수식어 — 문두에 오면 쉼표로 본 절과 분리. 'a sense of control': sense(핵심 명사) + of control(수식 전치사구)."},
     {id:"q3",sentence:"An animal who may get enough food but doesn't know when the food will appear and can see no consistent schedule may experience distress.",chunks:["An animal","who may get enough food but doesn't know when the food will appear and can see no consistent schedule","may experience","distress"],labels:["S","Rel.Cl","V","O"],pattern:"SVO",concept:"관계절 수식 주어 + 간접의문문",explanation:"핵심 뼈대: An animal(S) may experience(V) distress(O). 'who may get … and can see …'는 animal을 수식하는 관계절 — 내부에 두 동사구(get/see)가 but으로 대조. 'when the food will appear'는 know의 목적어인 간접의문문."},
-    {id:"q4",sentence:"We can provide a sense of control by ensuring that our animal's environment is predictable.",chunks:["We","can provide","a sense of control","by ensuring that our animal's environment is predictable"],labels:["S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + by V-ing 수단 수식어",explanation:"핵심 뼈대: We(S) can provide(V) a sense of control(O). 'by ensuring …'는 수단을 나타내는 전치사구(by + 동명사). 'that our animal's environment is predictable'은 ensure의 목적절(that절)."},
+    {id:"q4",sentence:"We can provide a sense of control by ensuring that our animal's environment is predictable.",chunks:["We","can provide","a sense of control","by ensuring that our animal's environment is predictable"],labels:["S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + by V-ing 수단 수식어",explanation:"핵심 뼈대: We(S) can provide(V) a sense of control(O). 'by ensuring …'는 수단을 나타내는 전치사구(by + 동명사). 'that our animal's environment is predictable'은 ensure의 목적절(that절).",linkedGrammar:{tp:"TP05","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "We can provide a sense of control by [___] that our animal's environment is predictable.", "options": ["ensuring", "to ensure"], "answer": "ensuring", "explanation": {"structure": "이 문장의 핵심은 We can provide입니다.", "rule": "by는 전치사입니다. 전치사 뒤에는 동명사(v-ing)가 옵니다.", "connection": "전치사 by 뒤이므로 동명사 ensuring이 맞습니다. to ensure는 전치사 바로 뒤에 올 수 없습니다."}}},
     {id:"q5",sentence:"There is always water available and always in the same place.",chunks:["There is","always","water","available and always in the same place"],labels:["V","Mod","S","C"],pattern:"There be 구문",concept:"There be 구문 + 형용사 보어",explanation:"There is + S(water). 'available and always in the same place'는 water를 보충 설명하는 형용사구(보어적 수식). 'always'는 빈도 부사. There be 구문에서 진짜 주어는 be 뒤에 위치."},
     {id:"q6",sentence:"There will always be a time and place to eliminate, without having to hold things in to the point of discomfort.",chunks:["There will always be","a time and place","to eliminate","without having to hold things in to the point of discomfort"],labels:["V","S","Inf","Mod"],pattern:"There be 구문",concept:"There be 구문 + to부정사 수식 + without V-ing",explanation:"There will be + S(a time and place). 'to eliminate'는 time and place를 수식하는 to부정사. 'without having to hold …'는 부대 상황 전치사구(without + 동명사). 'hold things in'은 구동사."},
     {id:"q7",sentence:"Human companions can display consistent emotional support, rather than providing love one moment and withholding love the next.",chunks:["Human companions","can display","consistent emotional support","rather than providing love one moment and withholding love the next"],labels:["S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + rather than V-ing 대조 수식어",explanation:"핵심 뼈대: Human companions(S) can display(V) consistent emotional support(O). 'rather than providing … and withholding …'는 대조를 나타내는 전치사구 수식어. providing과 withholding이 and로 병렬. 'one moment … the next'는 대조적 시간 표현."},
@@ -197,17 +308,17 @@ const SETS=[
     {id:"q1",sentence:"When the price of something fundamental drops greatly, the whole world can change.",chunks:["When the price of something fundamental drops greatly,","the whole world","can change"],labels:["Adv.Cl","S","V"],pattern:"SV",concept:"완전자동사 SV + when 부사절",explanation:"핵심 뼈대: the whole world(S) can change(V). change는 여기서 완전자동사 — SV로 완결. 'When the price … drops greatly'는 조건·상황 부사절. 'something fundamental'에서 형용사 fundamental이 부정대명사 something을 뒤에서 수식."},
     {id:"q2",sentence:"Chances are you are reading this sentence under some kind of artificial light.",chunks:["Chances are","you","are reading","this sentence","under some kind of artificial light"],labels:["관용표현","S","V","O","Mod"],pattern:"SVO + Mod",concept:"'Chances are (that)' 관용 표현",explanation:"'Chances are (that) …'는 '아마도 ~일 것이다'의 관용 표현 — that 생략 가능. 뒤에 오는 절: you(S) are reading(V) this sentence(O). 'under some kind of artificial light'는 상황 전치사구 수식어."},
     {id:"q3",sentence:"Light is so cheap that you use it without thinking.",chunks:["Light","is","so cheap","that you use it without thinking"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"so ~ that 결과절",explanation:"핵심 뼈대: Light(S) is(V) so cheap(C). 'so + 형용사 + that절'은 정도·결과를 나타내는 구조: '너무 ~해서 …하다'. that절은 결과 부사절. 'without thinking'은 전치사구(without + 동명사)."},
-    {id:"q4",sentence:"But in the early 1800s, it would have cost you four hundred times what you are paying now for the same amount of light.",chunks:["But in the early 1800s,","it","would have cost","you","four hundred times what you are paying now for the same amount of light"],labels:["Mod","S","V","IO","DO"],pattern:"SVOO",concept:"4형식 가정법과거완료 + what절 목적어",explanation:"4형식: cost + IO(you) + DO(four hundred times …). 'would have cost'는 가정법과거완료 조동사구. 'what you are paying now …'는 관계사 what이 이끄는 명사절로 DO 자리. 'four hundred times'는 배수 표현."},
+    {id:"q4",sentence:"But in the early 1800s, it would have cost you four hundred times what you are paying now for the same amount of light.",chunks:["But in the early 1800s,","it","would have cost","you","four hundred times what you are paying now for the same amount of light"],labels:["Mod","S","V","IO","DO"],pattern:"SVOO",concept:"4형식 가정법과거완료 + what절 목적어",explanation:"4형식: cost + IO(you) + DO(four hundred times …). 'would have cost'는 가정법과거완료 조동사구. 'what you are paying now …'는 관계사 what이 이끄는 명사절로 DO 자리. 'four hundred times'는 배수 표현.",linkedGrammar:{tp:"TP32","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "But in the early 1800s, it [___] you four hundred times what you are paying now for the same amount of light.", "options": ["would have cost", "would cost"], "answer": "would have cost", "explanation": {"structure": "이 문장은 과거 사실에 대한 가정법 과거완료입니다.", "rule": "과거의 반대 상황을 가정할 때 주절에는 'would have + p.p.'를 씁니다. 현재/미래 반대 상황에는 'would + 동사원형'을 씁니다.", "connection": "'1800년대에 그랬을 것이다'는 과거 시점의 가정이므로 would have cost가 맞습니다. would cost는 현재/미래 가정에 씁니다."}}},
     {id:"q5",sentence:"The decrease in the price of light lit up the world.",chunks:["The decrease in the price of light","lit up","the world"],labels:["S","V","O"],pattern:"SVO",concept:"전치사구 수식 주어 + 구동사",explanation:"핵심 뼈대: The decrease(S) lit up(V) the world(O). 'in the price of light'는 전치사구로 decrease를 수식. 'lit up'은 light up(밝히다)의 과거형 구동사(phrasal verb)."},
-    {id:"q6",sentence:"Not only did it turn night into day, but it allowed us to live and work in big buildings that natural light could not enter.",chunks:["Not only did it turn night into day,","but it","allowed","us","to live and work in big buildings that natural light could not enter"],labels:["도치절","S","V","O","OC(Inf)"],pattern:"SVOC",concept:"Not only ~ but 상관접속사 + 부정어 도치 + 5형식",explanation:"'Not only'가 절 앞에 오면 조동사 도치 발생: Not only did it turn … 5형식: allow + O(us) + to-V(OC). to live and work는 두 동사가 and로 병렬. 관계절 'that natural light could not enter'는 buildings 수식."},
-    {id:"q7",sentence:"Nearly nothing we have today would be possible if the cost of artificial light had not dropped to almost nothing.",chunks:["Nearly nothing we have today","would be","possible","if the cost of artificial light had not dropped to almost nothing"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"가정법과거완료 + 관계절 수식 주어",explanation:"핵심 뼈대: Nearly nothing(S) would be(V) possible(C). 'we have today'는 nothing을 수식하는 관계절. 'if the cost … had not dropped'는 가정법과거완료 — 과거 사실의 반대를 가정. SVC 2형식에 가정법이 적용된 구조."}
+    {id:"q6",sentence:"Not only did it turn night into day, but it allowed us to live and work in big buildings that natural light could not enter.",chunks:["Not only did it turn night into day,","but it","allowed","us","to live and work in big buildings that natural light could not enter"],labels:["도치절","S","V","O","OC(Inf)"],pattern:"SVOC",concept:"Not only ~ but 상관접속사 + 부정어 도치 + 5형식",explanation:"'Not only'가 절 앞에 오면 조동사 도치 발생: Not only did it turn … 5형식: allow + O(us) + to-V(OC). to live and work는 두 동사가 and로 병렬. 관계절 'that natural light could not enter'는 buildings 수식.",linkedGrammar:{"type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Not only did it turn night into day, but it allowed us to live and [___] in big buildings that natural light could not enter.", "options": ["work", "to work"], "answer": "work", "explanation": {"structure": "이 문장의 핵심은 it allowed us to live and [___]입니다.", "rule": "등위접속사 and로 연결된 병렬 구조에서는 앞뒤 형태를 일치시킵니다. to live의 live와 and로 연결된 자리이므로 동사원형이 와야 합니다.", "connection": "to live and [work] — to 하나가 두 동사원형(live / work)을 이끄는 병렬 구조이므로 동사원형 work가 맞습니다. to work는 to가 중복됩니다."}, "tp": "TP02"}},
+    {id:"q7",sentence:"Nearly nothing we have today would be possible if the cost of artificial light had not dropped to almost nothing.",chunks:["Nearly nothing we have today","would be","possible","if the cost of artificial light had not dropped to almost nothing"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"가정법과거완료 + 관계절 수식 주어",explanation:"핵심 뼈대: Nearly nothing(S) would be(V) possible(C). 'we have today'는 nothing을 수식하는 관계절. 'if the cost … had not dropped'는 가정법과거완료 — 과거 사실의 반대를 가정. SVC 2형식에 가정법이 적용된 구조.",linkedGrammar:{tp:"TP32","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Nearly nothing we have today would be possible if the cost of artificial light [___] to almost nothing.", "options": ["had not dropped", "didn't drop"], "answer": "had not dropped", "explanation": {"structure": "이 문장은 과거 사실의 반대를 가정하는 가정법 과거완료입니다.", "rule": "주절에 'would + 동사원형'이 있고 과거의 사실을 반대로 가정할 때, if절에는 'had + p.p.(과거완료)'를 씁니다.", "connection": "실제로 과거에 가격이 떨어졌으므로, 그 반대 상황을 가정하는 had not dropped가 맞습니다. didn't drop은 가정법 과거(현재 사실의 반대) if절에 씁니다."}}}
   ]},
   {id:"mock_2021_03_22",title:"21년 3월 모의 22번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"If you care deeply about something, you may place greater value on your ability to succeed in that area of concern.",chunks:["If you care deeply about something,","you","may place","greater value","on your ability to succeed in that area of concern"],labels:["Adv.Cl","S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + 전치사구 수식어 + 조건 부사절",explanation:"핵심 뼈대: you(S) may place(V) greater value(O). 'on your ability to succeed …'는 전치사구 수식어. 'to succeed in that area'는 ability를 수식하는 to부정사. If절은 조건 부사절."},
-    {id:"q2",sentence:"The internal pressure you place on yourself to achieve is normal and useful.",chunks:["The internal pressure","you place on yourself to achieve","is","normal and useful"],labels:["S","Rel.Cl","V","C"],pattern:"SVC",concept:"관계절 수식 주어 + 2형식",explanation:"핵심 뼈대: The internal pressure(S) is(V) normal and useful(C). 'you place on yourself to achieve'는 pressure를 수식하는 관계절(목적격 관계사 생략). SVC 2형식."},
+    {id:"q2",sentence:"The internal pressure you place on yourself to achieve is normal and useful.",chunks:["The internal pressure","you place on yourself to achieve","is","normal and useful"],labels:["S","Rel.Cl","V","C"],pattern:"SVC",concept:"관계절 수식 주어 + 2형식",explanation:"핵심 뼈대: The internal pressure(S) is(V) normal and useful(C). 'you place on yourself to achieve'는 pressure를 수식하는 관계절(목적격 관계사 생략). SVC 2형식.",linkedGrammar:{"type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "The internal pressure you place on yourself to achieve [___] normal and useful.", "options": ["is", "to be"], "answer": "is", "explanation": {"structure": "이 문장의 진짜 주어는 The internal pressure입니다.", "rule": "'The pressure + 관계절(you place on yourself)' 구조에서 관계절은 수식어입니다. 동사는 The pressure에 맞춥니다.", "connection": "주어 The pressure는 단수이므로 is가 맞습니다. to be는 동사 자리에 올 수 없습니다."}, "tp": "TP22"}},
     {id:"q3",sentence:"When you doubt your ability to succeed in areas that are important to you, your self-worth suffers.",chunks:["When you doubt your ability to succeed in areas that are important to you,","your self-worth","suffers"],labels:["Adv.Cl","S","V"],pattern:"SV",concept:"SV + when 부사절(관계절 중첩)",explanation:"핵심 뼈대: your self-worth(S) suffers(V). suffer는 완전자동사 — SV로 완결. When절 안에 관계절(that are important to you)이 중첩. 'to succeed in areas'는 ability 수식 to부정사."},
     {id:"q4",sentence:"Situations are uniquely stressful for each of us based on whether or not they activate our doubt.",chunks:["Situations","are","uniquely stressful","for each of us","based on whether or not they activate our doubt"],labels:["S","V","C","Mod","Mod"],pattern:"SVC + Mod",concept:"2형식 SVC + 전치사구 수식어 복수",explanation:"핵심 뼈대: Situations(S) are(V) uniquely stressful(C). 'for each of us'는 범위 수식어. 'based on whether or not …'는 분사구문 수식어. whether or not절은 간접의문문."},
-    {id:"q5",sentence:"It is not the pressure to perform that creates your stress.",chunks:["It","is","not the pressure to perform","that creates your stress"],labels:["가S","V","실S","Rel.Cl"],pattern:"It~that 강조 구문",concept:"It~that 강조 구문",explanation:"It is [강조 대상] that … 강조 구문. 강조된 주어: not the pressure to perform. 'that creates your stress'는 강조 구문의 that절. 'It'은 형식주어(가S)이고 실제 주어(실S)는 the pressure to perform."},
+    {id:"q5",sentence:"It is not the pressure to perform that creates your stress.",chunks:["It","is","not the pressure to perform","that creates your stress"],labels:["가S","V","실S","Rel.Cl"],pattern:"It~that 강조 구문",concept:"It~that 강조 구문",explanation:"It is [강조 대상] that … 강조 구문. 강조된 주어: not the pressure to perform. 'that creates your stress'는 강조 구문의 that절. 'It'은 형식주어(가S)이고 실제 주어(실S)는 the pressure to perform.",linkedGrammar:{tp:"TP10","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "It is not the pressure to perform [___] creates your stress.", "options": ["that", "what"], "answer": "that", "explanation": {"structure": "이 문장은 'It is ~ that' 강조 구문입니다.", "rule": "강조 구문 'It is A that B'에서 that은 접속사 역할을 하며 which로 바꿀 수 없습니다.", "connection": "'It is the pressure that ~' 강조 구문이므로 that이 맞습니다. what은 선행사를 포함하는 관계사로, 강조 구문의 접속사 자리에 올 수 없습니다."}}},
     {id:"q6",sentence:"Rather, it is the self-doubt that bothers you.",chunks:["Rather,","it","is","the self-doubt","that bothers you"],labels:["Mod","가S","V","실S","Rel.Cl"],pattern:"It~that 강조 구문",concept:"It~that 강조 구문 + 역접 부사",explanation:"앞 문장과 대비되는 It~that 강조 구문. 강조 대상: the self-doubt. 'Rather'는 앞 절(pressure → stress)을 반박하는 역접 부사. It(가S) is(V) the self-doubt(실S)."},
     {id:"q7",sentence:"Doubt causes you to see positive, neutral, and even genuinely negative experiences more negatively and as a reflection of your own shortcomings.",chunks:["Doubt","causes","you","to see positive, neutral, and even genuinely negative experiences","more negatively and as a reflection of your own shortcomings"],labels:["S","V","O","OC(Inf)","Mod"],pattern:"SVOC",concept:"cause + O + to-V (5형식)",explanation:"5형식: cause + O + to-V. Doubt(S) causes(V) you(O) to see experiences(OC). 'more negatively and as a reflection …'는 see의 방식/결과 수식어. 세 형용사(positive, neutral, negative)가 experiences를 병렬 수식."},
     {id:"q8",sentence:"When you see situations and your strengths more objectively, you are less likely to have doubt as the source of your distress.",chunks:["When you see situations and your strengths more objectively,","you","are","less likely to have doubt as the source of your distress"],labels:["Adv.Cl","S","V","C"],pattern:"SVC",concept:"2형식 SVC + when 부사절",explanation:"핵심 뼈대: you(S) are(V) less likely to have doubt …(C). 'less likely to-V'는 형용사구로 보어 자리. When절은 시간·조건 부사절. 'as the source of your distress'는 doubt의 역할을 설명하는 전치사구."}
@@ -217,54 +328,54 @@ const SETS=[
     {id:"q2",sentence:"Too often, we convince ourselves that massive success requires massive action.",chunks:["Too often,","we","convince","ourselves","that massive success requires massive action"],labels:["Mod","S","V","O","OC(that절)"],pattern:"SVOC",concept:"convince + O + that절 (5형식)",explanation:"convince + O + that절 구조. we(S) convince(V) ourselves(O) that절(OC). 'Too often'은 빈도 부사어 — 문두에서 쉼표로 분리. 'massive success requires massive action'은 that절의 SVO 뼈대."},
     {id:"q3",sentence:"Whether it is losing weight, winning a championship, or achieving any other goal, we put pressure on ourselves to make some earthshaking improvement.",chunks:["Whether it is losing weight, winning a championship, or achieving any other goal,","we","put pressure on ourselves","to make some earthshaking improvement"],labels:["Adv.Cl","S","V","Inf"],pattern:"SVO + Inf",concept:"Whether 양보 부사절 + put pressure on + to부정사",explanation:"핵심 뼈대: we(S) put pressure on ourselves(V+O). 'to make some earthshaking improvement'는 목적·결과 to부정사구 수식어. Whether절은 양보 부사절 — 어떤 경우든 관계없이. losing/winning/achieving 세 동명사가 병렬."},
     {id:"q4",sentence:"Improving by 1 percent isn't particularly notable, but it can be far more meaningful in the long run.",chunks:["Improving by 1 percent","isn't","particularly notable","but it can be far more meaningful in the long run"],labels:["S","V","C","등위절"],pattern:"SVC",concept:"동명사 주어 + SVC + but 등위절",explanation:"동명사구 'Improving by 1 percent'(S) isn't(V) particularly notable(C). but 이하는 대조 등위절: it(S) can be(V) far more meaningful(C). 'far more meaningful'에서 far는 비교급 강조 부사."},
-    {id:"q5",sentence:"The difference this tiny improvement can make over time is surprising.",chunks:["The difference","this tiny improvement can make over time","is","surprising"],labels:["S","Rel.Cl","V","C"],pattern:"SVC",concept:"관계절 수식 주어 + 2형식",explanation:"핵심 뼈대: The difference(S) is(V) surprising(C). 'this tiny improvement can make over time'은 difference를 수식하는 관계절(목적격 관계사 that/which 생략). SVC 2형식."},
+    {id:"q5",sentence:"The difference this tiny improvement can make over time is surprising.",chunks:["The difference","this tiny improvement can make over time","is","surprising"],labels:["S","Rel.Cl","V","C"],pattern:"SVC",concept:"관계절 수식 주어 + 2형식",explanation:"핵심 뼈대: The difference(S) is(V) surprising(C). 'this tiny improvement can make over time'은 difference를 수식하는 관계절(목적격 관계사 that/which 생략). SVC 2형식.",linkedGrammar:{"type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "The difference this tiny improvement can make over time [___] surprising.", "options": ["is", "to be"], "answer": "is", "explanation": {"structure": "이 문장의 진짜 주어는 The difference입니다.", "rule": "'The difference + 관계절(this tiny improvement can make)' 구조에서 관계절은 수식어입니다. 동사는 The difference에 맞춥니다.", "connection": "주어 The difference는 단수이므로 is가 맞습니다. to be는 동사 자리에 올 수 없습니다."}, "tp": "TP22"}},
     {id:"q6",sentence:"If you can get 1 percent better each day for one year, you'll end up thirty-seven times better by the time you're done.",chunks:["If you can get 1 percent better each day for one year,","you'll end up","thirty-seven times better","by the time you're done"],labels:["Adv.Cl","V","C","Adv.Cl"],pattern:"SVC",concept:"가정 부사절 + end up + 형용사 보어 + by the time절",explanation:"핵심 뼈대: you(S) will end up(V) thirty-seven times better(C). end up + 형용사: '결국 ~한 상태가 되다'. '37 times better'는 배수 비교 표현. 'by the time you're done'은 시간 부사절."},
     {id:"q7",sentence:"Conversely, if you get 1 percent worse each day for one year, you'll decline nearly down to zero.",chunks:["Conversely,","if you get 1 percent worse each day for one year,","you'll decline","nearly down to zero"],labels:["Mod","Adv.Cl","V","Mod"],pattern:"SV + Mod",concept:"완전자동사 decline + 부사구 + 조건 부사절",explanation:"핵심 뼈대: you(S) will decline(V). decline은 완전자동사 — SV로 완결. 'nearly down to zero'는 방향·정도 부사구 수식어. 'Conversely'는 앞 문장(1% 향상)과 대비되는 접속 부사."},
-    {id:"q8",sentence:"What starts as a small win or a minor failure adds up to something much more.",chunks:["What starts as a small win or a minor failure","adds up to","something much more"],labels:["S","V","O"],pattern:"SVO",concept:"관계사 What절 주어 + 구동사",explanation:"'What starts as …'는 관계사 what이 이끄는 명사절 — 문장 전체의 주어(S). 'adds up to'는 '합쳐져 ~이 되다'의 구동사(phrasal verb). 'something much more': much는 형용사 more를 강조."}
+    {id:"q8",sentence:"What starts as a small win or a minor failure adds up to something much more.",chunks:["What starts as a small win or a minor failure","adds up to","something much more"],labels:["S","V","O"],pattern:"SVO",concept:"관계사 What절 주어 + 구동사",explanation:"'What starts as …'는 관계사 what이 이끄는 명사절 — 문장 전체의 주어(S). 'adds up to'는 '합쳐져 ~이 되다'의 구동사(phrasal verb). 'something much more': much는 형용사 more를 강조.",linkedGrammar:{tp:"TP10","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "[___] starts as a small win or a minor failure adds up to something much more.", "options": ["What", "That"], "answer": "What", "explanation": {"structure": "빈칸 뒤 starts의 주어가 빠져 있고, 이 절 전체가 문장의 주어입니다.", "rule": "선행사 없이 명사절 주어를 이끌고 절 안에서 주어 역할을 할 때는 what을 씁니다.", "connection": "starts의 주어 역할을 하면서 전체 명사절 주어를 만드므로 What이 맞습니다. That은 절 안에서 주어 역할을 하지 않습니다."}}}
   ]},
   {id:"mock_2021_03_39",title:"21년 3월 모의 39번",level:"고1",levelClass:"lv-adv",questions:[
-    {id:"q1",sentence:"The continued survival of the human race can be explained by our ability to adapt to our environment.",chunks:["The continued survival of the human race","can be explained","by our ability to adapt to our environment"],labels:["S","V","Mod"],pattern:"수동태 SV",concept:"수동태 + by구 + to부정사 수식",explanation:"핵심 뼈대: The continued survival(S) can be explained(V) — 수동태(can be p.p.). 'by our ability'는 수동태의 행위자·수단 전치사구. 'to adapt to our environment'는 ability를 수식하는 to부정사."},
+    {id:"q1",sentence:"The continued survival of the human race can be explained by our ability to adapt to our environment.",chunks:["The continued survival of the human race","can be explained","by our ability to adapt to our environment"],labels:["S","V","Mod"],pattern:"수동태 SV",concept:"수동태 + by구 + to부정사 수식",explanation:"핵심 뼈대: The continued survival(S) can be explained(V) — 수동태(can be p.p.). 'by our ability'는 수동태의 행위자·수단 전치사구. 'to adapt to our environment'는 ability를 수식하는 to부정사.",linkedGrammar:{tp:"TP27","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "The continued survival of the human race can [___] by our ability to adapt to our environment.", "options": ["be explained", "explain"], "answer": "be explained", "explanation": {"structure": "이 문장의 주어는 The continued survival입니다.", "rule": "주어와 동사의 관계를 봐야 합니다. 생존(survival)은 '설명되는' 것이지 스스로 '설명하는' 것이 아닙니다. 수동 관계에는 be + p.p.를 씁니다.", "connection": "by our ability라는 행위자 표현도 수동태를 지지합니다. 따라서 be explained(수동)가 맞습니다."}}},
     {id:"q2",sentence:"While we may have lost some of our ancient ancestors' survival skills, we have learned new skills as they have become necessary.",chunks:["While we may have lost some of our ancient ancestors' survival skills,","we","have learned","new skills","as they have become necessary"],labels:["Adv.Cl","S","V","O","Adv.Cl"],pattern:"SVO",concept:"While 양보절 + SVO + as 부사절",explanation:"핵심 뼈대: we(S) have learned(V) new skills(O). While절은 양보 부사절(~하는 반면). 'as they have become necessary'는 이유·시간 부사절. 'may have lost'는 과거 추측 완료형."},
     {id:"q3",sentence:"Today, the gap between the skills we once had and the skills we now have grows ever wider as we rely more heavily on modern technology.",chunks:["Today,","the gap between the skills we once had and the skills we now have","grows","ever wider","as we rely more heavily on modern technology"],labels:["Mod","S","V","C","Adv.Cl"],pattern:"SVC",concept:"2형식 grow + 형용사 보어 + as 부사절",explanation:"핵심 뼈대: the gap(S) grows(V) ever wider(C). grow는 2형식 동사 — 형용사 보어를 취함. 'ever wider'에서 ever는 비교급 강조 부사. 주어 the gap은 두 관계절(we once had / we now have)로 수식된 복합 명사구."},
     {id:"q4",sentence:"Therefore, when you head off into the wilderness, it is important to fully prepare for the environment.",chunks:["Therefore,","when you head off into the wilderness,","it","is","important","to fully prepare for the environment"],labels:["Mod","Adv.Cl","가S","V","C","진S"],pattern:"가주어 it ~ 진주어 to-V",concept:"가주어 it + 진주어 to부정사 + when 부사절",explanation:"It(가S) is(V) important(C) — 진주어는 'to fully prepare for the environment'. 'when you head off into the wilderness'는 시간 부사절. 'head off into'는 구동사(~을 향해 떠나다)."},
     {id:"q5",sentence:"Before a trip, research how the native inhabitants dress, work, and eat.",chunks:["Before a trip,","research","how the native inhabitants dress, work, and eat"],labels:["Mod","V","O"],pattern:"명령문",concept:"명령문 + how절 간접의문문 목적어",explanation:"명령문: research(V)로 시작(주어 You 생략). 'how the native inhabitants dress, work, and eat'는 간접의문문으로 목적어(O) 자리. 세 동사(dress / work / eat)가 and로 병렬."},
     {id:"q6",sentence:"How they have adapted to their way of life will help you to understand the environment and allow you to select the best gear and learn the correct skills.",chunks:["How they have adapted to their way of life","will help","you","to understand the environment","and allow you to select the best gear and learn the correct skills"],labels:["S","V","O","OC(Inf)","등위절"],pattern:"SVOC",concept:"간접의문문 주어 + help/allow + O + to-V (5형식 병렬)",explanation:"'How they have adapted …'는 간접의문문이 문장 주어(S)로 기능. 5형식: help + you(O) + to understand(OC). and 이하 'allow you to select … and learn …'도 같은 5형식이 등위 연결. 목적격 보어 자리에 to부정사 두 개 병렬."},
-    {id:"q7",sentence:"This is crucial because most survival situations arise as a result of a series of events that could have been avoided.",chunks:["This","is","crucial","because most survival situations arise as a result of a series of events that could have been avoided"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"2형식 SVC + because 부사절(관계절 중첩)",explanation:"핵심 뼈대: This(S) is(V) crucial(C). because절은 이유 부사절. 절 내부 뼈대: most survival situations(S) arise(V). 관계절 'that could have been avoided'가 events를 수식 — 수동태 가정법과거완료(could have been p.p.)."}
+    {id:"q7",sentence:"This is crucial because most survival situations arise as a result of a series of events that could have been avoided.",chunks:["This","is","crucial","because most survival situations arise as a result of a series of events that could have been avoided"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"2형식 SVC + because 부사절(관계절 중첩)",explanation:"핵심 뼈대: This(S) is(V) crucial(C). because절은 이유 부사절. 절 내부 뼈대: most survival situations(S) arise(V). 관계절 'that could have been avoided'가 events를 수식 — 수동태 가정법과거완료(could have been p.p.).",linkedGrammar:{tp:"TP03","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "...most survival situations arise as a result of a series of events that could have been [___].", "options": ["avoided", "avoiding"], "answer": "avoided", "explanation": {"structure": "events는 선행사이고, 빈칸은 could have been 뒤에 오는 과거분사 자리입니다.", "rule": "사건(events)은 '피해지는' 것이므로 수동 관계입니다. 'could have been + p.p.'는 수동태 완료형입니다.", "connection": "events는 avoid의 대상이므로 과거분사 avoided가 맞습니다. avoiding은 능동 관계에 씁니다."}}}
   ]},
   {id:"mock_2021_03_32",title:"21년 3월 모의 32번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"When a child is upset, the easiest and quickest way to calm them down is to give them food.",chunks:["When a child is upset,","the easiest and quickest way to calm them down","is","to give them food"],labels:["Adv.Cl","S","V","C"],pattern:"SVC",concept:"2형식 SVC + to부정사 보어 + when 부사절",explanation:"핵심 뼈대: the way(S) is(V) to give them food(C). to부정사구가 주격 보어 자리. 'the easiest and quickest way to calm them down'에서 to calm은 way를 수식하는 to부정사. When절은 조건·상황 부사절."},
     {id:"q2",sentence:"This acts as a distraction from the feelings they are having, gives them something to do with their hands and mouth, and shifts their attention from whatever was upsetting them.",chunks:["This","acts as a distraction from the feelings they are having,","gives them something to do with their hands and mouth,","and shifts their attention from whatever was upsetting them"],labels:["S","V1","V2","V3"],pattern:"SV (동사 3개 병렬)",concept:"주어 하나에 동사구 3개 병렬 연결",explanation:"This(S)가 주어, 세 동사구가 콤마+and로 병렬: acts as(V1) / gives(V2) / shifts(V3). 관계절 'they are having'이 feelings 수식. 'whatever was upsetting them'은 명사절로 from의 목적어."},
-    {id:"q3",sentence:"If the food chosen is also seen as a treat such as sweets or a biscuit, then the child will feel 'treated' and happier.",chunks:["If the food chosen is also seen as a treat such as sweets or a biscuit,","the child","will feel","'treated' and happier"],labels:["Adv.Cl","S","V","C"],pattern:"SVC",concept:"2형식 feel + 형용사 보어 + 조건절(수동태)",explanation:"핵심 뼈대: the child(S) will feel(V) 'treated' and happier(C). feel은 2형식 동사. 두 형용사가 and로 병렬. If절 안 'is seen as'는 수동태. 'the food chosen'에서 chosen은 food를 수식하는 과거분사."},
-    {id:"q4",sentence:"In the shorter term, using food like this is effective.",chunks:["In the shorter term,","using food like this","is","effective"],labels:["Mod","S","V","C"],pattern:"SVC",concept:"동명사 주어 + 2형식 SVC",explanation:"동명사구 'using food like this'(S) is(V) effective(C). 동명사 주어는 단수 취급 → is. 'In the shorter term'은 시간 범위 수식어로 문두에서 쉼표로 분리."},
+    {id:"q3",sentence:"If the food chosen is also seen as a treat such as sweets or a biscuit, then the child will feel 'treated' and happier.",chunks:["If the food chosen is also seen as a treat such as sweets or a biscuit,","the child","will feel","'treated' and happier"],labels:["Adv.Cl","S","V","C"],pattern:"SVC",concept:"2형식 feel + 형용사 보어 + 조건절(수동태)",explanation:"핵심 뼈대: the child(S) will feel(V) 'treated' and happier(C). feel은 2형식 동사. 두 형용사가 and로 병렬. If절 안 'is seen as'는 수동태. 'the food chosen'에서 chosen은 food를 수식하는 과거분사.",linkedGrammar:{tp:"TP03","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "If the food [___] is also seen as a treat such as sweets or a biscuit, then the child will feel 'treated' and happier.", "options": ["chosen", "choosing"], "answer": "chosen", "explanation": {"structure": "the food는 이 절의 주어이고, 빈칸은 food를 수식하는 분사 자리입니다.", "rule": "명사와 분사의 관계를 봐야 합니다. 음식(food)은 '선택되는' 것이므로 수동 관계입니다. 수동 관계에는 과거분사(p.p.)를 씁니다.", "connection": "food는 choose의 대상이므로 과거분사 chosen이 맞습니다. choosing은 food가 스스로 선택하는 능동 관계에 씁니다."}}},
+    {id:"q4",sentence:"In the shorter term, using food like this is effective.",chunks:["In the shorter term,","using food like this","is","effective"],labels:["Mod","S","V","C"],pattern:"SVC",concept:"동명사 주어 + 2형식 SVC",explanation:"동명사구 'using food like this'(S) is(V) effective(C). 동명사 주어는 단수 취급 → is. 'In the shorter term'은 시간 범위 수식어로 문두에서 쉼표로 분리.",linkedGrammar:{tp:"TP26","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "In the shorter term, using food like this [___] effective.", "options": ["is", "are"], "answer": "is", "explanation": {"structure": "이 문장의 주어는 동명사구 'using food like this'입니다.", "rule": "동명사구가 주어일 때 단수 취급합니다.", "connection": "동명사구 주어는 단수이므로 is가 맞습니다."}}},
     {id:"q5",sentence:"But in the longer term it can be harmful as we quickly learn that food is a good way to manage emotions.",chunks:["But in the longer term,","it","can be","harmful","as we quickly learn that food is a good way to manage emotions"],labels:["Mod","S","V","C","Adv.Cl"],pattern:"SVC",concept:"2형식 SVC + as 이유절",explanation:"it(S) can be(V) harmful(C). 여기서 it은 앞 문장의 '음식으로 감정 관리하기'를 가리킴. 'as we quickly learn …'는 이유 부사절. that절은 learn의 목적절 — 'food is a good way to manage emotions'."},
     {id:"q6",sentence:"Whenever we feel annoyed, anxious, or even just bored, we turn to food to make ourselves feel better.",chunks:["Whenever we feel annoyed, anxious, or even just bored,","we","turn to food","to make ourselves feel better"],labels:["Adv.Cl","S","V","Inf"],pattern:"SV + Inf",concept:"Whenever 복합관계 부사절 + to부정사 목적",explanation:"핵심 뼈대: we(S) turn to food(V). 'to make ourselves feel better'는 목적 to부정사. make + ourselves(O) + feel better(OC) — 5형식. Whenever절은 '~할 때마다' 복합관계부사절. 세 형용사(annoyed/anxious/bored)가 feel의 보어로 병렬."}
   ]},
   {id:"mock_2021_03_33",title:"21년 3월 모의 33번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"Scientists believe that the frogs' ancestors were water-dwelling, fishlike animals.",chunks:["Scientists","believe","that the frogs' ancestors were water-dwelling, fishlike animals"],labels:["S","V","O"],pattern:"SVO",concept:"SVO — that절 목적어",explanation:"핵심 뼈대: Scientists(S) believe(V) that절(O). that절 내부: the frogs' ancestors(S) were(V) water-dwelling, fishlike animals(C) — SVC 2형식. believe는 that절을 목적어로 취하는 대표 동사."},
     {id:"q2",sentence:"The first frogs and their relatives gained the ability to come out on land and enjoy the opportunities for food and shelter there.",chunks:["The first frogs and their relatives","gained","the ability","to come out on land and enjoy the opportunities for food and shelter there"],labels:["S","V","O","Inf"],pattern:"SVO",concept:"SVO + to부정사 수식(ability)",explanation:"핵심 뼈대: The first frogs and their relatives(S) gained(V) the ability(O). 'to come out … and enjoy …'는 ability를 수식하는 to부정사구 — 두 동사(come out / enjoy)가 and로 병렬."},
-    {id:"q3",sentence:"But for this kind of 'breathing' to work properly, the frog's skin must stay moist.",chunks:["But for this kind of 'breathing' to work properly,","the frog's skin","must stay","moist"],labels:["Mod","S","V","C"],pattern:"SVC",concept:"2형식 stay + 형용사 보어 + for ~ to부정사 부사구",explanation:"핵심 뼈대: the frog's skin(S) must stay(V) moist(C). stay는 2형식 동사 — 형용사 보어를 취함. 'for this kind of breathing to work properly'는 조건·전제를 나타내는 for + 명사 + to-V 구조."},
+    {id:"q3",sentence:"But for this kind of 'breathing' to work properly, the frog's skin must stay moist.",chunks:["But for this kind of 'breathing' to work properly,","the frog's skin","must stay","moist"],labels:["Mod","S","V","C"],pattern:"SVC",concept:"2형식 stay + 형용사 보어 + for ~ to부정사 부사구",explanation:"핵심 뼈대: the frog's skin(S) must stay(V) moist(C). stay는 2형식 동사 — 형용사 보어를 취함. 'for this kind of breathing to work properly'는 조건·전제를 나타내는 for + 명사 + to-V 구조.",linkedGrammar:{tp:"TP12","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "...the frog's skin must stay [___].", "options": ["moist", "moistly"], "answer": "moist", "explanation": {"structure": "이 문장의 핵심은 the frog's skin must stay입니다.", "rule": "stay는 2형식 동사로 뒤에 주격보어(형용사)가 옵니다. '~한 상태를 유지하다'의 의미입니다.", "connection": "stay 뒤 보어 자리이므로 형용사 moist가 맞습니다. moistly는 부사 형태로 보어 자리에 올 수 없습니다."}}},
     {id:"q4",sentence:"And so the frog must remain near the water where it can take a dip every now and then to keep from drying out.",chunks:["And so","the frog","must remain","near the water","where it can take a dip every now and then to keep from drying out"],labels:["Mod","S","V","C","Rel.Cl"],pattern:"SVC",concept:"2형식 remain + 장소 보어 + where 관계절",explanation:"핵심 뼈대: the frog(S) must remain(V) near the water(C). remain은 2형식. where절은 the water를 수식하는 관계절. 'to keep from drying out'는 목적 to부정사. 'every now and then'은 '가끔'의 관용 부사."},
     {id:"q5",sentence:"Frogs must also lay their eggs in water, as their fishlike ancestors did.",chunks:["Frogs","must also lay","their eggs","in water","as their fishlike ancestors did"],labels:["S","V","O","Mod","Adv.Cl"],pattern:"SVO + Mod",concept:"SVO + as 비교·방식 절",explanation:"핵심 뼈대: Frogs(S) must lay(V) their eggs(O). 'in water'는 장소 전치사구. 'as their fishlike ancestors did'는 방식·비교 부사절 — did는 lay their eggs를 대동사로 대체."},
-    {id:"q6",sentence:"Eggs laid in the water must develop into water creatures, if they are to survive.",chunks:["Eggs laid in the water","must develop","into water creatures","if they are to survive"],labels:["S","V","Mod","Adv.Cl"],pattern:"SV + Mod",concept:"be to 용법 + 과거분사 수식 주어",explanation:"핵심 뼈대: Eggs(S) must develop(V) into water creatures(수식어). 'laid in the water'는 Eggs를 수식하는 과거분사구. 'if they are to survive'의 'be to-V'는 '~하려면/~할 운명'의 be to 용법."},
+    {id:"q6",sentence:"Eggs laid in the water must develop into water creatures, if they are to survive.",chunks:["Eggs laid in the water","must develop","into water creatures","if they are to survive"],labels:["S","V","Mod","Adv.Cl"],pattern:"SV + Mod",concept:"be to 용법 + 과거분사 수식 주어",explanation:"핵심 뼈대: Eggs(S) must develop(V) into water creatures(수식어). 'laid in the water'는 Eggs를 수식하는 과거분사구. 'if they are to survive'의 'be to-V'는 '~하려면/~할 운명'의 be to 용법.",linkedGrammar:{tp:"TP03","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Eggs [___] in the water must develop into water creatures, if they are to survive.", "options": ["laid", "laying"], "answer": "laid", "explanation": {"structure": "Eggs는 이 문장의 주어이고, 빈칸은 Eggs를 수식하는 분사 자리입니다.", "rule": "명사와 분사의 관계를 봐야 합니다. 알(Eggs)은 '놓여지는' 것이므로 수동 관계입니다. 수동 관계에는 과거분사(p.p.)를 씁니다.", "connection": "Eggs는 lay의 대상(목적어 관계)이므로 과거분사 laid가 맞습니다. laying은 능동 관계일 때 씁니다."}}},
     {id:"q7",sentence:"For frogs, metamorphosis thus provides the bridge between the water-dwelling young forms and the land-dwelling adults.",chunks:["For frogs,","metamorphosis","thus provides","the bridge","between the water-dwelling young forms and the land-dwelling adults"],labels:["Mod","S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + between A and B 전치사구",explanation:"핵심 뼈대: metamorphosis(S) provides(V) the bridge(O). 'between the water-dwelling young forms and the land-dwelling adults'는 the bridge를 수식하는 전치사구. 두 명사구가 A and B 구조로 대조적 병렬."}
   ]},
   {id:"mock_2021_03_34",title:"21년 3월 모의 34번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"It is important to distinguish between being legally allowed to do something, and actually being able to go and do it.",chunks:["It","is","important","to distinguish between being legally allowed to do something, and actually being able to go and do it"],labels:["가S","V","C","진S"],pattern:"가주어 it ~ 진주어 to-V",concept:"가주어 it + 형용사 보어 + 진주어 to부정사",explanation:"It(가S) is(V) important(C) — 진주어는 to부정사구. 'to distinguish between A and B': between의 A(being legally allowed …)와 B(actually being able …)가 and로 병렬. 두 동명사구가 대조적으로 연결."},
     {id:"q2",sentence:"A law could be passed allowing everyone, if they so wish, to run a mile in two minutes.",chunks:["A law","could be passed","allowing everyone","if they so wish,","to run a mile in two minutes"],labels:["S","V","Mod","Adv.Cl","OC(Inf)"],pattern:"수동태 + 분사구문",concept:"수동태 + allowing 분사구문 + 삽입 조건절",explanation:"핵심 뼈대: A law(S) could be passed(V) — 수동태. 'allowing everyone … to run …'은 수동태 뒤에 오는 분사구문(결과). 'if they so wish'는 삽입된 조건절. allow + everyone(O) + to run(OC) — 5형식 구조 내포."},
     {id:"q3",sentence:"That would not, however, increase their effective freedom, because, although allowed to do so, they are physically incapable of it.",chunks:["That","would not increase","their effective freedom","because although allowed to do so, they are physically incapable of it"],labels:["S","V","O","Adv.Cl"],pattern:"SVO",concept:"SVO + because절(although 분사구문 중첩)",explanation:"핵심 뼈대: That(S) would not increase(V) their effective freedom(O). because절 안에 'although allowed to do so'는 양보 분사구문(although + p.p.). they are physically incapable of it — SVC 2형식(be incapable of)."},
-    {id:"q4",sentence:"Having a minimum of restrictions and a maximum of possibilities is fine.",chunks:["Having a minimum of restrictions and a maximum of possibilities","is","fine"],labels:["S","V","C"],pattern:"SVC",concept:"동명사 주어(A and B 병렬) + 2형식",explanation:"동명사구가 주어: 'Having a minimum of restrictions'와 'a maximum of possibilities'가 and로 병렬. 하지만 동명사 Having 하나가 두 목적어를 거느리므로 단수 취급 → is(V) fine(C). SVC 2형식."},
-    {id:"q5",sentence:"Their effective freedom depends on actually having the means and ability to do what they choose.",chunks:["Their effective freedom","depends on","actually having the means and ability","to do what they choose"],labels:["S","V","O","Inf"],pattern:"SVO",concept:"depend on + 동명사 + to부정사 수식",explanation:"핵심 뼈대: Their effective freedom(S) depends on(V) actually having …(O). depend on은 전치사 포함 동사 — 목적어는 동명사(having). 'to do what they choose'는 ability를 수식하는 to부정사. 'what they choose'는 do의 목적어인 명사절."}
+    {id:"q4",sentence:"Having a minimum of restrictions and a maximum of possibilities is fine.",chunks:["Having a minimum of restrictions and a maximum of possibilities","is","fine"],labels:["S","V","C"],pattern:"SVC",concept:"동명사 주어(A and B 병렬) + 2형식",explanation:"동명사구가 주어: 'Having a minimum of restrictions'와 'a maximum of possibilities'가 and로 병렬. 하지만 동명사 Having 하나가 두 목적어를 거느리므로 단수 취급 → is(V) fine(C). SVC 2형식.",linkedGrammar:{tp:"TP26","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Having a minimum of restrictions and a maximum of possibilities [___] fine.", "options": ["is", "are"], "answer": "is", "explanation": {"structure": "이 문장의 주어는 동명사구 'Having a minimum of restrictions and a maximum of possibilities' 전체입니다.", "rule": "동명사구 전체가 주어일 때 단수 취급합니다. and로 연결되어 있어도 하나의 동명사(Having)가 이끄는 하나의 주어입니다.", "connection": "동명사구 주어는 단수로 취급하므로 is가 맞습니다. and가 있다고 해서 are를 쓰면 틀립니다."}}},
+    {id:"q5",sentence:"Their effective freedom depends on actually having the means and ability to do what they choose.",chunks:["Their effective freedom","depends on","actually having the means and ability","to do what they choose"],labels:["S","V","O","Inf"],pattern:"SVO",concept:"depend on + 동명사 + to부정사 수식",explanation:"핵심 뼈대: Their effective freedom(S) depends on(V) actually having …(O). depend on은 전치사 포함 동사 — 목적어는 동명사(having). 'to do what they choose'는 ability를 수식하는 to부정사. 'what they choose'는 do의 목적어인 명사절.",linkedGrammar:{tp:"TP05","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Their effective freedom depends on actually [___] the means and ability to do what they choose.", "options": ["having", "to have"], "answer": "having", "explanation": {"structure": "이 문장의 핵심은 freedom depends on입니다.", "rule": "depend on의 on은 전치사입니다. 전치사 뒤에는 동명사(v-ing)가 옵니다. to부정사는 전치사 뒤에 올 수 없습니다.", "connection": "전치사 on 뒤 자리이므로 동명사 having이 맞습니다. to have는 전치사 바로 뒤에 올 수 없습니다."}}}
   ]},
   {id:"mock_2021_03_35",title:"21년 3월 모의 35번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"Today's music business has allowed musicians to take matters into their own hands.",chunks:["Today's music business","has allowed","musicians","to take matters into their own hands"],labels:["S","V","O","OC(Inf)"],pattern:"SVOC",concept:"allow + O + to-V (5형식)",explanation:"5형식: allow + O + to-V. Today's music business(S) has allowed(V) musicians(O) to take matters into their own hands(OC). 'take matters into one's own hands'는 '스스로 처리하다' 관용 표현."},
-    {id:"q2",sentence:"Gone are the days of musicians waiting for a gatekeeper to say they are worthy of the spotlight.",chunks:["Gone","are","the days of musicians waiting for a gatekeeper to say they are worthy of the spotlight"],labels:["C","V","S"],pattern:"도치 구문(CVS)",concept:"형용사 도치 — Gone are the days",explanation:"원래 어순: The days … are gone. 형용사/분사(Gone)가 문두로 나오면 be동사와 주어가 도치. Gone(C) are(V) the days(S). 'of musicians waiting …'은 전치사구로 days 수식. 'to say they are worthy'는 gatekeeper 수식 to부정사."},
+    {id:"q2",sentence:"Gone are the days of musicians waiting for a gatekeeper to say they are worthy of the spotlight.",chunks:["Gone","are","the days of musicians waiting for a gatekeeper to say they are worthy of the spotlight"],labels:["C","V","S"],pattern:"도치 구문(CVS)",concept:"형용사 도치 — Gone are the days",explanation:"원래 어순: The days … are gone. 형용사/분사(Gone)가 문두로 나오면 be동사와 주어가 도치. Gone(C) are(V) the days(S). 'of musicians waiting …'은 전치사구로 days 수식. 'to say they are worthy'는 gatekeeper 수식 to부정사.",linkedGrammar:{tp:"TP03","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Gone are the days of musicians [___] for a gatekeeper to say they are worthy of the spotlight.", "options": ["waiting", "waited"], "answer": "waiting", "explanation": {"structure": "musicians는 분사의 의미상 주어입니다.", "rule": "musicians와 wait의 관계를 봐야 합니다. 음악가들이 직접 '기다리는' 것이므로 능동 관계입니다. 능동 관계에는 현재분사(v-ing)를 씁니다.", "connection": "musicians가 능동적으로 기다리는 관계이므로 현재분사 waiting이 맞습니다. waited는 과거동사 형태로 명사를 수식하는 분사 자리에 올 수 없습니다."}}},
     {id:"q3",sentence:"In today's music business, you don't need to ask for permission to build a fanbase and you no longer need to pay thousands of dollars to a company to do it.",chunks:["In today's music business,","you don't need to ask for permission to build a fanbase","and you no longer need to pay thousands of dollars to a company to do it"],labels:["Mod","SVO절1","SVO절2"],pattern:"SVO (등위절 병렬)",concept:"SVO 두 절 and로 병렬 + need to-V",explanation:"두 절이 and로 연결: you don't need to ask … / you no longer need to pay …. need to-V 구조에서 to부정사가 목적어. 각 절에 추가 to부정사(to build / to do)가 수식어로 연결."},
     {id:"q4",sentence:"Every day, musicians are getting their music out to thousands of listeners without any outside help.",chunks:["Every day,","musicians","are getting their music out","to thousands of listeners","without any outside help"],labels:["Mod","S","V","Mod","Mod"],pattern:"SVO + Mod",concept:"구동사(get out) + without V-ing 수식어",explanation:"핵심 뼈대: musicians(S) are getting … out(V) their music(O). 'get music out'은 '음악을 내보내다' 구동사 — 현재진행형. 'to thousands of listeners'는 방향 전치사구. 'without any outside help'는 방식 전치사구."},
     {id:"q5",sentence:"They simply deliver it to the fans directly, without asking for permission or outside help to receive exposure or connect with thousands of listeners.",chunks:["They","simply deliver","it","to the fans directly","without asking for permission or outside help to receive exposure or connect with thousands of listeners"],labels:["S","V","O","Mod","Mod"],pattern:"SVO + Mod",concept:"SVO + without V-ing 방식 수식어",explanation:"핵심 뼈대: They(S) deliver(V) it(O). 'to the fans directly'는 방향+방식 수식어. 'without asking …'은 방식 전치사구(without + 동명사). permission과 outside help가 or로 병렬, 뒤에 to receive … or connect …가 목적 to부정사로 병렬."}
   ]},
   {id:"mock_2021_03_36",title:"21년 3월 모의 36번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"The rules of the game always include rules about the type of ball that is allowed, starting with the size and weight of the ball.",chunks:["The rules of the game","always include","rules about the type of ball that is allowed","starting with the size and weight of the ball"],labels:["S","V","O","Mod"],pattern:"SVO + 분사구문",concept:"SVO + starting with 분사구문",explanation:"핵심 뼈대: The rules(S) always include(V) rules(O). 'about the type of ball'은 rules(O)를 수식하는 전치사구. 관계절 'that is allowed'가 ball 수식. 'starting with …'는 부대상황 분사구문."},
-    {id:"q2",sentence:"A ball might have the correct size and weight but if it is made as a hollow ball of steel it will be too stiff.",chunks:["A ball might have the correct size and weight","but if it is made as a hollow ball of steel,","it","will be","too stiff"],labels:["SVO절","Adv.Cl","S","V","C"],pattern:"SVC",concept:"조건 부사절 + 2형식 be too + 형용사",explanation:"핵심 뼈대: it(S) will be(V) too stiff(C). 'if it is made as a hollow ball of steel'은 조건 부사절 — 수동태(be made). 'too stiff'에서 too는 정도 초과 부사. 앞 절(might have …)과 but으로 대조."},
+    {id:"q2",sentence:"A ball might have the correct size and weight but if it is made as a hollow ball of steel it will be too stiff.",chunks:["A ball might have the correct size and weight","but if it is made as a hollow ball of steel,","it","will be","too stiff"],labels:["SVO절","Adv.Cl","S","V","C"],pattern:"SVC",concept:"조건 부사절 + 2형식 be too + 형용사",explanation:"핵심 뼈대: it(S) will be(V) too stiff(C). 'if it is made as a hollow ball of steel'은 조건 부사절 — 수동태(be made). 'too stiff'에서 too는 정도 초과 부사. 앞 절(might have …)과 but으로 대조.",linkedGrammar:{tp:"TP27","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "...if it [___] as a hollow ball of steel it will be too stiff.", "options": ["is made", "makes"], "answer": "is made", "explanation": {"structure": "이 절의 주어는 it(공)입니다.", "rule": "주어와 동사의 관계를 봐야 합니다. 공(it)은 '만들어지는' 것이지 스스로 '만드는' 것이 아닙니다. 수동 관계에는 be + p.p.를 씁니다.", "connection": "주어 it이 만들어지는 대상이므로 수동태 is made가 맞습니다. makes는 능동으로 의미상 맞지 않습니다."}}},
     {id:"q3",sentence:"If it is made from light foam rubber with a heavy center it will be too soft.",chunks:["If it is made from light foam rubber with a heavy center,","it","will be","too soft"],labels:["Adv.Cl","S","V","C"],pattern:"SVC",concept:"수동태 조건절 + 2형식 SVC",explanation:"핵심 뼈대: it(S) will be(V) too soft(C). If절은 조건 부사절 — 'is made from'은 재료를 나타내는 수동태 표현. 앞 문장(too stiff)과 이 문장(too soft)이 대조 쌍을 이룸."},
     {id:"q4",sentence:"A solid rubber ball would be too bouncy for most sports, and a solid ball made of clay would not bounce at all.",chunks:["A solid rubber ball would be too bouncy for most sports","and a solid ball made of clay","would not bounce","at all"],labels:["SVC절1","S","V","Mod"],pattern:"SV (등위 대조)",concept:"SVC + and + SV 대조 병렬",explanation:"첫 절: A solid rubber ball(S) would be(V) too bouncy(C) — 2형식. and 이하: a solid ball made of clay(S) would not bounce(V) — 완전자동사 SV. 'at all'은 부정 강조 부사. 'made of clay'는 과거분사구로 ball 수식. 두 절이 too bouncy(너무 탄성↑) vs not bounce(탄성 없음)으로 대조."},
     {id:"q5",sentence:"Similarly, along with stiffness, a ball needs to bounce properly.",chunks:["Similarly,","along with stiffness,","a ball","needs","to bounce properly"],labels:["Mod","Mod","S","V","O"],pattern:"SVO",concept:"SVO — need + to부정사 목적어",explanation:"핵심 뼈대: a ball(S) needs(V) to bounce properly(O). need는 to부정사를 목적어로 취하는 동사. 'Similarly'는 앞 문장(stiffness)과 유사한 논점을 도입하는 접속 부사. 'along with stiffness'는 함께 논의되는 추가 조건 전치사구."}
@@ -276,43 +387,43 @@ const SETS=[
     {id:"q4",sentence:"That tells us that a water molecule is made up of two hydrogen atoms and one oxygen atom.",chunks:["That","tells","us","that a water molecule is made up of two hydrogen atoms and one oxygen atom"],labels:["S","V","IO","DO"],pattern:"SVOO",concept:"4형식 tell + IO + DO(that절)",explanation:"4형식: tell + IO(us) + DO(that절). That(S) tells(V) us(IO) that절(DO). that절 내부: a water molecule(S) is made up of(V) — 수동태 구동사. 'two hydrogen atoms and one oxygen atom'이 병렬로 전치사 of의 목적어."}
   ]},
   {id:"mock_2021_03_40",title:"21년 3월 모의 40번",level:"고1",levelClass:"lv-adv",questions:[
-    {id:"q1",sentence:"In one study, researchers asked pairs of strangers to sit down in a room and chat.",chunks:["In one study,","researchers","asked","pairs of strangers","to sit down in a room and chat"],labels:["Mod","S","V","O","OC(Inf)"],pattern:"SVOC",concept:"ask + O + to-V (5형식)",explanation:"5형식: ask + O + to-V. researchers(S) asked(V) pairs of strangers(O) to sit down … and chat(OC). to부정사 안에 sit down과 chat 두 동사가 and로 병렬. 'In one study'는 연구 맥락 전치사구 수식어."},
-    {id:"q2",sentence:"In half of the rooms, a cell phone was placed on a nearby table; in the other half, no phone was present.",chunks:["In half of the rooms,","a cell phone was placed on a nearby table","in the other half,","no phone was present"],labels:["Mod","수동태절","Mod","수동태절"],pattern:"수동태 대조",concept:"수동태 두 절 세미콜론 대조",explanation:"두 절이 세미콜론(;)으로 대조: a cell phone was placed(수동태) vs no phone was present. 'was placed'는 be + p.p. 수동태. 'was present'는 be + 형용사(present) — SVC 2형식처럼 보이지만 present는 형용사."},
+    {id:"q1",sentence:"In one study, researchers asked pairs of strangers to sit down in a room and chat.",chunks:["In one study,","researchers","asked","pairs of strangers","to sit down in a room and chat"],labels:["Mod","S","V","O","OC(Inf)"],pattern:"SVOC",concept:"ask + O + to-V (5형식)",explanation:"5형식: ask + O + to-V. researchers(S) asked(V) pairs of strangers(O) to sit down … and chat(OC). to부정사 안에 sit down과 chat 두 동사가 and로 병렬. 'In one study'는 연구 맥락 전치사구 수식어.",linkedGrammar:{tp:"TP19","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "...researchers asked pairs of strangers [___] down in a room and chat.", "options": ["to sit", "sitting"], "answer": "to sit", "explanation": {"structure": "이 문장의 핵심은 researchers asked pairs입니다.", "rule": "ask는 5형식 동사로 'ask + 목적어 + to-v' 형태를 취합니다.", "connection": "ask + 목적어(pairs) 뒤에는 to부정사가 목적격보어로 옵니다. sitting은 이 자리에 올 수 없습니다."}}},
+    {id:"q2",sentence:"In half of the rooms, a cell phone was placed on a nearby table; in the other half, no phone was present.",chunks:["In half of the rooms,","a cell phone was placed on a nearby table","in the other half,","no phone was present"],labels:["Mod","수동태절","Mod","수동태절"],pattern:"수동태 대조",concept:"수동태 두 절 세미콜론 대조",explanation:"두 절이 세미콜론(;)으로 대조: a cell phone was placed(수동태) vs no phone was present. 'was placed'는 be + p.p. 수동태. 'was present'는 be + 형용사(present) — SVC 2형식처럼 보이지만 present는 형용사.",linkedGrammar:{tp:"TP27","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "In half of the rooms, a cell phone [___] on a nearby table.", "options": ["was placed", "placed"], "answer": "was placed", "explanation": {"structure": "이 문장의 주어는 a cell phone입니다.", "rule": "주어와 동사의 관계를 봐야 합니다. 핸드폰(a cell phone)은 '놓여진' 것이지 스스로 '놓는' 것이 아닙니다. 수동 관계에는 be + p.p.를 씁니다.", "connection": "주어 a cell phone은 놓여지는 대상이므로 수동태 was placed가 맞습니다."}}},
     {id:"q3",sentence:"When a cell phone was present in the room, the participants reported the quality of their relationship was worse than those who'd talked in a cell phone-free room.",chunks:["When a cell phone was present in the room,","the participants","reported","the quality of their relationship was worse than those who'd talked in a cell phone-free room"],labels:["Adv.Cl","S","V","O"],pattern:"SVO",concept:"SVO — that절(that 생략) 목적어 + when 부사절",explanation:"핵심 뼈대: the participants(S) reported(V) that절(O) — that 생략. that절 내부: the quality(S) was(V) worse(C) — SVC 비교급. 'than those who'd talked …'는 비교 기준절. When절은 상황 부사절."},
     {id:"q4",sentence:"The pairs who talked in the rooms with cell phones thought their partners showed less empathy.",chunks:["The pairs","who talked in the rooms with cell phones","thought","their partners showed less empathy"],labels:["S","Rel.Cl","V","O"],pattern:"SVO",concept:"관계절 수식 주어 + SVO(that절 생략)",explanation:"핵심 뼈대: The pairs(S) thought(V) that절(O) — that 생략. 'who talked in the rooms with cell phones'는 The pairs를 수식하는 관계절. that절 내부: their partners(S) showed(V) less empathy(O) — SVO."},
-    {id:"q5",sentence:"You might have felt good about yourself because you didn't pick it up to check your messages.",chunks:["You","might have felt","good about yourself","because you didn't pick it up to check your messages"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"2형식 feel + 형용사구 보어 + because 부사절",explanation:"핵심 뼈대: You(S) might have felt(V) good(C). 'good about yourself'에서 good은 feel의 형용사 보어, 'about yourself'는 전치사구로 good 수식. because절은 이유 부사절. 'pick it up'은 구동사, to check는 목적 to부정사."},
+    {id:"q5",sentence:"You might have felt good about yourself because you didn't pick it up to check your messages.",chunks:["You","might have felt","good about yourself","because you didn't pick it up to check your messages"],labels:["S","V","C","Adv.Cl"],pattern:"SVC",concept:"2형식 feel + 형용사구 보어 + because 부사절",explanation:"핵심 뼈대: You(S) might have felt(V) good(C). 'good about yourself'에서 good은 feel의 형용사 보어, 'about yourself'는 전치사구로 good 수식. because절은 이유 부사절. 'pick it up'은 구동사, to check는 목적 to부정사.",linkedGrammar:{"type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "You might [___] good about yourself because you didn't pick it up to check your messages.", "options": ["have felt", "feel"], "answer": "have felt", "explanation": {"structure": "이 문장은 과거의 상황에 대한 추측입니다.", "rule": "'might have + p.p.'는 과거에 일어났을 가능성을 나타냅니다. 'might + 동사원형'은 현재/미래의 가능성에 씁니다.", "connection": "핸드폰을 집지 않은 것은 이미 일어난 과거의 행동이므로, 그때 기분이 좋았을 것이라는 과거 추측 have felt가 맞습니다."}, "tp": "TP32_modal"}},
     {id:"q6",sentence:"Your unchecked messages were still hurting your connection with the person sitting across from you.",chunks:["Your unchecked messages","were still hurting","your connection","with the person sitting across from you"],labels:["S","V","O","Mod"],pattern:"SVO",concept:"SVO — 현재진행 수동 vs 능동 구분",explanation:"핵심 뼈대: Your unchecked messages(S) were hurting(V) your connection(O). 과거진행형 능동태(were V-ing). 'with the person sitting across from you'는 전치사구로 connection 수식. 'sitting across from you'는 person을 수식하는 현재분사구."}
   ]},
   {id:"mock_2021_03_4142",title:"21년 3월 모의 41~42번",level:"고1",levelClass:"lv-adv",questions:[
     {id:"q1",sentence:"As kids, we worked hard at learning to ride a bike; when we fell off, we got back on again, until it became second nature to us.",chunks:["As kids,","we worked hard at learning to ride a bike","when we fell off,","we got back on again","until it became second nature to us"],labels:["Mod","SV절","Adv.Cl","SV절","Adv.Cl"],pattern:"SV (부사절 중첩)",concept:"부사절 중첩 + until절 + get back on 구동사",explanation:"두 개의 주절(we worked / we got back)이 세미콜론으로 연결. When절(시간)과 until절(결과)이 각각 부사절로 붙음. 'work hard at V-ing': 전치사 at의 목적어로 동명사. 'it became second nature to us': SVC — it이 bike riding을 가리킴."},
     {id:"q2",sentence:"But when we try something new in our adult lives, we'll usually make just one attempt before judging whether it's worked.",chunks:["But when we try something new in our adult lives,","we","will usually make","just one attempt","before judging whether it's worked"],labels:["Adv.Cl","S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + before V-ing + whether 간접의문문",explanation:"핵심 뼈대: we(S) will make(V) just one attempt(O). 'before judging …'는 시간 전치사구(before + 동명사). 'whether it's worked'는 judging의 목적절(간접의문문). When절은 시간 부사절."},
-    {id:"q3",sentence:"If we don't succeed the first time, or if it feels a little awkward, we'll tell ourselves it wasn't a success rather than giving it another shot.",chunks:["If we don't succeed the first time, or if it feels a little awkward,","we","will tell","ourselves","it wasn't a success rather than giving it another shot"],labels:["Adv.Cl","S","V","IO","DO"],pattern:"SVOO",concept:"4형식 tell + IO + DO + rather than V-ing",explanation:"4형식: tell + IO(ourselves) + DO(it wasn't a success). 두 If절이 or로 연결된 조건 부사절. 'rather than giving it another shot'는 대조 전치사구(rather than + 동명사). 'give it another shot'은 '한 번 더 시도하다' 관용 표현."},
+    {id:"q3",sentence:"If we don't succeed the first time, or if it feels a little awkward, we'll tell ourselves it wasn't a success rather than giving it another shot.",chunks:["If we don't succeed the first time, or if it feels a little awkward,","we","will tell","ourselves","it wasn't a success rather than giving it another shot"],labels:["Adv.Cl","S","V","IO","DO"],pattern:"SVOO",concept:"4형식 tell + IO + DO + rather than V-ing",explanation:"4형식: tell + IO(ourselves) + DO(it wasn't a success). 두 If절이 or로 연결된 조건 부사절. 'rather than giving it another shot'는 대조 전치사구(rather than + 동명사). 'give it another shot'은 '한 번 더 시도하다' 관용 표현.",linkedGrammar:{tp:"TP05","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "...we'll tell ourselves it wasn't a success rather than [___] it another shot.", "options": ["giving", "to give"], "answer": "giving", "explanation": {"structure": "rather than은 전치사처럼 기능합니다.", "rule": "전치사 뒤에는 동명사(v-ing)가 옵니다. rather than 뒤에도 동명사가 옵니다.", "connection": "rather than 뒤이므로 동명사 giving이 맞습니다. to give는 전치사 뒤에 올 수 없습니다."}}},
     {id:"q4",sentence:"Consider the idea that your brain has a network of neurons.",chunks:["Consider","the idea","that your brain has a network of neurons"],labels:["V","O","동격절"],pattern:"명령문",concept:"명령문 + 동격 that절",explanation:"명령문: Consider(V) the idea(O). 'that your brain has a network of neurons'는 the idea와 동격 관계인 that절 — idea의 내용을 구체적으로 설명. 동격 that절 vs 관계절 구분: 동격절은 idea의 내용, 관계절은 idea의 특성."},
-    {id:"q5",sentence:"Those connections aren't very reliable at first, which may make your first efforts a little hit-and-miss.",chunks:["Those connections","aren't","very reliable","at first","which may make your first efforts a little hit-and-miss"],labels:["S","V","C","Mod","Rel.Cl"],pattern:"SVC",concept:"2형식 SVC + which 계속적 관계절(SVOC)",explanation:"핵심 뼈대: Those connections(S) aren't(V) very reliable(C). 'at first'는 시간 수식어. 'which may make …'는 앞 절 전체를 선행사로 하는 계속적 관계절. 관계절 내부: make(V) your first efforts(O) a little hit-and-miss(OC) — 5형식."},
+    {id:"q5",sentence:"Those connections aren't very reliable at first, which may make your first efforts a little hit-and-miss.",chunks:["Those connections","aren't","very reliable","at first","which may make your first efforts a little hit-and-miss"],labels:["S","V","C","Mod","Rel.Cl"],pattern:"SVC",concept:"2형식 SVC + which 계속적 관계절(SVOC)",explanation:"핵심 뼈대: Those connections(S) aren't(V) very reliable(C). 'at first'는 시간 수식어. 'which may make …'는 앞 절 전체를 선행사로 하는 계속적 관계절. 관계절 내부: make(V) your first efforts(O) a little hit-and-miss(OC) — 5형식.",linkedGrammar:{tp:"TP10","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Those connections aren't very reliable at first, [___] may make your first efforts a little hit-and-miss.", "options": ["which", "that"], "answer": "which", "explanation": {"structure": "쉼표 뒤에서 앞 절 전체를 선행사로 받는 관계절입니다.", "rule": "앞 절 전체나 명사를 선행사로 하는 계속적 용법(쉼표 + 관계사)에는 which를 씁니다. that은 계속적 용법으로 쓸 수 없습니다.", "connection": "쉼표 뒤에서 앞 내용 전체를 받는 계속적 용법이므로 which가 맞습니다."}}},
     {id:"q6",sentence:"Repetition of an action reinforces the connections between the neurons involved in that action.",chunks:["Repetition of an action","reinforces","the connections","between the neurons involved in that action"],labels:["S","V","O","Mod"],pattern:"SVO",concept:"SVO + between 전치사구 + 과거분사 수식",explanation:"핵심 뼈대: Repetition(S) reinforces(V) the connections(O). 'of an action'은 Repetition 수식 전치사구. 'between the neurons involved in that action'은 connections 수식 전치사구. 'involved in that action'은 neurons를 수식하는 과거분사구."},
     {id:"q7",sentence:"That means the more times you try using that new feedback technique, the more easily it will come to you when you need it.",chunks:["That","means","the more times you try using that new feedback technique,","the more easily it will come to you when you need it"],labels:["S","V","O(the 비교절1)","O(the 비교절2)"],pattern:"SVO",concept:"SVO — that절 목적어 + the 비교급 ~ the 비교급",explanation:"핵심 뼈대: That(S) means(V) that절(O). that절 내부가 'the 비교급 ~, the 비교급 …' 구문: 'the more times …, the more easily …'. try + V-ing: try 뒤에 동명사(using). when you need it은 시간 부사절로 내포."}
   ]},
   {id:"jungang_h1_2021_03",title:"중앙고1 21년 3월 모의 20~23번",level:"고1",levelClass:"lv-adv",questions:[
-    {id:"q1",sentence:"If you haven't sent it, you still have time to fix it.",chunks:["If you haven't sent it,","you","still have","time","to fix it"],labels:["Adv.Cl","S","V","O","Inf"],pattern:"SVO",concept:"부사절 + to부정사",explanation:"핵심 뼈대: you(S) still have(V) time(O). 'to fix it'은 time을 수식하는 to부정사구. If절은 전체 문장을 수식하는 부사절로, 문장 앞에 오면 콤마로 분리."},
+    {id:"q1",sentence:"If you haven't sent it, you still have time to fix it.",chunks:["If you haven't sent it,","you","still have","time","to fix it"],labels:["Adv.Cl","S","V","O","Inf"],pattern:"SVO",concept:"부사절 + to부정사",explanation:"핵심 뼈대: you(S) still have(V) time(O). 'to fix it'은 time을 수식하는 to부정사구. If절은 전체 문장을 수식하는 부사절로, 문장 앞에 오면 콤마로 분리.",linkedGrammar:{type:"choice",question:"다음 중 빈칸에 들어갈 말로 가장 적절한 것은?",stem:"If you haven't sent it, you still have time [___] it.",options:["to fix","fixing"],answer:"to fix",explanation:{structure:"이 문장의 핵심은 you still have time입니다.",rule:"time 뒤에는 그 시간을 어떻게 쓰는지 설명하는 to부정사가 자주 옵니다.",connection:"여기서는 '고칠 시간'이라는 뜻이므로 time을 설명하는 to fix가 맞습니다. 따라서 fixing이 아니라 to fix가 정답입니다."}}},
     {id:"q2",sentence:"The internal pressure you place on yourself is normal and useful.",chunks:["The internal pressure","you place on yourself","is","normal and useful"],labels:["S","Rel.Cl","V","C"],pattern:"SVC",concept:"관계절이 수식하는 주어",explanation:"주어: The internal pressure(핵심 S) + you place on yourself(관계절). 핵심 뼈대: The internal pressure … is(V) normal and useful(C). SVC 구조."},
     {id:"q3",sentence:"When you doubt your ability, your self-worth suffers.",chunks:["When you doubt your ability,","your self-worth","suffers"],labels:["Adv.Cl","S","V"],pattern:"SV",concept:"SV + 부사절(when)",explanation:"핵심 뼈대: your self-worth(S) suffers(V). suffer는 완전자동사. When절은 시간 부사절."},
-    {id:"q4",sentence:"Doubt causes you to see experiences as a reflection of your own shortcomings.",chunks:["Doubt","causes","you","to see experiences","as a reflection of your own shortcomings"],labels:["S","V","O","OC(Inf)","C"],pattern:"SVOC",concept:"cause + O + to-V (5형식)",explanation:"cause + O + to-V 는 5형식. Doubt(S) causes(V) you(O) to see experiences(OC). 'as a reflection of …'는 see의 보어."},
+    {id:"q4",sentence:"Doubt causes you to see experiences as a reflection of your own shortcomings.",chunks:["Doubt","causes","you","to see experiences","as a reflection of your own shortcomings"],labels:["S","V","O","OC(Inf)","C"],pattern:"SVOC",concept:"cause + O + to-V (5형식)",explanation:"cause + O + to-V 는 5형식. Doubt(S) causes(V) you(O) to see experiences(OC). 'as a reflection of …'는 see의 보어.",linkedGrammar:{tp:"TP19","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "Doubt causes you [___] experiences as a reflection of your own shortcomings.", "options": ["to see", "seeing"], "answer": "to see", "explanation": {"structure": "이 문장의 핵심은 Doubt causes you입니다.", "rule": "cause는 5형식 동사로 'cause + 목적어 + to-v' 형태를 취합니다.", "connection": "cause + 목적어(you) 뒤에는 to부정사가 목적격보어로 옵니다. seeing은 이 자리에 올 수 없습니다."}}},
     {id:"q5",sentence:"When one person lies, their responses will come more slowly.",chunks:["When one person lies,","their responses","will come","more slowly"],labels:["Adv.Cl","S","V","Mod"],pattern:"SV + Mod",concept:"부사절 + 부사 수식어",explanation:"핵심 뼈대: their responses(S) will come(V). 'more slowly'는 부사 수식어. When절은 부사절."},
     {id:"q6",sentence:"The brain needs more time to process the details than to recall stored facts.",chunks:["The brain","needs","more time","to process the details","than to recall stored facts"],labels:["S","V","O","Inf","Comp"],pattern:"SVO",concept:"more ~ than 비교 + to부정사",explanation:"핵심 뼈대: The brain(S) needs(V) more time(O). 두 to부정사구가 more … than으로 비교."},
     {id:"q7",sentence:"It is not the pressure to perform that creates your stress.",chunks:["It","is","not the pressure to perform","that creates your stress"],labels:["가S","V","실S","Rel.Cl"],pattern:"It ~ that 강조 구문",concept:"강조 구문",explanation:"It is [강조 대상] that … 강조 구문. 실제 주어는 'not the pressure to perform'."}
   ]},
   {id:"sf_reset_l1_3",title:"SF 구조 리셋반 Lesson 1~3",level:"입문",levelClass:"lv-basic",questions:[
-    {id:"q1",sentence:"She looks very happy today.",chunks:["She","looks","very happy","today"],labels:["S","V","C","Mod"],pattern:"SVC",concept:"2형식 — 감각동사 look",explanation:"look은 2형식 동사. She(S) looks(V) very happy(C). 형용사 happy가 주격 보어. 'today'는 시간 수식어."},
+    {id:"q1",sentence:"She looks very happy today.",chunks:["She","looks","very happy","today"],labels:["S","V","C","Mod"],pattern:"SVC",concept:"2형식 — 감각동사 look",explanation:"look은 2형식 동사. She(S) looks(V) very happy(C). 형용사 happy가 주격 보어. 'today'는 시간 수식어.",linkedGrammar:{tp:"TP12","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "She looks very [___] today.", "options": ["happy", "happily"], "answer": "happy", "explanation": {"structure": "이 문장의 핵심은 She looks입니다.", "rule": "look은 2형식 동사로 뒤에 주격보어가 옵니다. 주격보어 자리에는 형용사가 옵니다.", "connection": "look 뒤 보어 자리이므로 형용사 happy가 맞습니다. happily는 부사로 보어 자리에 올 수 없습니다."}}},
     {id:"q2",sentence:"He gave me a wonderful gift.",chunks:["He","gave","me","a wonderful gift"],labels:["S","V","IO","DO"],pattern:"SVOO",concept:"4형식 — 간접/직접목적어",explanation:"He(S) gave(V) me(IO) a wonderful gift(DO). 4형식: 주어 + 동사 + 간접목적어 + 직접목적어."},
     {id:"q3",sentence:"They call her a genius.",chunks:["They","call","her","a genius"],labels:["S","V","O","C"],pattern:"SVOC",concept:"5형식 — 명사 목적격 보어",explanation:"5형식: They(S) call(V) her(O) a genius(C). 목적격 보어 자리에 명사."},
-    {id:"q4",sentence:"I found the problem very difficult.",chunks:["I","found","the problem","very difficult"],labels:["S","V","O","C"],pattern:"SVOC",concept:"5형식 — 형용사 목적격 보어",explanation:"5형식: I(S) found(V) the problem(O) very difficult(C). 목적격 보어 자리에 형용사구."},
-    {id:"q5",sentence:"The teacher told us to study harder.",chunks:["The teacher","told","us","to study harder"],labels:["S","V","O","C"],pattern:"SVOC",concept:"5형식 — to부정사 목적격 보어",explanation:"tell + O + to-V는 5형식. The teacher(S) told(V) us(O) to study harder(C)."},
+    {id:"q4",sentence:"I found the problem very difficult.",chunks:["I","found","the problem","very difficult"],labels:["S","V","O","C"],pattern:"SVOC",concept:"5형식 — 형용사 목적격 보어",explanation:"5형식: I(S) found(V) the problem(O) very difficult(C). 목적격 보어 자리에 형용사구.",linkedGrammar:{tp:"TP19","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "I found the problem very [___].", "options": ["difficult", "difficulty"], "answer": "difficult", "explanation": {"structure": "이 문장의 핵심은 I found the problem입니다.", "rule": "find는 5형식 동사로 'find + 목적어 + 형용사/명사' 형태를 취합니다. 목적격보어 자리에는 형용사가 옵니다.", "connection": "find + 목적어(the problem) 뒤 목적격보어 자리이므로 형용사 difficult가 맞습니다. difficulty는 명사로 '어려움'이라는 뜻이지만 이 구조에서는 형용사가 맞습니다."}}},
+    {id:"q5",sentence:"The teacher told us to study harder.",chunks:["The teacher","told","us","to study harder"],labels:["S","V","O","C"],pattern:"SVOC",concept:"5형식 — to부정사 목적격 보어",explanation:"tell + O + to-V는 5형식. The teacher(S) told(V) us(O) to study harder(C).",linkedGrammar:{tp:"TP19","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "The teacher told us [___] harder.", "options": ["to study", "studying"], "answer": "to study", "explanation": {"structure": "이 문장의 핵심은 The teacher told us입니다.", "rule": "tell은 5형식 동사로 'tell + 목적어 + to-v' 형태를 취합니다.", "connection": "tell + 목적어(us) 뒤에는 to부정사가 목적격보어로 옵니다. studying은 이 자리에 올 수 없습니다."}}},
     {id:"q6",sentence:"Reading every day makes you a better writer.",chunks:["Reading every day","makes","you","a better writer"],labels:["S","V","O","C"],pattern:"SVOC",concept:"동명사 주어 + SVOC",explanation:"동명사구 Reading every day(S)가 주어. makes(V) you(O) a better writer(C). 동명사 주어는 단수 취급."}
   ]},
   {id:"baebae_m2_2nd",title:"방배중2 2학기 5~6과",level:"중2",levelClass:"lv-mid",questions:[
     {id:"q1",sentence:"Music can change your mood in an instant.",chunks:["Music","can change","your mood","in an instant"],labels:["S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + 전치사구",explanation:"핵심 뼈대: Music(S) can change(V) your mood(O). 'in an instant'는 시간 전치사구."},
-    {id:"q2",sentence:"She decided to learn a new language.",chunks:["She","decided","to learn a new language"],labels:["S","V","O"],pattern:"SVO",concept:"to부정사 목적어",explanation:"decide는 to부정사를 목적어로 취함. She(S) decided(V) to learn a new language(O)."},
-    {id:"q3",sentence:"The problem seemed very difficult at first.",chunks:["The problem","seemed","very difficult","at first"],labels:["S","V","C","Mod"],pattern:"SVC + Mod",concept:"2형식 seem + 형용사 보어",explanation:"seem은 2형식 동사. The problem(S) seemed(V) very difficult(C). 'at first'는 시간 부사어."},
+    {id:"q2",sentence:"She decided to learn a new language.",chunks:["She","decided","to learn a new language"],labels:["S","V","O"],pattern:"SVO",concept:"to부정사 목적어",explanation:"decide는 to부정사를 목적어로 취함. She(S) decided(V) to learn a new language(O).",linkedGrammar:{tp:"TP05","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "She decided [___] a new language.", "options": ["to learn", "learning"], "answer": "to learn", "explanation": {"structure": "이 문장의 핵심은 She decided입니다.", "rule": "decide는 to부정사를 목적어로 취하는 동사입니다. decide to-v는 고정된 표현입니다.", "connection": "decide 뒤에는 반드시 to-v가 옵니다. learning(동명사)은 decide의 목적어로 올 수 없습니다."}}},
+    {id:"q3",sentence:"The problem seemed very difficult at first.",chunks:["The problem","seemed","very difficult","at first"],labels:["S","V","C","Mod"],pattern:"SVC + Mod",concept:"2형식 seem + 형용사 보어",explanation:"seem은 2형식 동사. The problem(S) seemed(V) very difficult(C). 'at first'는 시간 부사어.",linkedGrammar:{tp:"TP12","type": "choice", "question": "다음 중 빈칸에 들어갈 말로 가장 적절한 것은?", "stem": "The problem seemed very [___] at first.", "options": ["difficult", "difficultly"], "answer": "difficult", "explanation": {"structure": "이 문장의 핵심은 The problem seemed입니다.", "rule": "seem은 2형식 동사로 뒤에 주격보어가 옵니다. 주격보어 자리에는 형용사가 옵니다.", "connection": "seem 뒤 보어 자리이므로 형용사 difficult가 맞습니다. difficultly는 부사 형태로 보어 자리에 올 수 없습니다."}}},
     {id:"q4",sentence:"He asked his teacher for advice.",chunks:["He","asked","his teacher","for advice"],labels:["S","V","O","Mod"],pattern:"SVO + Mod",concept:"ask + O + for + N",explanation:"He(S) asked(V) his teacher(O). 'for advice'는 전치사구. 'ask A for B' = 'A에게 B를 요청하다'."},
     {id:"q5",sentence:"We should protect the environment for future generations.",chunks:["We","should protect","the environment","for future generations"],labels:["S","V","O","Mod"],pattern:"SVO + Mod",concept:"SVO + 전치사구(목적/대상)",explanation:"핵심 뼈대: We(S) should protect(V) the environment(O). 'for future generations'는 목적/대상 전치사구."}
   ]}
@@ -327,7 +438,21 @@ const S={
   bankOrder:[], answerOrder:[],
   showLabels:false, submitted:false, lastOk:false, showExpl:false,
   showNext:false,
-  adminTaps:0, adminTimer:null
+  adminTaps:0, adminTimer:null, adminStudentKey:null, hintCollapsed:false,
+  grammarShown:false, grammarSelected:null, grammarDone:false, grammarTransition:false,
+  /* ── drill 모드 ── */
+  drillMode:false,
+  drillQuestions:[],       /* 현재 세트의 drill 문제 배열 */
+  drillQi:0,               /* drill 문항 인덱스 */
+  currentDrillQ:null,      /* 현재 drill 문제 JSON */
+  currentStep:0,           /* 현재 step 인덱스 (0-based) */
+  totalSteps:1,
+  stepResults:[],          /* [{stepId,task,correct,selectedIds,userOrder,correctOrder,drill,primaryFocus}] */
+  chunkStates:{},          /* {c1:'active', c2:'locked', ...} */
+  selectedChunks:[],       /* select 태스크 선택된 chunk id */
+  lockedChunks:[],         /* 다음 step에서 locked 처리할 chunk id */
+  removedChunks:[],        /* 다음 step에서 hidden 처리할 chunk id */
+  drillResults:[],         /* 전체 drill 문항 결과 */
 };
 
 /* ── 유틸 ── */
@@ -338,18 +463,87 @@ function shuffle(arr){
   return a;
 }
 function lblCls(l){return{S:'lS',V:'lV',O:'lO',C:'lC',IO:'lIO',DO:'lDO',OC:'lOC','OC(Inf)':'lOC',Mod:'lMod',Inf:'lInf','Adv.Cl':'lAdvCl','Rel.Cl':'lRelCl',Comp:'lComp','가S':'lGS','실S':'lRS'}[l]||'lDef';}
+/* 학생에게 보이는 라벨 — Mod → 수식어 */
+function displayLabel(l){
+  if(!l) return l;
+  if(l==='Mod') return '수식어';
+  if(l==='O')   return '목적어';
+  if(l==='IO')  return '목적어';
+  if(l==='DO')  return '목적어';
+  if(l==='Adv.Cl') return '부사절';
+  if(l==='Rel.Cl') return '관계절';
+  if(l==='Inf') return '부정사구';
+  if(l==='Comp') return '비교';
+  return l;
+}
 function pctEmoji(p){return p>=90?'🏆':p>=70?'⭐':'📚';}
 function pctColor(p){return p>=90?'#16a34a':p>=70?'#E8A010':'#dc2626';}
 function todayStr(){return new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});}
 /* 청크 표시용: 첫 글자 소문자화 (문장 첫 단어 힌트 제거) */
 function lcFirst(t){return t.charAt(0).toLowerCase()+t.slice(1);}
 
+/* ── concept → 학생용 접근 힌트 변환 (대화형) ── */
+function conceptToHint(concept){
+  if(!concept) return '"누가(주어)" 하는지 먼저 볼까요? 그 다음 동사를 찾으면 문장이 보여요 😊';
+  const c=concept;
+  if(/가주어|가S|It.*진주어|it.*to-V/i.test(c))
+    return '앞에 있는 It은 가짜 주어예요 👀 진짜 주어는 뒤쪽에 숨어 있어요 — 찾아볼까요?';
+  if(/도치|CVS|INV/i.test(c))
+    return '이 문장, 주어와 동사가 자리를 바꿨어요! 먼저 동사부터 찾고, 주어가 어디 있는지 역으로 확인해봐요 🔍';
+  if(/명령문/i.test(c))
+    return '주어가 숨어 있는 문장이에요. 제일 앞 단어부터 확인해볼까요? 동사가 바로 나올 거예요 💡';
+  if(/동명사.*주어|주어.*동명사|GS/i.test(c))
+    return '동사처럼 생긴 말이 주어 자리에 있어요. 뒤쪽에서 진짜 동사(~한다)를 찾아보면 구조가 보여요 🎯';
+  if(/관계절.*주어|주어.*관계절|Rel\.Cl/i.test(c))
+    return '주어 뒤에 긴 설명이 붙어 있어요. 핵심 주어만 먼저 잡고, 동사를 찾아볼게요 — 설명은 나중에 붙여요 😌';
+  if(/5형식|SVOC|목적어.*보어|O.*C/i.test(c))
+    return '동사 뒤에 목적어가 있고, 그 다음 목적어를 설명하는 말이 와요. 동사 → 목적어 → 설명, 이 순서로 찾아볼까요? 🧩';
+  if(/4형식|SVOO|간접.*직접|IO.*DO/i.test(c))
+    return '동사 뒤에 두 개의 자리가 있어요. "누구에게" 먼저, 그 다음 "무엇을" 순서로 잡아볼게요 📦';
+  if(/부사절|Adv\.Cl|when|because|if절|while|although/i.test(c))
+    return '긴 부사절이 있지만 겁먹지 말아요! 주절(누가 + 한다)을 먼저 찾고, 나머지는 나중에 붙이면 돼요 💪';
+  if(/명사절|that절 목적어|that절.*O|간접의문문|whether/i.test(c))
+    return '동사 뒤에 절 전체가 목적어로 와요. 주절의 동사를 먼저 잡고, 뒤 절을 하나의 덩어리로 보면 쉬워요 🎯';
+  if(/관계절|Rel\.Cl|관계사/i.test(c))
+    return '명사를 꾸미는 설명 덩어리가 있어요. 핵심 주어·동사부터 잡고, 설명은 나중에 붙여볼까요? 😊';
+  if(/2형식|SVC|감각동사|seem|look|become|remain|stay/i.test(c))
+    return '이 동사 뒤에는 목적어가 아니라 "어떤 상태인지"를 설명하는 말이 와요. 동사부터 찾고, 뒤에 뭐가 있는지 볼게요 👁️';
+  if(/병렬|등위|and.*V|V1.*V2/i.test(c))
+    return '두 개 이상의 동사가 나란히 연결된 문장이에요. 하나씩 찾아가며 완성해봐요 — 생각보다 규칙적이에요 ✨';
+  if(/비교|more.*than|배수|as.*as/i.test(c))
+    return '비교하는 표현이 있어요. 핵심 뼈대(누가 + 한다)를 먼저 잡고, 비교 부분은 나중에 붙여볼게요 📊';
+  if(/수동태|be.*p\.p\.|passive/i.test(c))
+    return '"무언가가 어떻게 됐는지"를 표현하는 문장이에요. "무엇이(주어)"부터 찾고, 동사를 확인해볼까요? 🔄';
+  if(/분사구문|V-ing.*구문|p\.p\..*구문/i.test(c))
+    return '앞에 수식어 덩어리가 있어요. 주절의 "누가 + 한다"부터 먼저 잡고, 앞 덩어리는 나중에 붙여요 🧱';
+  if(/SVO/i.test(c))
+    return '"누가(주어)" 하는지 먼저 볼까요? 그 다음 동사, 그리고 뭘 하는지 순서로 찾으면 돼요 😌';
+  if(/SV/i.test(c))
+    return '이 문장은 주어와 동사만으로 완성돼요. "누가 + 한다"를 먼저 잡아볼까요? 생각보다 단순해요 💡';
+  return '"누가(주어)" 하는지 먼저 볼까요? 그 다음 동사를 찾으면 문장이 보여요 😊';
+}
+
+/* 힌트 토글 */
+function toggleHint(){
+  S.hintCollapsed=!S.hintCollapsed;
+  R();
+}
+
 /* ════════════════════════════════════════════════════════════
    렌더
    ════════════════════════════════════════════════════════════ */
 function R(){
   const a=document.getElementById('app');
-  ({login:rLogin,select:rSelect,quiz:rQuiz,result:rResult,admin:rAdmin})[S.sc]?.(a);
+  try{
+    ({login:rLogin,select:rSelect,quiz:rQuiz,result:rResult,admin:rAdmin,drill:rDrill,drill_result:rDrillResult,admin_student:rAdminStudent})[S.sc]?.(a);
+  }catch(err){
+    console.error('Render error in sc='+S.sc+':', err);
+    /* 에러 발생 시 화면에 표시 */
+    if(a) a.innerHTML=`<div style="padding:20px;background:#fff5f5;border-radius:12px;margin:20px;font-size:13px;color:#dc2626;line-height:1.7">
+      <strong>오류 발생 (${S.sc})</strong><br>${err.message}<br><br>
+      <button type="button" onclick="S.sc='login';R()" style="padding:8px 16px;background:#1B3A5C;color:#fff;border:none;border-radius:8px;cursor:pointer">로그인으로 돌아가기</button>
+    </div>`;
+  }
 }
 
 /* ── 1. 로그인 ── */
@@ -365,10 +559,10 @@ function rLogin(a){
         <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:8px">이름 입력</div>
         <input type="text" id="nameInput" placeholder="예) 홍길동" autocomplete="off" maxlength="10"
           onkeydown="if(event.key==='Enter')login()">
-        <button class="btn bn mt12" onclick="login()">시작하기 →</button>
+        <button type="button" class="btn bn mt12" onclick="login()">시작하기 →</button>
       </div>
       <div style="text-align:center;margin-top:4px;padding-bottom:20px">
-        <button onclick="adminLogin()"
+        <button type="button" onclick="adminLogin()"
           style="font-size:12px;color:#94a3b8;background:none;border:1px solid #e2e8f0;
                  border-radius:8px;cursor:pointer;padding:6px 16px;font-weight:600">
           🔐 관리자
@@ -379,53 +573,210 @@ function rLogin(a){
 }
 
 function adminLogin(){
-  const pw=prompt('관리자 비밀번호');
-  if(pw===null)return;
-  if(pw==='0411'){S.sc='admin';R();}
-  else alert('비밀번호가 틀렸습니다.');
+  /* 기존 모달 있으면 제거 */
+  const prev=document.getElementById('adminModal');
+  if(prev) prev.remove();
+
+  const modal=document.createElement('div');
+  modal.id='adminModal';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.innerHTML=`
+    <div style="background:#fff;border-radius:16px;padding:28px 24px;width:100%;max-width:320px;box-shadow:0 8px 32px rgba(0,0,0,.18)">
+      <div style="font-size:16px;font-weight:800;color:#1B3A5C;margin-bottom:4px">🔐 관리자 로그인</div>
+      <div style="font-size:12px;color:#94a3b8;margin-bottom:20px">비밀번호를 입력하세요</div>
+      <input id="adminPwInput" type="password" placeholder="••••••"
+        autocomplete="off"
+        style="width:100%;padding:12px 14px;font-size:18px;letter-spacing:4px;border:2px solid #e2e8f0;border-radius:10px;outline:none;text-align:center;margin-bottom:8px"
+        onkeydown="if(event.key==='Enter')confirmAdminPw()">
+      <div id="adminPwErr" style="font-size:12px;color:#dc2626;text-align:center;height:16px;margin-bottom:12px"></div>
+      <div style="display:flex;gap:8px">
+        <button type="button" onclick="document.getElementById('adminModal').remove()"
+          style="flex:1;padding:11px;border-radius:10px;border:2px solid #e2e8f0;background:#fff;font-size:14px;font-weight:700;color:#64748b;cursor:pointer">취소</button>
+        <button type="button" onclick="confirmAdminPw()"
+          style="flex:2;padding:11px;border-radius:10px;border:none;background:#1B3A5C;font-size:14px;font-weight:700;color:#fff;cursor:pointer">확인</button>
+      </div>
+    </div>`;
+  document.body.appendChild(modal);
+  setTimeout(()=>{const el=document.getElementById('adminPwInput');if(el)el.focus();},80);
+  /* 모달 바깥 클릭 시 닫기 */
+  modal.addEventListener('click',e=>{if(e.target===modal)modal.remove();});
+}
+
+function confirmAdminPw(){
+  const el=document.getElementById('adminPwInput');
+  const err=document.getElementById('adminPwErr');
+  if(!el)return;
+  const pw=el.value;
+  if(pw==='0411'){
+    document.getElementById('adminModal').remove();
+    S.sc='admin';R();
+  } else {
+    if(err) err.textContent='비밀번호가 틀렸습니다.';
+    el.value='';
+    el.focus();
+  }
 }
 
 /* ── 2. 세트 선택 ── */
 function rSelect(a){
-  const ms=S.mode==='study';
+  const mode=S.mode; // 'study' | 'drill' | 'test'
+
+  /* 흐름 단계 카드 데이터 */
+  const steps=[
+    {
+      id:'study',
+      step:'1단계',
+      label:'배우기',
+      icon:'📖',
+      title:'학습 모드',
+      desc:'접근 힌트 + 라벨 힌트를 보며 구조를 이해해요.',
+      color:'#1B3A5C',
+      bg:'#EFF6FF',
+      border:'#BFDBFE'
+    },
+    {
+      id:'drill',
+      step:'2단계',
+      label:'연습하기',
+      icon:'🦴',
+      title:'구조 훈련',
+      desc:'주어 → 동사 순서로 뼈대를 직접 만들어봐요.',
+      color:'#6D28D9',
+      bg:'#F5F3FF',
+      border:'#DDD6FE'
+    },
+    {
+      id:'test',
+      step:'3단계',
+      label:'확인하기',
+      icon:'✏️',
+      title:'테스트 모드',
+      desc:'힌트 없이 실력을 확인하고 점수를 기록해요.',
+      color:'#B45309',
+      bg:'#FFFBEB',
+      border:'#FDE68A'
+    }
+  ];
+
+  /* ── 가로 흐름 바 (연결선 포함) ── */
+  const flowBarHtml=`<div style="
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:16px;padding:4px 0;
+    ">
+    ${steps.map((s,i)=>{
+      const isActive=mode===s.id;
+      const isDone=steps.findIndex(x=>x.id===mode)>i;
+      const lineColor=isDone?'#1B3A5C':'#e2e8f0';
+      return`
+        <!-- 단계 아이콘 -->
+        <div onclick="setMode('${s.id}')" style="
+          display:flex;flex-direction:column;align-items:center;gap:4px;
+          cursor:pointer;flex:0 0 auto;
+        ">
+          <div style="
+            width:44px;height:44px;border-radius:12px;
+            background:${isActive?s.color:isDone?s.color+'22':'#f1f5f9'};
+            border:2px solid ${isActive?s.color:isDone?s.color+'55':'#e2e8f0'};
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
+            transition:all .2s;
+            box-shadow:${isActive?`0 3px 12px ${s.color}33`:'none'};
+          ">
+            <div style="font-size:6px;font-weight:800;letter-spacing:.3px;line-height:1;
+              color:${isActive?'rgba(255,255,255,.8)':isDone?s.color:'#94a3b8'}">${s.step}</div>
+            <div style="font-size:18px;line-height:1.1">${s.icon}</div>
+          </div>
+          <div style="font-size:10px;font-weight:800;
+            color:${isActive?s.color:isDone?s.color:'#94a3b8'};
+            letter-spacing:.2px;">${s.label}</div>
+        </div>
+        <!-- 연결 화살표 (마지막 제외) -->
+        ${i<steps.length-1?`<div style="flex:1;display:flex;align-items:center;padding:0 4px;padding-bottom:18px;">
+          <div style="flex:1;height:2px;background:linear-gradient(90deg,${lineColor},${steps.findIndex(x=>x.id===mode)>i+1?steps[i+1].color+'22':'#94a3b8'});border-radius:2px;"></div>
+          <div style="font-size:10px;color:${isDone?'#1B3A5C':'#94a3b8'};margin:0 1px;font-weight:700">▶</div>
+        </div>`:''}
+      `;
+    }).join('')}
+  </div>`;
+
+  /* ── 선택된 모드 상세 카드 ── */
+  const activeStep=steps.find(s=>s.id===mode);
+  const stepsHtml=flowBarHtml+`
+    <div style="
+      padding:12px 14px;border-radius:12px;
+      border:2px solid ${activeStep.color};
+      background:${activeStep.bg};
+    ">
+      <div style="font-size:13px;font-weight:800;color:${activeStep.color};margin-bottom:3px">
+        ${activeStep.icon} ${activeStep.title}
+      </div>
+      <div style="font-size:11px;color:${activeStep.color}bb;line-height:1.6">${activeStep.desc}</div>
+    </div>
+  `;
+
+  /* 세트 목록 countLabel */
+  const isDrill=mode==='drill';
+  const isTest=mode==='test';
+
+  /* 세트 선택 후 바로 시작 */
+  const visible=getVisibleSets();
+  const setListHtml=visible.length
+    ? visible.map(st=>{
+        const total=st.questions.length;
+        const testCount=Math.max(1,Math.round(total*sampleRate));
+        const countLabel=isTest
+          ?`<span style="color:#1B3A5C;font-weight:700">${testCount}문제 출제</span> <span style="color:#cbd5e1">(전체 ${total}개 중)</span>`
+          :`문제 ${total}개`;
+        return`<div class="set-item" onclick="startSet('${st.id}')">
+          <div>
+            <div class="set-title">${st.title}</div>
+            <div class="set-meta"><span class="set-badge ${st.levelClass}">${st.level}</span> &nbsp;${countLabel}</div>
+          </div>
+          <span style="font-size:18px;color:#cbd5e1">›</span>
+        </div>`;
+      }).join('')
+    : `<div style="font-size:13px;color:#94a3b8;text-align:center;padding:20px 0">현재 공개된 세트가 없습니다.</div>`;
+
   a.innerHTML=`
+    <!-- 헤더 -->
     <div class="card">
       <div class="fb mb8">
-        <div><div class="brand" style="font-size:18px;text-align:left">📐 SF Structure</div>
-        <div style="font-size:12px;color:#888">${S.name} 님</div></div>
-        <button class="btn bo" style="width:auto;padding:8px 14px;font-size:13px" onclick="logout()">로그아웃</button>
+        <div>
+          <div class="brand" style="font-size:18px;text-align:left">📐 SF Structure</div>
+          <div style="font-size:12px;color:#888">${S.name} 님</div>
+        </div>
+        <button type="button" class="btn bo" style="width:auto;padding:8px 14px;font-size:13px" onclick="logout()">로그아웃</button>
       </div>
     </div>
+
+    <!-- 학습 흐름 선택 -->
     <div class="card">
-      <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:10px">📋 모드 선택</div>
-      <div class="mode-tab">
-        <button class="${ms?'on':''}" onclick="setMode('study')">📖 학습 모드</button>
-        <button class="${ms?'':'on'}" onclick="setMode('test')">✏️ 테스트 모드</button>
-      </div>
-      <div style="font-size:12px;color:#94a3b8;line-height:1.6">
-        ${ms?'힌트 보기 가능 · 최대 2회 시도 · 설명 확인':'1회 제출 → 즉시 정답 확인 · 점수 기록 · 이의신청 가능'}
-      </div>
+      <div style="font-size:12px;font-weight:700;color:#94a3b8;letter-spacing:.5px;margin-bottom:12px">학습 순서에 따라 선택하세요</div>
+      ${stepsHtml}
+      <!-- Priority 2: 바로 테스트 안내 (학습/훈련 모드일 때만 표시) -->
+      ${mode!=='test'?`
+      <div style="text-align:center;margin-top:8px">
+        <button type="button" onclick="setMode('test')" style="
+          display:inline-flex;align-items:center;gap:5px;
+          font-size:12px;font-weight:700;color:#B45309;
+          background:#FFFBEB;border:1.5px solid #FDE68A;
+          border-radius:20px;padding:6px 16px;cursor:pointer;
+          transition:all .15s;
+        ">
+          이미 할 수 있다면 → 바로 확인하기로 가도 좋아요
+        </button>
+      </div>`:''}
     </div>
+
+    <!-- 세트 선택 -->
     <div class="card">
-      <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:12px">📁 세트 선택</div>
-      ${(()=>{
-        const visible=getVisibleSets();
-        if(!visible.length) return`<div style="font-size:13px;color:#94a3b8;text-align:center;padding:20px 0">현재 공개된 세트가 없습니다.</div>`;
-        return visible.map(st=>{
-          const total=st.questions.length;
-          const testCount=Math.max(1,Math.round(total*sampleRate));
-          const countLabel=ms
-            ?`문제 ${total}개`
-            :`<span style="color:#1B3A5C;font-weight:700">${testCount}문제 출제</span> <span style="color:#cbd5e1">(전체 ${total}개 중)</span>`;
-          return`<div class="set-item" onclick="startQuiz('${st.id}')">
-            <div><div class="set-title">${st.title}</div>
-            <div class="set-meta"><span class="set-badge ${st.levelClass}">${st.level}</span> &nbsp;${countLabel}</div></div>
-            <span style="font-size:18px;color:#cbd5e1">›</span>
-          </div>`;
-        }).join('');
-      })()}
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <div style="font-size:13px;font-weight:700;color:#1B3A5C">세트 선택</div>
+        <div style="font-size:11px;color:#fff;background:${steps.find(s=>s.id===mode).color};border-radius:6px;padding:2px 8px;font-weight:700">${steps.find(s=>s.id===mode).label}</div>
+      </div>
+      ${setListHtml}
     </div>
-    <div style="text-align:center;font-size:11px;color:#cbd5e1;padding-bottom:20px">세트를 클릭하면 바로 시작됩니다</div>`;
+    <div style="text-align:center;font-size:11px;color:#cbd5e1;padding-bottom:20px">세트를 선택하면 바로 시작됩니다</div>
+  `;
 }
 
 /* ── 3. 문제 풀이 ── */
@@ -441,20 +792,20 @@ function rQuiz(a){
     const raw=q.chunks[ci], label=q.labels[ci];
     /* 뱅크: 첫 글자 소문자 (위치 힌트 제거) / 답안·제출 후: 원문 유지 */
     const text=(zone==='bank'&&!S.submitted)?lcFirst(raw):raw;
-    const lbl=(S.showLabels&&!S.submitted&&label)?`<span class="ck-lbl ${lblCls(label)}">${label}</span>`:'';
+    const lbl=(S.showLabels&&!S.submitted&&label)?`<span class="ck-lbl ${lblCls(label)}">${displayLabel(label)}</span>`:'';
     let cls=zone==='bank'?'ck ck-bank':'ck ck-ans';
     if(S.submitted&&zone==='ans') cls=S.lastOk?'ck ck-ok':'ck ck-no';
     const drag=S.submitted?'':'draggable="true"';
     const clk=S.submitted?'':(zone==='bank'?`onclick="clickBank(${pos})"`:`onclick="clickAns(${pos})"`);
-    return`<button class="${cls}" style="${lblTop}" data-zone="${zone}" data-pos="${pos}" data-ci="${ci}" ${drag} ${clk}>${lbl}${text}</button>`;
+    return`<button type="button" class="${cls}" style="${lblTop}" data-zone="${zone}" data-pos="${pos}" data-ci="${ci}" ${drag} ${clk}>${lbl}${text}</button>`;
   }
 
   const bankHtml=S.bankOrder.length
     ?S.bankOrder.map((ci,bi)=>ckHtml(ci,'bank',bi)).join('')
-    :`<span style="font-size:12px;color:#94a3b8;padding:8px">모든 청크 배치 완료</span>`;
+    :`<span style="font-size:12px;color:#94a3b8;padding:8px">모든 조각을 놓았어요</span>`;
   const ansHtml=S.answerOrder.length
     ?S.answerOrder.map((ci,ai)=>ckHtml(ci,'ans',ai)).join('')
-    :`<span class="zone-ph">여기에 청크를 배열하세요</span>`;
+    :`<span class="zone-ph">여기에 조각을 놓아보세요</span>`;
 
   const hintRow=(isStudy&&!S.submitted)?`
     <div class="hint-row">
@@ -462,12 +813,26 @@ function rQuiz(a){
       <label class="sw"><input type="checkbox" ${S.showLabels?'checked':''} onchange="toggleLabels(this.checked)"><span class="sl"></span></label>
     </div>`:'';
 
+  /* ── 학습 모드 접근 힌트 ── */
+  const approachHint=(isStudy&&q.concept)?`
+    <div style="margin-bottom:12px;border-radius:10px;overflow:hidden;border:1.5px solid #e0e7ff">
+      <div onclick="toggleHint()" style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#f5f3ff;cursor:pointer;user-select:none">
+        <span style="font-size:11px;font-weight:800;color:#6d28d9;letter-spacing:.3px">💭 어떻게 접근할까?</span>
+        <span style="font-size:13px;color:#a78bfa;font-weight:700">${S.hintCollapsed?'▸ 펼치기':'▾ 접기'}</span>
+      </div>
+      ${S.hintCollapsed?'':
+        `<div style="padding:9px 12px;background:#faf5ff;font-size:12px;color:#4c1d95;line-height:1.7;font-weight:500">
+          ${conceptToHint(q.concept)}
+        </div>`}
+    </div>`
+  :'';
+
   const allPlaced=S.bankOrder.length===0;
   const btnRow=!S.submitted?`
     <div class="btn-row">
-      <button class="btn bGray" style="flex:1" onclick="resetChunks()">초기화</button>
-      <button class="btn bn" style="flex:2" onclick="submitAnswer()" ${allPlaced?'':'disabled'}>
-        ${allPlaced?'제출 →':`남은 청크: ${S.bankOrder.length}개`}
+      <button type="button" class="btn bGray" style="flex:1" onclick="resetChunks()">초기화</button>
+      <button type="button" class="btn bn" style="flex:2" onclick="submitAnswer()" ${allPlaced?'':'disabled'}>
+        ${allPlaced?'제출 →':`남은 조각: ${S.bankOrder.length}개`}
       </button>
     </div>`:'';
 
@@ -477,7 +842,7 @@ function rQuiz(a){
     const curR=S.results.find(r=>r.qi===S.qi);
     /* 1초 딜레이 후에만 다음 버튼 표시 */
     const nextBtn=S.showNext
-      ?`<button class="btn ${isLast?'bg':'bn'} mt12" onclick="${isLast?'finishQuiz()':'nextQ()'}">
+      ?`<button type="button" class="btn ${isLast?'bg':'bn'} mt12" onclick="${isLast?'finishQuiz()':'nextQ()'}">
           ${isLast?'결과 보기 🏁':'다음 문제 →'}</button>`
       :`<div style="font-size:11px;color:#94a3b8;text-align:center;margin-top:12px;padding:4px">잠시 후 다음 버튼이 나타납니다...</div>`;
 
@@ -486,9 +851,11 @@ function rQuiz(a){
       const pts=curR?curR.pts:0;
       fb=`<div class="fdb ok">✅ 정답! &nbsp;<span style="font-size:13px">${pts}점 획득</span></div>`;
       if(isStudy){
-        if(!S.showExpl) fb+=`<button class="btn bGray mt8" style="font-size:13px" onclick="showExpl()">📖 설명 보기</button>`;
+        if(!S.showExpl) fb+=`<button type="button" class="btn bGray mt8" style="font-size:13px" onclick="showExpl()">📖 설명 보기</button>`;
         else fb+=`<div class="expl-box mt8"><div class="expl-ttl"><span class="pattern-badge">${q.pattern}</span><span class="concept-tag">${q.concept}</span></div><div style="margin-top:8px">${q.explanation}</div></div>`;
       }
+      /* 연계 문법 문제 */
+      if(isStudy && q.linkedGrammar) fb+=linkedGrammarUI(q.linkedGrammar, q.linkedGrammar.tp||'');
       fb+=nextBtn;
     } else {
       /* 오답 — 즉시 정답 표시 */
@@ -498,18 +865,20 @@ function rQuiz(a){
 
       /* 학습 모드 + 1차 오답 → 다시 시도 버튼 (정답 보여주고 위에 있음) */
       if(isStudy&&S.attempts<2){
-        fb+=`<div class="btn-row mt8"><button class="btn bn" onclick="retryQ()">다시 시도 (1회 남음)</button></div>`;
+        fb+=`<div class="btn-row mt8"><button type="button" class="btn bn" onclick="retryQ()">다시 시도 (1회 남음)</button></div>`;
         /* 다시 시도 중에는 이의신청/설명/다음 버튼 없음 */
       } else {
         /* 테스트 모드 또는 학습 2회 소진 → 이의신청 + (설명) + 다음 */
         const isDisp=curR&&curR.disputed;
-        if(!isDisp) fb+=`<button class="btn bYellow mt8" style="font-size:13px" onclick="disputeQ()">📋 내 답도 맞아요</button>`;
+        if(!isDisp) fb+=`<button type="button" class="btn bYellow mt8" style="font-size:13px" onclick="disputeQ()">📋 내 답도 맞아요</button>`;
         else fb+=`<div class="fdb disp mt8">📋 검토 대기 중 — 선생님이 확인합니다</div>`;
 
         if(isStudy){
-          if(!S.showExpl) fb+=`<button class="btn bGray mt8" style="font-size:13px" onclick="showExpl()">📖 설명 보기</button>`;
+          if(!S.showExpl) fb+=`<button type="button" class="btn bGray mt8" style="font-size:13px" onclick="showExpl()">📖 설명 보기</button>`;
           else fb+=`<div class="expl-box mt8"><div class="expl-ttl"><span class="pattern-badge">${q.pattern}</span><span class="concept-tag">${q.concept}</span></div><div style="margin-top:8px">${q.explanation}</div></div>`;
         }
+        /* 연계 문법 문제 */
+        if(isStudy && q.linkedGrammar) fb+=linkedGrammarUI(q.linkedGrammar, q.linkedGrammar.tp||'');
         fb+=nextBtn;
       }
     }
@@ -519,18 +888,26 @@ function rQuiz(a){
     <div class="card">
       <div class="quiz-header">
         <span class="q-num">문제 ${S.qi+1} / ${tot}</span>
-        ${isTest?`<span class="q-score">점수: ${S.score} / ${S.qi*2}점</span>`:`<span class="q-mode">📖 학습 모드</span>`}
+        ${isTest
+          ?`<div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:10px;font-weight:800;color:#fff;background:#B45309;border-radius:6px;padding:2px 8px;letter-spacing:.3px">확인하기</span>
+              <span class="q-score">점수: ${S.score} / ${S.qi*2}점</span>
+            </div>`
+          :S.mode==='drill'
+            ?`<span class="q-mode">🦴 구조 훈련</span>`
+            :`<span class="q-mode">📖 학습 모드</span>`}
       </div>
       <div class="pb"><div class="pf" style="width:${pct}%"></div></div>
+      ${approachHint}
       ${hintRow}
       <div class="zone-lbl">내 답안</div>
       <div class="answer-zone ${S.answerOrder.length===0?'empty':''}" id="ans-zone" style="${S.showLabels&&!S.submitted?'padding-top:8px':''}">${ansHtml}</div>
-      <div class="zone-lbl">청크 뱅크</div>
+      <div class="zone-lbl">문장 조각</div>
       <div class="bank-zone" id="bank-zone">${bankHtml}</div>
       ${btnRow}
       ${fb}
     </div>
-    <button class="btn bGray" style="margin-top:0" onclick="backToSelect()">← 세트 선택으로</button>`;
+    <button type="button" class="btn bGray" style="margin-top:0" onclick="backToSelect()">← 세트 선택으로</button>`;
 
   if(!S.submitted) bindDrag();
 }
@@ -558,14 +935,35 @@ function rResult(a){
 
   const rows=S.results.map((r,i)=>{
     const q=qList[i];
+    const isWrong=r.pts===0&&!r.disputed&&!r.approved;
     let tag=r.disputed?`<span class="res-tag res-disp">📋 검토중</span>`:
       r.approved?`<span class="res-tag res-ok">✅ 정답처리</span>`:
       r.pts>0?`<span class="res-tag res-ok">${r.pts===2?'✓ 2점':'✓ 1점'}</span>`:
       `<span class="res-tag res-no">✗ 0점</span>`;
-    return`<div class="res-row">
-      <span style="font-size:11px;font-weight:700;color:#94a3b8;flex-shrink:0;width:20px">${i+1}</span>
-      <span class="res-sent">${q.sentence}</span>
-      ${isTest?tag:''}
+
+    const wrongDetail=isWrong?`
+      <div style="margin-top:8px;padding-top:8px;border-top:1px solid #fee2e2">
+        <div style="font-size:10px;font-weight:700;color:#94a3b8;margin-bottom:5px">✅ 정답 순서</div>
+        <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">
+          ${q.chunks.map(ck=>`<span style="display:inline-block;padding:4px 9px;border-radius:6px;background:#f0fdf4;border:1px solid #86efac;font-size:12px;font-weight:600;color:#166534">${ck}</span>`).join('')}
+        </div>
+        ${r.studentAnswer?`
+        <div style="font-size:10px;font-weight:700;color:#94a3b8;margin-bottom:4px">❌ 내 답안</div>
+        <div style="font-size:12px;color:#dc2626;margin-bottom:8px;line-height:1.6">${r.studentAnswer}</div>`:''}
+        ${q.explanation?`
+        <details>
+          <summary style="font-size:11px;font-weight:700;color:#1d4ed8;cursor:pointer;user-select:none;padding:4px 0">📖 구조 설명 보기</summary>
+          <div style="font-size:12px;color:#1e40af;background:#eff6ff;border-radius:8px;padding:10px;margin-top:6px;line-height:1.75">${q.explanation}</div>
+        </details>`:''}
+      </div>`:'';
+
+    return`<div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <span style="font-size:11px;font-weight:700;color:#94a3b8;flex-shrink:0;width:20px;margin-top:2px">${i+1}</span>
+        <span class="res-sent" style="flex:1">${q.sentence}</span>
+        ${isTest?tag:''}
+      </div>
+      ${wrongDetail}
     </div>`;
   }).join('');
 
@@ -592,9 +990,10 @@ function rResult(a){
       ${rows}
     </div>
     <div style="display:flex;flex-direction:column;gap:8px;padding-bottom:20px">
-      ${isTest?`<button class="btn bGray" onclick="copyResult()">📋 결과 복사 (학부모 전달용)</button>`:''}
-      <button class="btn bn" onclick="retakeSet()">같은 세트 다시 풀기</button>
-      <button class="btn bo" onclick="backToSelect()">← 세트 선택으로</button>
+      ${isTest?`<button type="button" class="btn bGray" onclick="copyResult()">📋 결과 복사 (학부모 전달용)</button>`:''}
+      ${S.results.some(r=>r.pts===0&&!r.disputed&&!r.approved)?`<button type="button" class="btn br" onclick="retakeWrong()">🔁 틀린 문장만 다시 풀기</button>`:''}
+      <button type="button" class="btn bn" onclick="retakeSet()">같은 세트 다시 풀기</button>
+      <button type="button" class="btn bo" onclick="backToSelect()">← 세트 선택으로</button>
     </div>`;
 
   /* ── 이의신청 실시간 리스너 ── */
@@ -632,11 +1031,470 @@ function copyResult(){
   if(approved.length){t+=`■ ✅ 정답 처리됨 (이의신청 승인 ${approved.length}개)\n`;approved.forEach(({q},i)=>{t+=`${i+1}. ${q.sentence}\n`;});t+='\n';}
   if(wrong.length){t+=`■ 틀린 문장 (${wrong.length}개)\n`;wrong.forEach(({q},i)=>{t+=`${i+1}. ${q.sentence}\n`;});t+='\n';}
   if(disp.length){t+=`■ 이의신청 검토 중 (${disp.length}개)\n`;disp.forEach(({q},i)=>{t+=`${i+1}. ${q.sentence}\n`;});t+='\n';}
-  if(!wrong.length&&!disp.length&&!approved.length) t+=`✅ 모든 문장 정확히 배열!\n\n`;
+  if(!wrong.length&&!disp.length&&!approved.length) t+=`✅ 모든 문장 정확히 완성!\n\n`;
   else if(!wrong.length&&!disp.length&&approved.length) t+=`✅ 이의신청 포함 전 문장 정답!\n\n`;
   t+=`─ SF English · Skeleton & Flesh ─`;
   navigator.clipboard?navigator.clipboard.writeText(t).then(()=>alert('복사 완료!\n카카오톡 등에 붙여넣기 하세요.')):
     (()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('복사되었습니다.');})();
+}
+
+/* ── 5. drill 화면 ── */
+
+/* 청크 역할 분류 → CSS 클래스 */
+function chunkRoleClass(label){
+  if(!label) return '';
+  const S_LABELS=['S','GS','RS','가S','실S','진S'];
+  const V_LABELS=['V','V1','V2','V3'];
+  const OC_LABELS=['O','C','IO','DO','OC','OC(Inf)','OC(that절)'];
+  const MOD_LABELS2=['Mod','Adv.Cl','Rel.Cl','Inf','Adv','AdvCl','Comp'];
+  if(S_LABELS.includes(label)) return 'role-s';
+  if(V_LABELS.includes(label)) return 'role-v';
+  if(OC_LABELS.some(l=>label===l||label.startsWith('OC('))) return 'role-oc';
+  if(MOD_LABELS2.includes(label)) return 'role-mod';
+  return '';
+}
+
+/* 뼈대 가이드 바 — 현재 답안에 이미 채워진 라벨 기준으로 활성화 */
+function buildSkeletonBar(answerOrder, chunks, chunkStates){
+  /* 답안에 놓인 청크들의 라벨 수집 */
+  const placedLabels=new Set();
+  answerOrder.forEach(ci=>{
+    const c=chunks[ci]; if(!c) return;
+    const st=chunkStates[c.id]||'active';
+    if(st==='hidden') return;
+    placedLabels.add(c.label);
+  });
+  const hasS=chunks.some(c=>['S','GS','RS','가S','실S','진S'].includes(c.label)&&placedLabels.has(c.label));
+  const hasV=chunks.some(c=>['V','V1','V2','V3'].includes(c.label)&&placedLabels.has(c.label));
+  const hasOC=chunks.some(c=>['O','C','IO','DO','OC'].some(l=>c.label===l||c.label.startsWith('OC('))&&placedLabels.has(c.label));
+  /* 다음 채워야 할 슬롯 결정 */
+  let activeSlot= !hasS?'s': !hasV?'v': !hasOC?'oc':'mod';
+  const slot=(id,cls,label,emoji)=>{
+    const done= id==='s'?hasS: id==='v'?hasV: id==='oc'?hasOC:false;
+    const active= id===activeSlot && !done;
+    return`<span class="sk-slot ${cls}${done?' sk-done':active?' sk-active':''}">${emoji} ${label}</span>`;
+  };
+  return`<div class="skeleton-bar">
+    ${slot('s','sk-s','주어','🔵')}
+    <span class="sk-arrow">→</span>
+    ${slot('v','sk-v','동사','🔴')}
+    <span class="sk-arrow">→</span>
+    ${slot('oc','sk-oc','핵심 자리','🟢')}
+    <span class="sk-arrow">→</span>
+    <span class="sk-slot sk-mod">🟡 수식어</span>
+  </div>`;
+}
+
+function rDrill(a){
+  const dq=S.currentDrillQ;
+  if(!dq){a.innerHTML='';return;}
+  const stepData=dq.steps[S.currentStep];
+  const chunks=stepData.chunks;              /* 원본 청크 배열 — 인덱스 기준 */
+  const totalQ=S.drillQuestions.length;
+  const pct=Math.round((S.drillQi/totalQ)*100);
+  const isSelect=stepData.task==='select';
+  const isLastStep=S.currentStep>=S.totalSteps-1;
+  const isLastQ=S.drillQi>=totalQ-1;
+
+  function chunkStyle(state){
+    if(state==='dimmed')  return 'opacity:.45;border-style:dashed';
+    if(state==='locked')  return 'background:#e2e8f0;color:#94a3b8;cursor:default';
+    if(state==='grouped') return 'border:2px solid #3b82f6';
+    return '';
+  }
+
+  /* 피드백 */
+  let fb='';
+  if(S.submitted){
+    const _testInfo=DRILL_TO_TEST[dq.drill]||null;
+    const _testLine=(_testInfo&&isLastStep)
+      ?`<div style="font-size:12px;color:#475569;background:#f8fafc;border-radius:8px;padding:8px 12px;margin-top:8px;line-height:1.7">
+          📝 <strong>시험 연결:</strong> ${_testInfo.exam} &nbsp;|&nbsp; <strong>함정:</strong> ${_testInfo.trap}
+        </div>`
+      :'';
+    const _errMsg=(!S.lastOk&&dq.drill)?DRILL_TO_ERROR_MSG[dq.drill]||''  :'';
+    if(S.lastOk){
+      fb=`<div style="color:#16a34a;font-weight:700;font-size:15px;text-align:center;padding:12px">✅ 정확합니다!</div>${_testLine}`;
+    } else {
+      fb=`<div style="color:#dc2626;font-weight:700;font-size:15px;text-align:center;padding:12px">❌ 다시 확인하세요</div>`
+        +(_errMsg?`<div style="font-size:12px;color:#92400e;background:#fffbeb;border-radius:8px;padding:8px 12px;margin-top:6px;line-height:1.7">⚠️ ${_errMsg}</div>`:'')
+        +_testLine;
+    }
+    /* 오답일 때 정답 표시 */
+    if(!S.lastOk){
+      const correct=stepData.answer.order.map(cid=>{
+        const c=chunks.find(x=>x.id===cid);
+        return c?`<span style="display:inline-block;margin:2px 3px;padding:5px 10px;border-radius:7px;border:1px solid #16a34a;font-size:13px;color:#16a34a">${lcFirst(c.text)}</span>`:'';
+      }).join('');
+      fb+=`<div style="margin-top:8px;font-size:12px;color:#64748b">정답:</div><div style="margin-top:4px">${correct}</div>`;
+    }
+    fb+=!isLastStep
+      ?`<button type="button" class="btn bn mt8" onclick="advanceDrillStep()">다음 단계 →</button>`
+      :!isLastQ
+        ?`<button type="button" class="btn bn mt8" onclick="nextDrillQ()">다음 문장 →</button>`
+        :`<button type="button" class="btn bg mt8" onclick="finishDrill()">훈련 완료 →</button>`;
+  }
+
+  /* primaryFocus 배지 색상 */
+  const PF_COLOR={SV:'#1B3A5C',MOD:'#0891b2',CLAUSE:'#7c3aed',MOVE:'#dc2626',OC:'#16a34a',VERB_FORM:'#E8A010'};
+  const pfColor=PF_COLOR[dq.primaryFocus]||'#64748b';
+  const pfBadge=`<span style="display:inline-block;padding:2px 10px;border-radius:99px;font-size:11px;font-weight:700;background:${pfColor}20;color:${pfColor};margin-bottom:8px">${focusLabel(dq.primaryFocus)}</span>`;
+  /* 단계 이름 매핑 */
+  const STEP_NAMES={
+    SV:     ['🔵 1단계. 뼈대 찾기 (수식어 제외)'],
+    MOD:    ['🟡 1단계. 수식어 찾기','🔵 2단계. 뼈대 완성하기'],
+    CLAUSE: ['🟣 1단계. 절 덩어리 인식하기'],
+    MOVE:   ['🔵 1단계. 주어 찾기','🔵 2단계. 문장 완성하기'],
+    OC:     ['🟢 1단계. 목적어·보어 위치 잡기'],
+    VERB_FORM:['🔴 1단계. 동사 찾기','🔵 2단계. 문장 완성하기'],
+  };
+  const stepNames=STEP_NAMES[dq.primaryFocus]||[];
+  const stepName=stepNames[S.currentStep]||`${S.currentStep+1}단계`;
+  const stepBadge=`<div style="
+      display:inline-flex;align-items:center;gap:6px;
+      background:#f5f3ff;border:1.5px solid #ddd6fe;
+      border-radius:20px;padding:5px 14px;margin-bottom:10px;
+    ">
+    <span style="font-size:12px;font-weight:800;color:#6d28d9">${stepName}</span>
+    ${S.totalSteps>1?`<span style="font-size:10px;color:#a78bfa">(${S.currentStep+1}/${S.totalSteps})</span>`:''}
+  </div>`;
+
+  /* ── answer zone ── */
+  const ansHtml=S.answerOrder.map((ci,pos)=>{
+    const c=chunks[ci]; if(!c) return '';
+    const st=S.chunkStates[c.id]||'active';
+    const clickAttr=(S.submitted||st==='locked')?'':` onclick="clickAns(${pos})"`;
+    return `<div class="ck" draggable="true" data-zone="ans" data-pos="${pos}" data-ci="${ci}"
+      style="${chunkStyle(st)}"${clickAttr}>
+      ${S.showLabels?`<span class="lbl ${lblCls(c.label)}">${displayLabel(c.label)}</span>`:''}
+      ${lcFirst(c.text)}</div>`;
+  }).join('');
+
+  /* ── bank zone — 역할 색상 적용 ── */
+  const bankHtml=S.bankOrder.map((ci,pos)=>{
+    const c=chunks[ci]; if(!c) return '';
+    const st=S.chunkStates[c.id]||'active';
+    const isSelected=S.selectedChunks.includes(c.id);
+    const selStyle=isSelected?'border:2px solid #16a34a;background:#f0fdf4':'';
+    const roleClass=isSelect?'':chunkRoleClass(c.label);
+    const clickAttr=isSelect
+      ?` onclick="drillSelectChunk('${c.id}')"`
+      :S.submitted?'':` onclick="clickBank(${pos})"`;
+    return `<div class="ck ${isSelect?'':'ck-bank'} ${roleClass}" ${isSelect?'':' draggable="true"'} data-zone="${isSelect?'':'bank'}" data-pos="${pos}" data-ci="${ci}"
+      style="${chunkStyle(st)};${selStyle}"${clickAttr}>
+      ${S.showLabels?`<span class="lbl ${lblCls(c.label)}">${displayLabel(c.label)}</span>`:''}
+      ${lcFirst(c.text)}</div>`;
+  }).join('');
+
+  const canSubmit=isSelect?(S.selectedChunks.length>0):(S.answerOrder.length>0);
+
+  /* 뼈대 가이드 바 (arrange 모드에서만) */
+  const skeletonBar=(!isSelect&&!S.submitted)
+    ? buildSkeletonBar(S.answerOrder, chunks, S.chunkStates)
+    : '';
+
+  /* 조립 과정 안내 배너 — arrange 모드, 미제출 시 */
+  const DRILL_GUIDE={
+    SV:       '주어부터 찾아볼까요? 수식어를 걷어내면 뼈대가 보여요 🔍',
+    MOD:      S.currentStep===0
+               ?'설명 덩어리(수식어)를 먼저 골라볼까요? 흐린 조각에 집중해요 🟡'
+               :'수식어를 걷어냈어요! 이제 남은 뼈대를 순서대로 놓아볼게요 🔵',
+    CLAUSE:   '파란 테두리 덩어리는 하나의 절이에요. 덩어리째 위치를 잡아볼까요? 🟣',
+    MOVE:     S.currentStep===0
+               ?'이 문장, 주어가 어디 숨었는지 먼저 찾아볼까요? 🔍'
+               :'주어를 찾았어요! 이제 문장을 완성해볼게요 💪',
+    OC:       '동사 뒤 목적어(O)와 보어(C) 위치를 집중해서 잡아볼까요? 🟢',
+    VERB_FORM:S.currentStep===0
+               ?'이 문장의 진짜 동사(V)가 뭔지 먼저 찾아볼까요? 🔴'
+               :'동사를 찾았어요! 이제 전체 문장을 만들어볼게요 💪',
+  };
+  const bannerMsg=DRILL_GUIDE[dq.primaryFocus]||'주어 → 동사 순서로 뼈대를 먼저 잡고, 수식어를 붙여 완성해요 🦴';
+  const showBanner=(!isSelect&&!S.submitted);
+  const drillBanner=showBanner
+    ?`<div class="drill-banner">
+        <span class="drill-banner-icon">🦴</span>
+        <span class="drill-banner-text">${bannerMsg}</span>
+      </div>`
+    :'';
+
+  a.innerHTML=`
+    <div style="padding:12px 0">
+      <div class="card" style="padding:12px 16px">
+        <div class="fb">
+          <button type="button" onclick="backDrillToSelect()" style="background:none;border:none;font-size:13px;color:#64748b;cursor:pointer;padding:0">← 나가기</button>
+          <div style="font-size:13px;color:#64748b">${S.drillQi+1} / ${totalQ}</div>
+        </div>
+        <div style="height:4px;background:#e2e8f0;border-radius:2px;margin-top:8px">
+          <div style="height:4px;background:#7c3aed;border-radius:2px;width:${pct}%;transition:width .3s"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        ${pfBadge}${stepBadge}
+        ${drillBanner}
+        <div style="font-size:14px;font-weight:700;color:#1B3A5C;margin-bottom:10px">${stepData.instruction}</div>
+        <details style="margin-top:4px">
+          <summary style="font-size:11px;color:#94a3b8;cursor:pointer;user-select:none">원문 보기</summary>
+          <div style="font-size:12px;color:#94a3b8;line-height:1.7;padding:8px 0 0">${dq.sourceSentence}</div>
+        </details>
+      </div>
+
+      ${!isSelect?`
+      <div class="card" id="ans-zone" style="min-height:56px">
+        ${skeletonBar}
+        <div class="zone-lbl-drill">✏️ 내가 만든 문장</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;min-height:40px;padding:4px 0">
+          ${ansHtml||'<span style="font-size:12px;color:#cbd5e1;font-style:italic;padding:8px">여기에 조각을 놓아보세요</span>'}
+        </div>
+      </div>`:''}
+
+      <div class="card" id="bank-zone">
+        <div class="zone-lbl-drill">${isSelect?'🔍 해당하는 조각을 탭하세요':'📦 문장 조각'}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px">${bankHtml}</div>
+      </div>
+
+      <div class="card">
+        ${fb||`<div class="btn-row">
+          <button type="button" class="btn bGray" onclick="drillReset()">다시 시작</button>
+          <button type="button" class="btn bn" style="flex:2" onclick="submitDrill()" ${canSubmit?'':'disabled'}>확인</button>
+        </div>`}
+      </div>
+    </div>`;
+
+  if(!isSelect && !S.submitted) setTimeout(()=>bindDrag(),0);
+}
+
+/* ── 6. drill 결과 화면 ── */
+function rDrillResult(a){
+  const total=S.drillResults.length;
+  const correct=S.drillResults.filter(r=>r.correct).length;
+  const pct=total?Math.round((correct/total)*100):0;
+
+  /* primaryFocus별 집계 */
+  const focusMap={};
+  S.drillResults.forEach(r=>{
+    const f=r.primaryFocus||'SV';
+    if(!focusMap[f]) focusMap[f]={total:0,correct:0};
+    focusMap[f].total++;
+    if(r.correct) focusMap[f].correct++;
+  });
+
+  const focusRows=Object.entries(focusMap).map(([f,v])=>{
+    const ok=v.correct===v.total;
+    const pf=Math.round((v.correct/v.total)*100);
+    return`<div style="padding:10px 0;border-bottom:1px solid #f1f5f9">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:13px;font-weight:600">${ok?'✅':'⚠️'} ${focusLabel(f)}</span>
+        <span style="font-size:13px;font-weight:700;color:${ok?'#16a34a':'#E8A010'}">${v.correct}/${v.total}</span>
+      </div>
+      <div style="height:4px;background:#e2e8f0;border-radius:2px">
+        <div style="height:4px;background:${ok?'#16a34a':'#E8A010'};border-radius:2px;width:${pf}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  /* 약점 drill 추천 */
+  const weak=S.drillResults.filter(r=>!r.correct);
+  const weakDrills=[...new Set(weak.map(r=>r.drill))];
+  const weakSection=weakDrills.length?`
+    <div class="card">
+      <div style="font-size:13px;font-weight:700;color:#dc2626;margin-bottom:8px">💡 약점 훈련 추천</div>
+      ${weakDrills.map(d=>`<div style="font-size:12px;color:#64748b;padding:6px 0;display:flex;align-items:center;gap:6px">
+        <span style="font-size:16px">→</span>
+        <span>${drillLabel(d)}</span>
+      </div>`).join('')}
+    </div>`:'';
+
+  a.innerHTML=`
+    <div style="padding:20px 0">
+      <div class="card" style="text-align:center">
+        <div style="font-size:32px;margin-bottom:8px">${pct>=90?'🏆':pct>=70?'⭐':'📚'}</div>
+        <div style="font-size:20px;font-weight:800;color:#1B3A5C;margin-bottom:4px">훈련 완료</div>
+        <div style="font-size:36px;font-weight:900;color:${pctColor(pct)}">${pct}%</div>
+        <div style="font-size:13px;color:#64748b;margin-bottom:8px">${total}문제 중 ${correct}문제 정답</div>
+        <div style="font-size:12px;color:${pctColor(pct)};font-weight:600">
+          ${pct>=90?'완벽합니다! 다음 세트로 넘어가세요.':pct>=70?'잘 하고 있어요. 틀린 문장을 한 번 더 확인하세요.':'약점이 발견됐어요. 아래 추천 훈련을 진행하세요.'}
+        </div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:8px">📊 구조별 결과</div>
+        ${focusRows}
+      </div>
+      ${weakSection}
+      <div class="card">
+        ${weakDrills.length?`<button type="button" class="btn bn mb8" onclick="retakeDrillWeak()">🔁 틀린 문장만 다시</button>`:''}
+        <button type="button" class="btn bo mb8" onclick="retakeDrill()">같은 세트 다시 풀기</button>
+        <button type="button" class="btn bGray" onclick="backDrillToSelect()">← 세트 선택으로</button>
+      </div>
+    </div>`;
+}
+
+/* ── drill 액션 함수들 ── */
+function drillSelectChunk(cid){
+  if(S.submitted) return;
+  const stepData=S.currentDrillQ.steps[S.currentStep];
+  const multi=stepData.selectionType==='multiple';
+  if(multi){
+    const idx=S.selectedChunks.indexOf(cid);
+    if(idx>=0) S.selectedChunks.splice(idx,1);
+    else S.selectedChunks.push(cid);
+  } else {
+    S.selectedChunks=S.selectedChunks.includes(cid)?[]:[cid];
+  }
+  R();
+}
+
+function submitDrill(){
+  if(S.submitted) return;
+  const stepData=S.currentDrillQ.steps[S.currentStep];
+  S.lastOk=gradeDrillStep(stepData);
+  S.submitted=true;
+
+  /* step 결과 저장 */
+  S.stepResults.push({
+    stepId:stepData.stepId,
+    task:stepData.task,
+    correct:S.lastOk,
+    selectedIds:[...S.selectedChunks],
+    userOrder:[...S.answerOrder],
+    correctOrder:stepData.answer.order,
+    drill:S.currentDrillQ.drill,
+    primaryFocus:S.currentDrillQ.primaryFocus
+  });
+
+  /* 마지막 step이면 문항 결과 저장 + Firebase 로그 */
+  const isLastStep=S.currentStep>=S.totalSteps-1;
+  if(isLastStep){
+    const allCorrect=S.stepResults.every(r=>r.correct);
+    S.drillResults.push({
+      questionId:S.currentDrillQ.questionId,
+      correct:allCorrect,
+      drill:S.currentDrillQ.drill,
+      primaryFocus:S.currentDrillQ.primaryFocus
+    });
+
+    /* Firebase 로그 저장 — 문항 단위 1회 */
+    if(DB && S.name && S.set){
+      const dq=S.currentDrillQ;
+      const srcQ=S.set.questions.find(q=>q.id===dq.sourceSentenceId)||{};
+      const userAnswerTexts=S.answerOrder.map(ci=>{
+        const c=stepData.chunks[ci];
+        return c?c.text:'';
+      }).filter(Boolean);
+      const correctAnswerTexts=stepData.answer.order.map(cid=>{
+        const c=stepData.chunks.find(x=>x.id===cid);
+        return c?c.text:'';
+      }).filter(Boolean);
+
+      try{
+        DB.ref('structure_logs/'+sKey(S.name)).push().set({
+          name:         S.name,
+          timestamp:    Date.now(),
+          setId:        S.set.id,
+          setTitle:     S.set.title,
+          questionId:   dq.sourceSentenceId,
+          correct:      allCorrect,
+          primaryFocus: dq.primaryFocus||null,
+          drill:        dq.drill||null,
+          exam:         (DRILL_TO_TEST[dq.drill]||{}).exam||null,
+          trap:         (DRILL_TO_TEST[dq.drill]||{}).trap||null,
+          errorMsg:     DRILL_TO_ERROR_MSG[dq.drill]||null,
+          userAnswer:   userAnswerTexts,
+          correctAnswer:correctAnswerTexts
+        });
+      }catch(e){ /* Firebase 에러 무시 — 앱 동작에 영향 없음 */ }
+    }
+  }
+  R();
+}
+
+function gradeDrillStep(stepData){
+  if(stepData.task==='select') return checkDrillSelect(stepData);
+  return checkDrillArrange(stepData);
+}
+
+function checkDrillArrange(stepData){
+  /* answerOrder는 stepData.chunks의 인덱스 배열 → chunk id 순서로 변환 */
+  /* hidden/locked 중 locked만 포함 (hidden은 제거된 수식어) */
+  const userOrderIds=S.answerOrder.map(ci=>{
+    const c=stepData.chunks[ci];
+    if(!c) return null;
+    if(S.chunkStates[c.id]==='hidden') return null; /* 제거된 수식어 제외 */
+    return c.id;
+  }).filter(Boolean);
+  return JSON.stringify(userOrderIds)===JSON.stringify(stepData.answer.order);
+}
+
+function checkDrillSelect(stepData){
+  const correct=new Set(stepData.answer.order);
+  const user=new Set(S.selectedChunks);
+  if(correct.size!==user.size) return false;
+  for(let id of correct){ if(!user.has(id)) return false; }
+  return true;
+}
+
+function advanceDrillStep(){
+  const stepData=S.currentDrillQ.steps[S.currentStep];
+  if(stepData.task==='select'){
+    const effect=stepData.selectEffect||'lock';
+    /* 오답이어도 정답 기준으로 상태 전달 — 잘못 선택한 청크로 다음 step이 망가지지 않도록 */
+    const correctIds=stepData.answer.order;
+    if(effect==='remove') S.removedChunks=[...correctIds];
+    else                   S.lockedChunks=[...correctIds];
+  }
+  if(stepData.task==='remove') S.removedChunks=[...stepData.answer.order];
+  S.currentStep++;
+  S.selectedChunks=[];
+  initDrillStep();R();
+}
+
+function nextDrillQ(){
+  S.drillQi++;
+  initDrillQ();R();
+}
+
+function finishDrill(){
+  /* ── 드릴 세션 완료 기록 → Firebase ── */
+  if(DB && S.name && S.set && S.drillResults.length){
+    const total=S.drillResults.length;
+    const correct=S.drillResults.filter(r=>r.correct).length;
+    const pct=Math.round(correct/total*100);
+    const focusBreakdown={};
+    S.drillResults.forEach(r=>{
+      const f=r.primaryFocus||'SV';
+      if(!focusBreakdown[f]) focusBreakdown[f]={total:0,correct:0};
+      focusBreakdown[f].total++;
+      if(r.correct) focusBreakdown[f].correct++;
+    });
+    try{
+      DB.ref('structure_drill_sessions/'+sKey(S.name)+'/'+S.set.id+'_'+Date.now()).set({
+        name:S.name, setId:S.set.id, setTitle:S.set.title,
+        timestamp:Date.now(), date:new Date().toISOString(),
+        total, correct, pct, focusBreakdown
+      });
+    }catch(e){}
+  }
+  S.sc='drill_result';R();
+}
+
+function drillReset(){
+  if(S.submitted) return;
+  initDrillStep();R();
+}
+
+function retakeDrill(){
+  startDrill(S.set.id);
+}
+
+function retakeDrillWeak(){
+  const weakIds=new Set(S.drillResults.filter(r=>!r.correct).map(r=>r.questionId.replace('_drill','')));
+  S.drillQuestions=S.drillQuestions.filter(dq=>weakIds.has(dq.sourceSentenceId));
+  S.drillQi=0;S.drillResults=[];S.sc='drill';
+  initDrillQ();R();
+}
+
+function backDrillToSelect(){
+  S.drillMode=false;S.currentDrillQ=null;S.sc='select';R();
 }
 
 /* ── 5. 관리자 ── */
@@ -647,7 +1505,7 @@ function rAdmin(a){
       <div class="fb mb8">
         <div><div class="brand" style="font-size:18px;text-align:left">🔧 관리자</div>
         <div style="font-size:12px;color:#888">SF English Structure</div></div>
-        <button class="btn bo" style="width:auto;padding:8px 14px;font-size:13px" onclick="S.sc='login';R()">나가기</button>
+        <button type="button" class="btn bo" style="width:auto;padding:8px 14px;font-size:13px" onclick="S.sc='login';R()">나가기</button>
       </div>
     </div>
 
@@ -659,7 +1517,7 @@ function rAdmin(a){
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px" id="rateButtons">
         ${[30,50,60,70,80,100].map(v=>`
-          <button class="pgBtn${pct===v?' on':''}" onclick="setRate(${v})">${v}%</button>
+          <button type="button" class="pgBtn${pct===v?' on':''}" onclick="setRate(${v})">${v}%</button>
         `).join('')}
       </div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
@@ -674,7 +1532,7 @@ function rAdmin(a){
         &nbsp;→&nbsp;
         ${SETS.map(st=>`<span style="display:inline-block;margin:1px 4px">${st.title.split(' ').slice(0,2).join(' ')}: <strong>${Math.max(1,Math.round(st.questions.length*sampleRate))}/${st.questions.length}문제</strong></span>`).join(' · ')}
       </div>
-      <button class="btn bn" onclick="saveRate()">💾 저장하기</button>
+      <button type="button" class="btn bn" onclick="saveRate()">💾 저장하기</button>
       <div id="rateSaveMsg" style="text-align:center;font-size:12px;color:#16a34a;margin-top:8px;height:16px"></div>
     </div>
 
@@ -701,12 +1559,20 @@ function rAdmin(a){
       <div id="visSaveMsg" style="text-align:center;font-size:12px;color:#16a34a;margin-top:8px;height:16px"></div>
     </div>
 
+    <!-- 학생 기록 -->
+    <div class="card">
+      <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">👥 학생 기록 조회</div>
+      <div style="font-size:11px;color:#94a3b8;margin-bottom:12px">학생을 탭하면 상세 기록을 볼 수 있어요.</div>
+      <div id="studentList"><div style="text-align:center;padding:16px;color:#888;font-size:13px">불러오는 중…</div></div>
+    </div>
+
     <!-- 이의신청 검토 -->
     <div class="card" style="padding-bottom:8px">
       <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:12px">📋 이의신청 검토</div>
     </div>
     <div id="adminList"><div style="text-align:center;padding:24px;color:#888;font-size:13px">불러오는 중…</div></div>`;
   loadDisputes();
+  loadStudentList();
 }
 
 function setRate(v){
@@ -765,6 +1631,248 @@ function toggleSet(id, on){
   }
 }
 
+/* ── 학생 목록 로드 ── */
+function loadStudentList(){
+  const el=document.getElementById('studentList');
+  if(!el) return;
+  if(!DB){el.innerHTML=`<div style="font-size:12px;color:#888;text-align:center">Firebase 연결 없음</div>`;return;}
+
+  /* structure_results(테스트) + structure_logs(훈련) 두 경로에서 학생 이름 수집 */
+  let resultsSnap=null, logsSnap=null, drillSessSnap=null;
+  function tryRender(){
+    if(!resultsSnap||!logsSnap||!drillSessSnap) return;
+    /* 학생별 집계: { name, lastTs, testSessions, drillSessions } */
+    const map={};
+    resultsSnap.forEach(studentNode=>{
+      const name=studentNode.val()&&Object.values(studentNode.val())[0]&&Object.values(studentNode.val())[0].name||studentNode.key;
+      if(!map[studentNode.key]) map[studentNode.key]={name,lastTs:0,testSessions:0,drillSessions:0};
+      studentNode.forEach(session=>{
+        const v=session.val();
+        if(v.date) map[studentNode.key].lastTs=Math.max(map[studentNode.key].lastTs,new Date(v.date).getTime());
+        map[studentNode.key].testSessions++;
+      });
+    });
+    logsSnap.forEach(studentNode=>{
+      if(!map[studentNode.key]) map[studentNode.key]={name:studentNode.key,lastTs:0,testSessions:0,drillSessions:0};
+      studentNode.forEach(entry=>{
+        const v=entry.val();
+        if(v.timestamp) map[studentNode.key].lastTs=Math.max(map[studentNode.key].lastTs,v.timestamp);
+        if(v.name) map[studentNode.key].name=v.name;
+      });
+    });
+    drillSessSnap.forEach(studentNode=>{
+      if(!map[studentNode.key]) map[studentNode.key]={name:studentNode.key,lastTs:0,testSessions:0,drillSessions:0};
+      studentNode.forEach(sess=>{
+        const v=sess.val();
+        if(v.timestamp) map[studentNode.key].lastTs=Math.max(map[studentNode.key].lastTs,v.timestamp);
+        if(v.name) map[studentNode.key].name=v.name;
+        map[studentNode.key].drillSessions++;
+      });
+    });
+
+    const students=Object.entries(map).sort((a,b)=>b[1].lastTs-a[1].lastTs);
+    if(!students.length){
+      el.innerHTML=`<div style="font-size:12px;color:#94a3b8;text-align:center;padding:12px">아직 기록된 학생이 없어요.</div>`;
+      return;
+    }
+    el.innerHTML=students.map(([key,d])=>{
+      const dateStr=d.lastTs?new Date(d.lastTs).toLocaleDateString('ko-KR',{month:'short',day:'numeric'}):'기록없음';
+      return`<div onclick="openStudentDetail('${key}')" style="display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #f1f5f9;cursor:pointer">
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#1B3A5C">${d.name}</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px">
+            마지막 접속 ${dateStr}
+            ${d.testSessions?` &nbsp;·&nbsp; 확인하기 ${d.testSessions}회`:''}
+            ${d.drillSessions?` &nbsp;·&nbsp; 연습하기 ${d.drillSessions}회`:''}
+          </div>
+        </div>
+        <span style="font-size:18px;color:#cbd5e1">›</span>
+      </div>`;
+    }).join('');
+  }
+
+  DB.ref('structure_results').once('value',snap=>{resultsSnap=snap;tryRender();});
+  DB.ref('structure_logs').once('value',snap=>{logsSnap=snap;tryRender();});
+  DB.ref('structure_drill_sessions').once('value',snap=>{drillSessSnap=snap;tryRender();});
+}
+
+function openStudentDetail(key){
+  S.adminStudentKey=key;
+  S.sc='admin_student';
+  R();
+}
+
+/* ── 학생 상세 화면 ── */
+function rAdminStudent(a){
+  const key=S.adminStudentKey;
+  a.innerHTML=`<div style="padding:12px 0">
+    <div class="card" style="padding:12px 16px">
+      <div class="fb">
+        <button type="button" onclick="S.sc='admin';R()" style="background:none;border:none;font-size:13px;color:#64748b;cursor:pointer;padding:0">← 관리자로</button>
+      </div>
+    </div>
+    <div id="studentDetail"><div style="text-align:center;padding:40px;color:#888;font-size:13px">불러오는 중…</div></div>
+  </div>`;
+
+  if(!DB){document.getElementById('studentDetail').innerHTML=`<div class="card" style="text-align:center;color:#888">Firebase 연결 없음</div>`;return;}
+
+  let resultsSnap=null, logsSnap=null, drillSessionsSnap=null;
+  function renderDetail(){
+    if(!resultsSnap||!logsSnap||!drillSessionsSnap) return;
+    const el=document.getElementById('studentDetail');
+    if(!el) return;
+
+    /* 학생 이름 */
+    let studentName=key;
+    logsSnap.forEach(e=>{if(e.val().name) studentName=e.val().name;});
+    resultsSnap.forEach(e=>{if(e.val().name) studentName=e.val().name;});
+
+    /* ① 최근 접속 */
+    let lastTs=0;
+    logsSnap.forEach(e=>{if(e.val().timestamp) lastTs=Math.max(lastTs,e.val().timestamp);});
+    resultsSnap.forEach(e=>{if(e.val().date) lastTs=Math.max(lastTs,new Date(e.val().date).getTime());});
+    drillSessionsSnap.forEach(e=>{if(e.val().timestamp) lastTs=Math.max(lastTs,e.val().timestamp);});
+    const lastStr=lastTs?new Date(lastTs).toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric',weekday:'short'}):'없음';
+
+    /* ② 세트별 테스트 점수 (가장 최근 1회) — setId 키 */
+    const testMap={};  /* setId → 최신 테스트 결과 */
+    resultsSnap.forEach(session=>{
+      const v=session.val();
+      if(!testMap[v.setId]||new Date(v.date)>new Date(testMap[v.setId].date)) testMap[v.setId]=v;
+    });
+
+    /* ③ 세트별 연습하기 완료 (가장 최근 1회) — setId 키 */
+    const drillMap={};  /* setId → 최신 드릴 세션 */
+    drillSessionsSnap.forEach(session=>{
+      const v=session.val();
+      if(!drillMap[v.setId]||v.timestamp>drillMap[v.setId].timestamp) drillMap[v.setId]=v;
+    });
+
+    /* ④ 전체 세트를 기준으로 학습 현황 테이블 생성 */
+    /* 테스트 또는 드릴 기록이 있는 세트만 표시, 최신순 */
+    const allSetIds=new Set([...Object.keys(testMap),...Object.keys(drillMap)]);
+    const setProgress=[];
+    allSetIds.forEach(sid=>{
+      const t=testMap[sid]||null;
+      const d=drillMap[sid]||null;
+      const latestTs=Math.max(t?new Date(t.date).getTime():0, d?d.timestamp:0);
+      const title=(t||d).setTitle||sid;
+      setProgress.push({sid,title,t,d,latestTs});
+    });
+    setProgress.sort((a,b)=>b.latestTs-a.latestTs);
+
+    const progressRows=setProgress.map(({title,t,d})=>{
+      /* 연습하기 셀 */
+      let drillCell;
+      if(d){
+        const col=d.pct>=80?'#16a34a':d.pct>=60?'#E8A010':'#dc2626';
+        const dateStr=new Date(d.timestamp).toLocaleDateString('ko-KR',{month:'short',day:'numeric'});
+        drillCell=`<div style="text-align:center">
+          <div style="font-size:14px;font-weight:800;color:${col}">${d.pct}%</div>
+          <div style="font-size:10px;color:#94a3b8">${d.correct}/${d.total} &nbsp;${dateStr}</div>
+        </div>`;
+      } else {
+        drillCell=`<div style="text-align:center;font-size:12px;color:#cbd5e1">-</div>`;
+      }
+      /* 확인하기 셀 */
+      let testCell;
+      if(t){
+        const col=t.pct>=80?'#16a34a':t.pct>=60?'#E8A010':'#dc2626';
+        const dateStr=new Date(t.date).toLocaleDateString('ko-KR',{month:'short',day:'numeric'});
+        testCell=`<div style="text-align:center">
+          <div style="font-size:14px;font-weight:800;color:${col}">${t.pct}%</div>
+          <div style="font-size:10px;color:#94a3b8">${t.score}/${t.maxScore}점 &nbsp;${dateStr}</div>
+        </div>`;
+      } else {
+        testCell=`<div style="text-align:center;font-size:12px;color:#cbd5e1">-</div>`;
+      }
+      return`<div style="display:grid;grid-template-columns:1fr 80px 80px;align-items:center;padding:9px 0;border-bottom:1px solid #f1f5f9;gap:6px">
+        <div style="font-size:12px;font-weight:600;color:#1e293b;line-height:1.4">${title}</div>
+        ${drillCell}
+        ${testCell}
+      </div>`;
+    }).join('');
+
+    const progressTable = setProgress.length ? `
+      <div style="display:grid;grid-template-columns:1fr 80px 80px;gap:6px;padding:0 0 8px;border-bottom:2px solid #e2e8f0;margin-bottom:2px">
+        <div style="font-size:10px;font-weight:800;color:#94a3b8;letter-spacing:.5px">세트</div>
+        <div style="font-size:10px;font-weight:800;color:#0891b2;letter-spacing:.5px;text-align:center">🦴 연습하기</div>
+        <div style="font-size:10px;font-weight:800;color:#1B3A5C;letter-spacing:.5px;text-align:center">✅ 확인하기</div>
+      </div>
+      ${progressRows}` :
+      `<div style="font-size:12px;color:#94a3b8">아직 기록이 없어요.</div>`;
+
+    /* ⑤ primaryFocus별 오답 패턴 (훈련 로그 기준) */
+    const pfMap={};
+    logsSnap.forEach(e=>{
+      const v=e.val();
+      const pf=v.primaryFocus||'(미분류)';
+      if(!pfMap[pf]) pfMap[pf]={total:0,correct:0};
+      pfMap[pf].total++;
+      if(v.correct) pfMap[pf].correct++;
+    });
+    const PF_COLOR={SV:'#1B3A5C',MOD:'#0891b2',CLAUSE:'#7c3aed',MOVE:'#dc2626',OC:'#16a34a',VERB_FORM:'#E8A010'};
+    const pfRows=Object.entries(pfMap).sort((a,b)=>(a[1].correct/a[1].total)-(b[1].correct/b[1].total)).map(([pf,v])=>{
+      const pct=Math.round(v.correct/v.total*100);
+      const color=pct>=80?'#16a34a':pct>=60?'#E8A010':'#dc2626';
+      const barColor=PF_COLOR[pf]||'#64748b';
+      return`<div style="padding:8px 0;border-bottom:1px solid #f1f5f9">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px">
+          <span style="font-size:12px;font-weight:700;color:#1e293b">${focusLabel(pf)}</span>
+          <span style="font-size:12px;font-weight:700;color:${color}">${v.correct}/${v.total} (${pct}%)</span>
+        </div>
+        <div style="height:5px;background:#e2e8f0;border-radius:3px">
+          <div style="height:5px;background:${barColor};border-radius:3px;width:${pct}%"></div>
+        </div>
+      </div>`;
+    }).join('');
+
+    /* ⑥ 틀린 문장 목록 (훈련 로그 기준) */
+    const wrongList=[];
+    logsSnap.forEach(e=>{
+      const v=e.val();
+      if(!v.correct){
+        const q=SETS.flatMap(s=>s.questions).find(q=>q.id===v.questionId);
+        wrongList.push({sentence:q?q.sentence:v.questionId, setTitle:v.setTitle, ts:v.timestamp, drill:v.drill, errorMsg:v.errorMsg||null});
+      }
+    });
+    wrongList.sort((a,b)=>b.ts-a.ts);
+    const wrongRows=wrongList.length
+      ? wrongList.map(w=>`<div style="padding:8px 0;border-bottom:1px solid #f1f5f9">
+          <div style="font-size:12px;color:#1e293b;line-height:1.5;font-weight:600">${w.sentence}</div>
+          <div style="font-size:11px;color:#94a3b8;margin-top:2px">${w.setTitle} &nbsp;·&nbsp; ${new Date(w.ts).toLocaleDateString('ko-KR',{month:'short',day:'numeric'})}</div>
+          ${w.errorMsg?`<div style="font-size:11px;color:#92400e;background:#fffbeb;border-radius:5px;padding:4px 8px;margin-top:4px">${w.errorMsg}</div>`:''}
+        </div>`).join('')
+      : `<div style="font-size:12px;color:#94a3b8;padding:8px 0">틀린 훈련 기록이 없어요.</div>`;
+
+    el.innerHTML=`
+      <div class="card">
+        <div style="font-size:18px;font-weight:800;color:#1B3A5C;margin-bottom:4px">👤 ${studentName}</div>
+        <div style="font-size:12px;color:#94a3b8">마지막 접속: ${lastStr}</div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:12px">📋 세트별 학습 현황</div>
+        ${progressTable}
+      </div>
+
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:10px">🦴 구조 유형별 오답 패턴</div>
+        ${pfRows||`<div style="font-size:12px;color:#94a3b8">훈련 기록이 없어요.</div>`}
+      </div>
+
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:10px">❌ 틀린 문장 목록 (훈련 기준, 최신순)</div>
+        ${wrongRows}
+      </div>`;
+  }
+
+  DB.ref('structure_results/'+key).once('value',snap=>{resultsSnap=snap;renderDetail();});
+  DB.ref('structure_logs/'+key).once('value',snap=>{logsSnap=snap;renderDetail();});
+  DB.ref('structure_drill_sessions/'+key).once('value',snap=>{drillSessionsSnap=snap;renderDetail();});
+}
+
+
 function loadDisputes(){
   const el=document.getElementById('adminList');
   if(!el)return;
@@ -788,8 +1896,8 @@ function loadDisputes(){
           <div class="admin-ans-val" style="color:#dc2626">${item.studentAnswer}</div>
         </div>
         <div class="admin-btn-row">
-          <button class="btn bGreen" onclick="resolveDispute('${item.key}','approved')">✅ 정답 처리</button>
-          <button class="btn br" onclick="resolveDispute('${item.key}','rejected')">❌ 오답 유지</button>
+          <button type="button" class="btn bGreen" onclick="resolveDispute('${item.key}','approved')">✅ 정답 처리</button>
+          <button type="button" class="btn br" onclick="resolveDispute('${item.key}','rejected')">❌ 오답 유지</button>
         </div>
       </div>`).join('');
   });
@@ -812,6 +1920,11 @@ function login(){const e=document.getElementById('nameInput'),n=e?e.value.trim()
 function logout(){S.name='';S.sc='login';R();}
 function setMode(m){S.mode=m;R();}
 
+function startSet(id){
+  if(S.mode==='drill') startDrill(id);
+  else startQuiz(id);
+}
+
 function startQuiz(id){
   const f=SETS.find(s=>s.id===id);if(!f)return;
   S.set=f;S.qi=0;S.score=0;S.results=[];S.sc='quiz';
@@ -827,6 +1940,254 @@ function startQuiz(id){
 
   initQ();R();
 }
+
+/* ── drill 모드 시작 ── */
+function startDrill(id){
+  const f=SETS.find(s=>s.id===id);if(!f)return;
+  S.set=f;
+  S.drillMode=true;
+  S.drillQuestions=buildDrillQuestions(f.questions);
+  S.drillQi=0;
+  S.drillResults=[];
+  S.sc='drill';
+  initDrillQ();R();
+}
+
+/* 기존 questions 배열 → drill 문제 JSON 배열로 변환 (Phase1: basic arrange만) */
+function buildDrillQuestions(questions){
+  const setId=S.set?S.set.id:'';
+  const tagSet=DRILL_TAG_MAP[setId]||{};
+
+  return questions.map(q=>{
+    const tag=tagSet[q.id]||{primaryFocus:'SV',stage:'basic',drill:'DRILL_SV_CORE',minorTag:'SV_MAIN_VERB'};
+    const pf=tag.primaryFocus;
+    const stage=tag.stage;
+    const drill=tag.drill;
+
+    /* 청크 객체 생성 */
+    const chunks=q.chunks.map((text,i)=>({
+      id:`c${i+1}`, text, label:q.labels[i]||'', state:'active', group:null
+    }));
+
+    /* 수식어 계열 라벨 */
+    const MOD_LABELS=['Mod','Adv.Cl','Rel.Cl','Inf','Part'];
+    const CORE_LABELS=['S','V','O','C','IO','DO','OC'];
+    const modChunks  =chunks.filter(c=>MOD_LABELS.includes(c.label));
+    const coreChunks =chunks.filter(c=>CORE_LABELS.includes(c.label));
+
+    /* 정답 순서: 원본 chunks 순서 기준 */
+    const fullAnswer={
+      order: chunks.map(c=>c.id),
+      roles: Object.fromEntries(chunks.map(c=>[c.id,c.label]))
+    };
+    const coreAnswer={
+      order: coreChunks.map(c=>c.id),
+      roles: Object.fromEntries(coreChunks.map(c=>[c.id,c.label]))
+    };
+
+    let steps=[];
+
+    /* ── primaryFocus별 step 설계 ── */
+
+    if(pf==='SV'){
+      /* SV: 수식어(Mod/Adv.Cl/Rel.Cl/Inf/Part)만 hidden, O/C는 남김 */
+      const svChunks=chunks.map(c=>({...c, state: MOD_LABELS.includes(c.label)?'hidden':'active'}));
+      /* 정답: hidden 제외한 나머지 (S/V/O/C 등) 원래 순서 유지 */
+      const svVisible=chunks.filter(c=>!MOD_LABELS.includes(c.label));
+      const svAnswer={
+        order: svVisible.map(c=>c.id),
+        roles: Object.fromEntries(svVisible.map(c=>[c.id,c.label]))
+      };
+      steps=[{
+        stepId:1,
+        instruction:'주어(S)와 동사(V)를 먼저 잡고, 뼈대를 순서대로 놓아보세요. 흐린 조각은 설명(수식어)이에요.',
+        chunks:svChunks, task:'arrange', selectionType:null,
+        answer: svAnswer,
+        hint:{labelVisible:false, lockedPositions:[]}
+      }];
+
+    } else if(pf==='MOD'){
+      if(stage==='basic'||modChunks.length===0){
+        /* basic: 수식어 dimmed로 흐리게, 전체 배열 */
+        const dimmedChunks=chunks.map(c=>({...c, state: MOD_LABELS.includes(c.label)?'dimmed':'active'}));
+        steps=[{
+          stepId:1,
+          instruction:'문장 조각을 올바른 순서로 놓아보세요. 흐린 조각은 설명(수식어)이에요 — 주어·동사 뼈대에 집중하세요!',
+          chunks:dimmedChunks, task:'arrange', selectionType:null,
+          answer:fullAnswer,
+          hint:{labelVisible:false, lockedPositions:[]}
+        }];
+      } else {
+        /* mixed: step1 수식어 선택(제거), step2 뼈대 배열 */
+        steps=[
+          {
+            stepId:1,
+            instruction:'설명(수식어) 조각을 모두 찾아 탭하세요. (여러 개 선택 가능)',
+            chunks:chunks.map(c=>({...c,state:'active'})),
+            task:'select', selectionType:'multiple', selectEffect:'remove',
+            answer:{order:modChunks.map(c=>c.id), roles:Object.fromEntries(modChunks.map(c=>[c.id,c.label]))},
+            hint:{labelVisible:false, lockedPositions:[]}
+          },
+          {
+            stepId:2,
+            instruction:'설명 조각을 걷어낸 뒤, 남은 뼈대를 주어 → 동사 순서로 놓아보세요.',
+            chunks:chunks.map(c=>({...c, state: MOD_LABELS.includes(c.label)?'hidden':'active'})),
+            task:'arrange', selectionType:null,
+            /* 정답: MOD_LABELS 제외한 나머지 청크 순서 — label 무관하게 원본 순서 유지 */
+            answer:(()=>{
+              const visible=chunks.filter(c=>!MOD_LABELS.includes(c.label));
+              return {
+                order: visible.map(c=>c.id),
+                roles: Object.fromEntries(visible.map(c=>[c.id,c.label]))
+              };
+            })(),
+            hint:{labelVisible:false, lockedPositions:[]}
+          }
+        ];
+      }
+
+    } else if(pf==='CLAUSE'){
+      /* CLAUSE: 절을 grouped 하나의 덩어리로 제공, 전체 배열 */
+      const clauseLabels=['Adv.Cl','Rel.Cl','Inf'];
+      const groupedChunks=chunks.map(c=>({
+        ...c,
+        state: clauseLabels.includes(c.label)?'grouped':'active',
+        group: clauseLabels.includes(c.label)?'clause':null
+      }));
+      steps=[{
+        stepId:1,
+        instruction:'파란 테두리 조각은 하나의 절(덩어리)이에요. 덩어리째 순서대로 놓아보세요.',
+        chunks:groupedChunks, task:'arrange', selectionType:null,
+        answer:fullAnswer,
+        hint:{labelVisible:false, lockedPositions:[]}
+      }];
+
+    } else if(pf==='MOVE'){
+      /* MOVE: step1 주어 선택, step2 정상 어순 배열 */
+      /* 진짜 주어: 실S 우선, 없으면 S. 가S(가주어)는 정답에서 제외 */
+      const realSChunks=chunks.filter(c=>c.label==='실S');
+      const sChunks=realSChunks.length>0 ? realSChunks : chunks.filter(c=>c.label==='S');
+      steps=[
+        {
+          stepId:1,
+          instruction: (tag.minorTag==='MOVE_IT_THAT')?'강조된 진짜 주어(S)를 찾아 탭하세요.'
+                        :(tag.minorTag==='MOVE_INV')?'이 문장의 주어(S)를 찾아 탭하세요. (도치에 주의!)'
+                        :'이 문장의 진짜 주어(S)를 찾아 탭하세요.',
+          chunks:chunks.map(c=>({...c,state:'active'})),
+          task:'select', selectionType:'single', selectEffect:'lock',
+          answer:{
+            order: sChunks.map(c=>c.id),
+            roles: Object.fromEntries(sChunks.map(c=>[c.id,c.label]))
+          },
+          hint:{labelVisible:false, lockedPositions:[]}
+        },
+        {
+          stepId:2,
+          instruction:'주어(S) → 동사(V) 순서를 확인하며, 문장 조각을 올바른 순서로 놓아보세요.',
+          chunks:chunks.map(c=>({...c,state:'active'})),
+          task:'arrange', selectionType:null,
+          answer:fullAnswer,
+          hint:{labelVisible:false, lockedPositions:[]}
+        }
+      ];
+
+    } else if(pf==='OC'){
+      /* OC: 수식어 dimmed, O·C 중심 배열 */
+      const ocChunks=chunks.map(c=>({
+        ...c,
+        state: (c.label==='Mod'||c.label==='Adv.Cl')?'dimmed':'active'
+      }));
+      steps=[{
+        stepId:1,
+        instruction:'목적어(O)와 보어(C)가 어디에 오는지 집중하며 순서대로 놓아보세요.',
+        chunks:ocChunks, task:'arrange', selectionType:null,
+        answer:fullAnswer,
+        hint:{labelVisible:false, lockedPositions:[]}
+      }];
+
+    } else if(pf==='VERB_FORM'){
+      /* VERB_FORM: step1 동사 선택, step2 전체 배열 */
+      const vChunks=chunks.filter(c=>c.label==='V');
+      steps=[
+        {
+          stepId:1,
+          instruction:'이 문장의 동사(V)를 찾아 탭하세요. (준동사인지 본동사인지 확인!)',
+          chunks:chunks.map(c=>({...c,state:'active'})),
+          task:'select', selectionType:'single', selectEffect:'lock',
+          answer:{
+            order: vChunks.map(c=>c.id),
+            roles: Object.fromEntries(vChunks.map(c=>[c.id,c.label]))
+          },
+          hint:{labelVisible:false, lockedPositions:[]}
+        },
+        {
+          stepId:2,
+          instruction:'동사(V)를 확인했으니, 이제 주어 → 동사 순서로 전체 문장을 완성해보세요.',
+          chunks:chunks.map(c=>({...c,state:'active'})),
+          task:'arrange', selectionType:null,
+          answer:fullAnswer,
+          hint:{labelVisible:false, lockedPositions:[]}
+        }
+      ];
+
+    } else {
+      /* 기본 fallback: 전체 배열 */
+      steps=[{
+        stepId:1,
+        instruction:'주어 → 동사 순서로 뼈대를 먼저 잡고, 문장 조각을 완성해보세요.',
+        chunks:chunks.map(c=>({...c,state:'active'})),
+        task:'arrange', selectionType:null,
+        answer:fullAnswer,
+        hint:{labelVisible:false, lockedPositions:[]}
+      }];
+    }
+
+    return {
+      questionId: q.id+'_drill',
+      sourceSentenceId: q.id,
+      sourceSentence: q.sentence,
+      primaryFocus: pf,
+      stage,
+      drill,
+      uiMode: steps.length>1?'stepwise':(steps[0].task==='select'?'select_then_arrange':'arrange'),
+      concept: q.concept||'',
+      explanation: q.explanation||'',
+      steps
+    };
+  });
+}
+
+function initDrillQ(){
+  const dq=S.drillQuestions[S.drillQi];
+  S.currentDrillQ=dq;
+  S.currentStep=0;
+  S.totalSteps=dq.steps.length;
+  S.stepResults=[];
+  S.selectedChunks=[];
+  S.lockedChunks=[];
+  S.removedChunks=[];
+  initDrillStep();
+}
+
+function initDrillStep(){
+  const stepData=S.currentDrillQ.steps[S.currentStep];
+  /* chunkStates 초기화 — 우선순위: locked > hidden > JSON state */
+  S.chunkStates={};
+  stepData.chunks.forEach(c=>{
+    let state=c.state;
+    if(S.removedChunks.includes(c.id)) state='hidden';
+    if(S.lockedChunks.includes(c.id))  state='locked';
+    S.chunkStates[c.id]=state;
+  });
+  /* bankOrder/answerOrder: stepData.chunks의 인덱스 기준 (quiz와 동일 방식) */
+  const lockedIdx=stepData.chunks.map((c,i)=>({c,i}))
+    .filter(({c})=>S.chunkStates[c.id]==='locked').map(({i})=>i);
+  const activeIdx=stepData.chunks.map((c,i)=>({c,i}))
+    .filter(({c})=>['active','dimmed','grouped'].includes(S.chunkStates[c.id])).map(({i})=>i);
+  S.answerOrder=[...lockedIdx];        /* locked → answer zone에 순서대로 */
+  S.bankOrder=shuffle([...activeIdx]); /* active → bank에 섞어서 */
+  S.submitted=false;S.lastOk=false;S.showNext=false;
+}
 /* 현재 문제 반환 (테스트: 샘플링 배열 / 학습: 원본 배열) */
 function curQ(){return S.testQuestions?S.testQuestions[S.qi]:S.set.questions[S.qi];}
 function totQ(){return S.testQuestions?S.testQuestions.length:S.set.questions.length;}
@@ -834,8 +2195,9 @@ function totQ(){return S.testQuestions?S.testQuestions.length:S.set.questions.le
 function initQ(){
   const q=curQ();
   S.bankOrder=shuffle(q.chunks.map((_,i)=>i));S.answerOrder=[];
-  S.attempts=0;S.submitted=false;S.lastOk=false;S.showExpl=false;S.showNext=false;
-  if(S.mode==='test')S.showLabels=false;
+  S.attempts=0;S.submitted=false;S.lastOk=false;S.showExpl=false;S.showNext=false;S.hintCollapsed=false;
+  S.grammarShown=false;S.grammarSelected=null;S.grammarDone=false;S.grammarTransition=false;
+  S.showLabels=(S.mode==='study');  /* 학습 모드: 라벨 기본 ON, 테스트/훈련: OFF */
 }
 
 function clickBank(p){if(S.submitted)return;moveChunk('bank',p,'ans',S.answerOrder.length);}
@@ -844,11 +2206,159 @@ function resetChunks(){if(S.submitted)return;S.bankOrder=shuffle(curQ().chunks.m
 function toggleLabels(v){S.showLabels=v;R();}
 function showExpl(){S.showExpl=true;R();}
 
+/* ── 연계 문법 문제 UI 생성 ── */
+function linkedGrammarUI(lg, tp){
+  if(!lg) return '';
+
+  /* ── 버튼만 보이는 상태 ── */
+  if(!S.grammarShown){
+    if(S.grammarTransition){
+      /* 전환 중간 브릿지 화면 */
+      return`<div style="
+          margin-top:14px;padding:18px 16px;
+          border-radius:14px;
+          background:linear-gradient(135deg,#fff7ed,#fef3c7);
+          border:2px solid #fed7aa;
+          text-align:center;
+          animation:fadeIn .3s ease;
+        ">
+        <div style="font-size:22px;margin-bottom:8px">🎯</div>
+        <div style="font-size:14px;font-weight:800;color:#9a3412;margin-bottom:4px">
+          방금 만든 문장이 시험에는 어떻게 나올까요?
+        </div>
+        <div style="font-size:12px;color:#c2410c">잠깐, 도전해봐요!</div>
+      </div>`;
+    }
+    return`<div style="margin-top:14px;padding-top:14px;border-top:2px dashed #e2e8f0">
+      <button type="button" class="btn" onclick="showGrammar()"
+        style="background:#fff7ed;border:2px solid #ea580c;color:#ea580c;font-size:13px;font-weight:800;padding:12px;letter-spacing:.2px">
+        이 문장, 시험에는 이렇게 나와요! →
+      </button>
+    </div>`;
+  }
+
+  /* stem 에서 [___] 강조 */
+  const stemHtml=lg.stem.replace(/\[([^\]]+)\]/g,
+    '<span style="font-weight:800;color:#1B3A5C;background:#dbeafe;padding:1px 6px;border-radius:4px">[$1]</span>');
+
+  /* 선택지 */
+  const optionsHtml=lg.options.map(opt=>{
+    let style='display:block;width:100%;padding:11px 14px;margin-bottom:8px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;text-align:left;border:2px solid;transition:all .15s;';
+    if(S.grammarDone){
+      if(opt===lg.answer) style+='border-color:#16a34a;background:#f0fdf4;color:#16a34a;';
+      else if(opt===S.grammarSelected) style+='border-color:#dc2626;background:#fff5f5;color:#dc2626;';
+      else style+='border-color:#e2e8f0;background:#f8fafc;color:#94a3b8;';
+    } else {
+      const isSel=S.grammarSelected===opt;
+      style+=isSel?'border-color:#ea580c;background:#fff7ed;color:#ea580c;':'border-color:#e2e8f0;background:#fff;color:#1e293b;';
+    }
+    const icon=S.grammarDone?(opt===lg.answer?'✅ ':opt===S.grammarSelected?'❌ ':''):'';
+    const click=S.grammarDone?'':` onclick="selectGrammar('${opt.replace(/'/g,"\\'")}')"`; 
+    return`<button type="button" style="${style}"${click}>${icon}${opt}</button>`;
+  }).join('');
+
+  /* 제출 버튼 */
+  const submitBtn=(!S.grammarDone&&S.grammarSelected)
+    ?`<button type="button" class="btn mt8" style="background:#ea580c;color:#fff;font-weight:800" onclick="submitGrammar()">확인</button>`:'';
+
+  /* 오답 피드백 */
+  const wrongMsg=(S.grammarDone&&S.grammarSelected!==lg.answer&&tp)
+    ?`<div style="
+        margin-bottom:10px;padding:10px 12px;
+        background:#fff5f5;border-radius:10px;
+        border-left:3px solid #dc2626;
+        font-size:12px;color:#991b1b;line-height:1.7;
+      ">
+      💡 ${getGrammarWrongMsg(tp)}
+    </div>`
+    :'';
+
+  /* 3단계 해설 */
+  const explHtml=S.grammarDone?`
+    <div style="margin-top:12px;background:#eff6ff;border-radius:10px;padding:14px;border:1px solid #bfdbfe">
+      <div style="font-size:10px;font-weight:800;color:#1B3A5C;letter-spacing:.5px;margin-bottom:10px">📖 구조 기반 해설</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <span style="flex-shrink:0;font-size:10px;font-weight:800;background:#1B3A5C;color:#fff;border-radius:4px;padding:2px 6px;margin-top:2px">구조</span>
+          <span style="font-size:13px;color:#1e40af;line-height:1.65">${lg.explanation.structure}</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <span style="flex-shrink:0;font-size:10px;font-weight:800;background:#0891b2;color:#fff;border-radius:4px;padding:2px 6px;margin-top:2px">규칙</span>
+          <span style="font-size:13px;color:#1e40af;line-height:1.65">${lg.explanation.rule}</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:flex-start">
+          <span style="flex-shrink:0;font-size:10px;font-weight:800;background:#16a34a;color:#fff;border-radius:4px;padding:2px 6px;margin-top:2px">정답</span>
+          <span style="font-size:13px;color:#1e40af;line-height:1.65">${lg.explanation.connection}</span>
+        </div>
+      </div>
+    </div>`:'';
+
+  /* ── 문법 영역 — 시각적으로 다른 레이어 표시 ── */
+  return`<div style="
+      margin-top:14px;
+      padding:14px;
+      border-radius:14px;
+      background:#fff7ed;
+      border:2px solid #fed7aa;
+    ">
+    <!-- 실전 적용 배지 -->
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+      <span style="
+        font-size:10px;font-weight:800;letter-spacing:.5px;
+        background:#ea580c;color:#fff;
+        border-radius:6px;padding:3px 9px;
+      ">실전 적용</span>
+      <span style="font-size:11px;color:#9a3412;font-weight:600">방금 배운 구조, 시험에서는 이렇게 나와요</span>
+    </div>
+    <div style="font-size:12px;color:#7c2d12;margin-bottom:8px;font-weight:600">${lg.question}</div>
+    <div style="
+      font-size:14px;color:#1e293b;line-height:1.75;
+      background:#fff;border-radius:10px;
+      padding:12px;margin-bottom:12px;
+      border:1px solid #fed7aa;
+    ">${stemHtml}</div>
+    ${optionsHtml}
+    ${submitBtn}
+    ${wrongMsg}
+    ${explHtml}
+  </div>`;
+}
+
+function showGrammar(){
+  S.grammarTransition=true; R();
+  setTimeout(()=>{S.grammarShown=true;S.grammarTransition=false;R();}, 900);
+}
+function selectGrammar(opt){if(S.grammarDone)return;S.grammarSelected=opt;R();}
+/* TP별 오답 피드백 메시지 */
+const GRAMMAR_WRONG_MSG={
+  TP01:'방금 구조 훈련에서 동사(V) 자리를 찾으셨죠? 그 자리는 동사원형이어야 해요. 명령문은 주어 없이 동사원형으로 시작해요!',
+  TP03:'분사 자리예요. 방금 찾은 구조에서 이 명사가 "하는" 것인지 "되는" 것인지 생각해보세요. 능동이면 v-ing, 수동이면 p.p.예요.',
+  TP05:'방금 구조에서 이 자리 전후를 확인해보세요. 전치사 뒤엔 동명사(v-ing), 명사를 수식하거나 진주어엔 to-v가 와요.',
+  TP10:'관계사 자리예요. 절 안에 빠진 문장 성분이 있는지 확인해보세요. 목적어나 주어가 빠지면 what, 선행사 있으면 that/which예요.',
+  TP12:'방금 동사를 찾으셨죠? 그 동사가 2형식이면 뒤에 보어가 와요. 보어 자리엔 형용사, 동사를 꾸밀 때만 부사를 써요.',
+  TP19:'5형식 동사 자리예요. 방금 찾은 목적어 뒤가 목적격보어 자리예요. ask/tell/cause 같은 동사는 to-v를 목적격보어로 취해요.',
+  TP22:'수식어 사이에서 진짜 주어를 찾는 거예요. 방금 S 자리를 찾으셨죠? 그 주어의 수에 동사를 맞춰야 해요.',
+  TP26:'동명사구나 to부정사구가 주어일 때는 단수 취급해요. 방금 주어 자리를 찾으셨죠? 길어 보여도 하나의 덩어리예요.',
+  TP27:'방금 구조에서 주어와 동사의 관계를 보세요. 주어가 "하는" 것이면 능동, "되는" 것이면 수동(be + p.p.)이에요.',
+  TP29:'시제를 확인해보세요. 같은 시점의 과거 사건은 단순과거, 그보다 이전 사건은 과거완료(had + p.p.)를 써요.',
+  TP32:'가정법이에요. 현재·미래 반대 가정은 if절에 과거형, 과거 반대 가정은 if절에 과거완료(had + p.p.)를 써요.',
+};
+function submitGrammar(){
+  if(!S.grammarSelected||S.grammarDone)return;
+  S.grammarDone=true;
+  R();
+}
+function getGrammarWrongMsg(tp){
+  return GRAMMAR_WRONG_MSG[tp]||'앞에서 찾은 주어·동사 구조를 다시 떠올려보세요. 구조가 보이면 답이 보여요!';
+}
+
 function submitAnswer(){
   const q=curQ();
   const correct=q.chunks.map((_,i)=>i);
   const isOk=JSON.stringify(S.answerOrder)===JSON.stringify(correct);
   S.attempts++;S.submitted=true;S.lastOk=isOk;S.showNext=false;
+  /* 오답 시 힌트 자동 펼침 */
+  if(!isOk) S.hintCollapsed=false;
   const sa=S.answerOrder.map(ci=>q.chunks[ci]).join(' / ');
   const ca=q.chunks.join(' / ');
   if(isOk){
@@ -892,19 +2402,34 @@ function finishQuiz(){
   S.sc='result';R();
 }
 function retakeSet(){if(window._sfDisputeRef){window._sfDisputeRef.off();window._sfDisputeRef=null;}startQuiz(S.set.id);}
+
+function retakeWrong(){
+  if(window._sfDisputeRef){window._sfDisputeRef.off();window._sfDisputeRef=null;}
+  const qList=S.testQuestions||S.set.questions;
+  const wrongQs=S.results
+    .map((r,i)=>({r,q:qList[i]}))
+    .filter(({r})=>r.pts===0&&!r.disputed&&!r.approved)
+    .map(({q})=>q);
+  if(!wrongQs.length) return;
+  S.qi=0; S.score=0; S.results=[];
+  S.testQuestions=wrongQs;
+  S.sc='quiz';
+  initQ(); /* ← 필수: submitted/lastOk/attempts/showNext 등 이전 상태 초기화 */
+  R();
+}
 function backToSelect(){if(window._sfDisputeRef){window._sfDisputeRef.off();window._sfDisputeRef=null;}S.sc='select';R();}
 
 /* ════════════════════════════════════════════════════════════
    드래그 앤 드롭
    ════════════════════════════════════════════════════════════ */
-const D={active:false,srcZone:null,srcPos:null,ci:null,ghost:null,touchEl:null};
+const D={active:false,srcZone:null,srcPos:null,ci:null,ghost:null,touchEl:null,moved:false,touchStartX:0,touchStartY:0};
 function bindDrag(){
   const az=document.getElementById('ans-zone'),bz=document.getElementById('bank-zone');
   if(!az||!bz)return;
   document.querySelectorAll('.ck[draggable]').forEach(el=>{
     el.addEventListener('dragstart',onDS);el.addEventListener('dragend',onDE);
     el.addEventListener('dragover',onCDO);el.addEventListener('drop',onCD);
-    el.addEventListener('touchstart',onTS,{passive:false});
+    el.addEventListener('touchstart',onTS,{passive:true});
   });
   az.addEventListener('dragover',e=>{e.preventDefault();az.classList.add('drag-over');});
   az.addEventListener('dragleave',e=>{if(!az.contains(e.relatedTarget))az.classList.remove('drag-over');});
@@ -919,12 +2444,79 @@ function onCDO(e){e.preventDefault();e.stopPropagation();const t=e.currentTarget
 function onCD(e){e.preventDefault();e.stopPropagation();if(!D.active)return;const t=e.currentTarget;const rect=t.getBoundingClientRect();moveChunk(D.srcZone,D.srcPos,t.dataset.zone,e.clientX<rect.left+rect.width/2?+t.dataset.pos:+t.dataset.pos+1);}
 function onZD(e){e.preventDefault();document.getElementById('ans-zone').classList.remove('drag-over');document.querySelectorAll('.drop-indicator').forEach(el=>el.remove());if(!D.active)return;moveChunk(D.srcZone,D.srcPos,'ans',S.answerOrder.length);}
 function onBD(e){e.preventDefault();document.getElementById('bank-zone').classList.remove('drag-over');if(!D.active||D.srcZone==='bank')return;moveChunk(D.srcZone,D.srcPos,'bank',S.bankOrder.length);}
-function onTS(e){const el=e.currentTarget;D.srcZone=el.dataset.zone;D.srcPos=+el.dataset.pos;D.ci=+el.dataset.ci;D.active=true;D.touchEl=el;const t=e.touches[0];const g=document.createElement('div');g.id='drag-ghost';g.textContent=el.textContent.trim();g.style.left=t.clientX+'px';g.style.top=t.clientY+'px';document.body.appendChild(g);D.ghost=g;el.classList.add('dragging');e.preventDefault();}
-function onTM(e){if(!D.active||!D.ghost)return;e.preventDefault();const t=e.touches[0];D.ghost.style.left=t.clientX+'px';D.ghost.style.top=t.clientY+'px';D.ghost.style.display='none';const un=document.elementFromPoint(t.clientX,t.clientY);D.ghost.style.display='';document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));const z=un&&un.closest('#ans-zone,#bank-zone');if(z)z.classList.add('drag-over');}
-function onTE(e){if(!D.active)return;const t=e.changedTouches[0];if(D.ghost)D.ghost.style.display='none';const un=document.elementFromPoint(t.clientX,t.clientY);if(D.ghost){D.ghost.remove();D.ghost=null;}if(D.touchEl)D.touchEl.classList.remove('dragging');document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));if(!un){D.active=false;return;}const tc=un.closest('.ck[data-zone]');if(tc&&tc!==D.touchEl){const r=tc.getBoundingClientRect();moveChunk(D.srcZone,D.srcPos,tc.dataset.zone,t.clientX<r.left+r.width/2?+tc.dataset.pos:+tc.dataset.pos+1);D.active=false;return;}const tz=un.closest('#ans-zone')?'ans':un.closest('#bank-zone')?'bank':null;if(tz)moveChunk(D.srcZone,D.srcPos,tz,tz==='ans'?S.answerOrder.length:S.bankOrder.length);D.active=false;}
+function onTS(e){
+  const el=e.currentTarget;
+  /* 청크 요소인지 확인 */
+  if(!el.dataset.zone) return;
+  D.srcZone=el.dataset.zone;D.srcPos=+el.dataset.pos;D.ci=+el.dataset.ci;
+  D.touchEl=el;
+  const t=e.touches[0];
+  D.touchStartX=t.clientX;D.touchStartY=t.clientY;
+  D.moved=false;D.active=false;D.ghost=null;
+}
+function onTM(e){
+  const t=e.touches[0];
+  const dx=t.clientX-D.touchStartX, dy=t.clientY-D.touchStartY;
+  if(!D.active && Math.sqrt(dx*dx+dy*dy)>8){
+    /* 드래그 시작 */
+    D.active=true;D.moved=true;
+    const el=D.touchEl;
+    const g=document.createElement('div');
+    g.id='drag-ghost';g.textContent=el.textContent.trim();
+    g.style.left=t.clientX+'px';g.style.top=t.clientY+'px';
+    document.body.appendChild(g);D.ghost=g;
+    el.classList.add('dragging');
+  }
+  if(!D.active||!D.ghost)return;
+  e.preventDefault();
+  D.ghost.style.left=t.clientX+'px';D.ghost.style.top=t.clientY+'px';
+  D.ghost.style.display='none';
+  const un=document.elementFromPoint(t.clientX,t.clientY);
+  D.ghost.style.display='';
+  document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));
+  const z=un&&un.closest('#ans-zone,#bank-zone');
+  if(z)z.classList.add('drag-over');
+}
+function onTE(e){
+  /* touchEl이 없으면 청크 터치가 아님 — 무시 */
+  if(!D.touchEl) return;
+
+  const t=e.changedTouches[0];
+  /* 고스트 정리 */
+  if(D.ghost){D.ghost.remove();D.ghost=null;}
+  if(D.touchEl)D.touchEl.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(el=>el.classList.remove('drag-over'));
+
+  if(!D.moved){
+    /* 탭 — 클릭과 동일하게 처리 */
+    const zone=D.srcZone, pos=D.srcPos;
+    D.touchEl=null; D.active=false; D.moved=false;
+    if(S.submitted)return;
+    if(zone==='bank') clickBank(pos);
+    else if(zone==='ans') clickAns(pos);
+    return;
+  }
+
+  /* 드래그 끝 — 기존 드롭 로직 */
+  D.touchEl=null;
+  if(!D.active){D.moved=false;return;}
+  const un=document.elementFromPoint(t.clientX,t.clientY);
+  if(!un){D.active=false;D.moved=false;return;}
+  const tc=un.closest('.ck[data-zone]');
+  if(tc){
+    const r=tc.getBoundingClientRect();
+    moveChunk(D.srcZone,D.srcPos,tc.dataset.zone,t.clientX<r.left+r.width/2?+tc.dataset.pos:+tc.dataset.pos+1);
+    D.active=false;D.moved=false;return;
+  }
+  const tz=un.closest('#ans-zone')?'ans':un.closest('#bank-zone')?'bank':null;
+  if(tz)moveChunk(D.srcZone,D.srcPos,tz,tz==='ans'?S.answerOrder.length:S.bankOrder.length);
+  D.active=false;D.moved=false;
+}
 document.addEventListener('touchmove',onTM,{passive:false});
-document.addEventListener('touchend',onTE,{passive:false});
-function moveChunk(sz,sp,dz,dp){let ci;if(sz==='bank')ci=S.bankOrder.splice(sp,1)[0];else ci=S.answerOrder.splice(sp,1)[0];if(dz==='ans'){const adj=(sz==='ans'&&sp<dp)?dp-1:dp;S.answerOrder.splice(Math.max(0,Math.min(adj,S.answerOrder.length)),0,ci);}else{S.bankOrder.push(ci);}R();}
+document.addEventListener('touchend',onTE);
+function moveChunk(sz,sp,dz,dp){let ci;if(sz==='bank')ci=S.bankOrder.splice(sp,1)[0];else ci=S.answerOrder.splice(sp,1)[0];if(dz==='ans'){const adj=(sz==='ans'&&sp<dp)?dp-1:dp;S.answerOrder.splice(Math.max(0,Math.min(adj,S.answerOrder.length)),0,ci);}else{S.bankOrder.push(ci);}R();
+  /* 스냅 애니메이션: 답안 구역에 놓인 마지막 청크에 적용 */
+  if(dz==='ans'){requestAnimationFrame(()=>{const els=document.querySelectorAll('#ans-zone .ck');if(els.length){const t=els[Math.min(dp,els.length-1)];t.classList.remove('ck-snap');void t.offsetWidth;t.classList.add('ck-snap');}});} }
 
 R();
 </script>
